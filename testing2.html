@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BacaRia Prototype - Interactive</title>
+    <style>
+      /* --- Root Variables & Base Reset --- */
+      :root {
+        --primary-blue: #1a237e;
+        --primary-pink: #d81b60;
+        --light-blue: #3f51b5;
+        --bg-color: #f8f9fa;
+        --white: #ffffff;
+        --text-dark: #333333;
+        --gray-light: #e0e0e0;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+      body {
+        background-color: #cfd8dc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* --- App Container --- */
+      .app-container {
+        width: 100%;
+        max-width: 400px;
+        height: 100vh;
+        max-height: 850px;
+        background-color: var(--white);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      @media (min-width: 415px) {
+        .app-container {
+          height: 90vh;
+          border-radius: 30px;
+          border: 8px solid #222;
+        }
+      }
+
+      /* --- Layout Utilities --- */
+      .screen {
+        display: none;
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 70px;
+        background-color: var(--white);
+      }
+      .screen.active {
+        display: flex;
+        flex-direction: column;
+      }
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px 5px;
+      }
+      .header-logo {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 20px;
+        color: var(--primary-pink);
+      }
+      .header-logo span {
+        color: var(--primary-blue);
+      }
+      .points {
+        color: #ffb300;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .page-title {
+        color: #b388ff;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 0 20px 10px;
+        border-bottom: 2px solid var(--primary-blue);
+      }
+
+      /* --- 1. Login Screen --- */
+      #login-screen {
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        text-align: center;
+      }
+      .login-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+      }
+      .login-logo {
+        font-size: 32px;
+        font-weight: bold;
+        color: var(--primary-pink);
+        margin-bottom: 10px;
+      }
+      .login-logo span {
+        color: var(--primary-blue);
+      }
+      .input-login {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 2px solid var(--primary-blue);
+        border-radius: 8px;
+        outline: none;
+      }
+      .btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 25px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .btn-login {
+        background-color: var(--primary-pink);
+        color: white;
+      }
+      .btn-register {
+        background-color: transparent;
+        border: 2px solid var(--primary-pink);
+        color: var(--primary-pink);
+      }
+      .error-msg {
+        color: red;
+        font-size: 12px;
+        margin-bottom: 10px;
+        display: none;
+      }
+
+      /* --- 2. Home & Explore --- */
+      .search-bar {
+        margin: 15px 20px;
+        display: flex;
+        align-items: center;
+        border: 2px solid #5c6bc0;
+        border-radius: 25px;
+        padding: 8px 15px;
+      }
+      .search-bar input {
+        border: none;
+        outline: none;
+        width: 100%;
+        margin-left: 10px;
+        font-size: 16px;
+        color: #5c6bc0;
+      }
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        padding: 0 20px 20px;
+      }
+      .cat-card {
+        border: 2px solid var(--primary-blue);
+        border-radius: 8px;
+        padding: 15px 5px;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .cat-card.pink {
+        border-color: var(--primary-pink);
+      }
+      .cat-card span {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+      .cat-card p {
+        font-size: 10px;
+        font-weight: bold;
+        background: var(--primary-blue);
+        color: white;
+        padding: 2px 5px;
+        border-radius: 4px;
+        width: 90%;
+      }
+      .cat-card.pink p {
+        background: var(--primary-pink);
+      }
+
+      .explore-section {
+        padding: 15px 20px 0;
+      }
+      .explore-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--primary-pink);
+        background: #fce4ec;
+        padding: 2px 10px;
+        border-radius: 10px;
+        width: fit-content;
+      }
+      .explore-row {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      .explore-row .cat-card {
+        min-width: 80px;
+      }
+
+      /* --- 3. Category Detail Screen --- */
+      #category-detail {
+        padding: 20px;
+      }
+      .back-btn {
+        font-size: 14px;
+        color: var(--primary-blue);
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+      .book-list-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .book-item-row {
+        display: flex;
+        border: 1px solid var(--gray-light);
+        padding: 10px;
+        border-radius: 8px;
+        gap: 15px;
+        align-items: center;
+      }
+      .book-cover-sm {
+        width: 50px;
+        height: 70px;
+        background: #9fa8da;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* --- 4. Create Screen --- */
+      .create-area {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .input-group {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .input-group label {
+        display: block;
+        color: var(--primary-blue);
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .input-group input,
+      .input-group textarea {
+        width: 100%;
+        border: 2px dashed var(--primary-pink);
+        padding: 10px;
+        outline: none;
+        box-shadow: 4px 4px 0px #9fa8da;
+      }
+
+      /* --- 5. Library Screen --- */
+      .library-area {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .library-book {
+        width: 100%;
+        height: 200px;
+        background: #ffcdd2;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: cursive;
+        color: #c62828;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .review-section {
+        margin-top: 15px;
+      }
+      .review-input {
+        width: 100%;
+        border: 1px solid var(--primary-blue);
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+        resize: none;
+        margin-bottom: 5px;
+      }
+      .btn-small {
+        background: var(--primary-blue);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .review-list {
+        margin-top: 10px;
+        border-left: 3px solid var(--primary-pink);
+        padding-left: 10px;
+      }
+      .review-item {
+        font-size: 12px;
+        color: #555;
+        margin-bottom: 5px;
+        background: #fce4ec;
+        padding: 8px;
+        border-radius: 4px;
+      }
+      #created-books-container {
+        margin-top: 20px;
+        border-top: 2px dashed var(--gray-light);
+        padding-top: 20px;
+      }
+
+      /* --- 6. Profile Screen --- */
+      .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid var(--gray-light);
+      }
+      .avatar {
+        width: 80px;
+        height: 80px;
+        background: #bcaaa4;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      .profile-stats {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .stat-box h3 {
+        color: var(--text-dark);
+        font-size: 22px;
+      }
+      .stat-box p {
+        font-size: 12px;
+        color: #666;
+      }
+      .profile-section {
+        padding: 15px 20px;
+      }
+      .section-title {
+        color: var(--primary-blue);
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+      .book-list {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scrollbar-width: none;
+      }
+      .book-item {
+        text-align: center;
+        width: 80px;
+        flex-shrink: 0;
+      }
+      .book-item div {
+        width: 80px;
+        height: 80px;
+        background: #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        padding: 5px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .book-item p {
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+      .mission-box {
+        background: #fce4ec;
+        border: 1px solid var(--primary-blue);
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+      }
+      .mission-icon {
+        font-size: 30px;
+        margin-right: 15px;
+      }
+      .progress-bar-container {
+        flex: 1;
+      }
+      .progress-bar {
+        background: #e0e0e0;
+        border-radius: 10px;
+        height: 15px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--primary-blue);
+        margin-top: 5px;
+      }
+      .progress-fill {
+        background: #80cbc4;
+        height: 100%;
+        width: 80%;
+      }
+      .progress-text {
+        text-align: right;
+        font-size: 12px;
+        font-weight: bold;
+        margin-top: 5px;
+        color: #555;
+      }
+
+      /* --- Bottom Navigation --- */
+      .bottom-nav {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: var(--white);
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        border-top: 2px solid var(--primary-blue);
+        z-index: 10;
+      }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--text-dark);
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .nav-icon {
+        font-size: 22px;
+        filter: grayscale(100%);
+      }
+      .nav-item.active {
+        color: var(--primary-pink);
+      }
+      .nav-item.active .nav-icon {
+        filter: grayscale(0%);
+      }
+      .nav-create .nav-icon {
+        background-color: var(--primary-blue);
+        color: white;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -20px;
+        border: 3px solid white;
+        filter: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <div id="login-screen" class="screen active">
+        <div class="login-icon">📖</div>
+        <h1 class="login-logo"><span>Baca</span>Ria</h1>
+        <p style="margin-bottom: 20px; font-weight: bold; color: #555">
+          Sign in to your account
+        </p>
+
+        <div id="login-error" class="error-msg">
+          Email and Password cannot be empty!
+        </div>
+        <input
+          type="email"
+          id="login-email"
+          class="input-login"
+          placeholder="Email (Gmail)"
+          required
+        />
+        <input
+          type="password"
+          id="login-password"
+          class="input-login"
+          placeholder="Password"
+          required
+        />
+
+        <button class="btn btn-login" onclick="processLogin()">LOGIN</button>
+        <button class="btn btn-register">REGISTER</button>
+      </div>
+
+      <div
+        id="main-app"
+        style="display: none; height: 100%; flex-direction: column"
+      >
+        <div id="home" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+          </div>
+          <div class="search-bar">
+            <span>🔍</span
+            ><input type="text" placeholder="Pick what you like" />
+          </div>
+          <div class="category-grid">
+            <div class="cat-card" onclick="openCategory('Fantasy')">
+              <span>🌙</span>
+              <p>Fantasy</p>
+            </div>
+            <div
+              class="cat-card pink"
+              onclick="openCategory('Self-Improvement')"
+            >
+              <span>❤️</span>
+              <p>Self-Improvement</p>
+            </div>
+            <div class="cat-card" onclick="openCategory('Mental Health')">
+              <span>🧠</span>
+              <p>Mental Health</p>
+            </div>
+            <div class="cat-card pink" onclick="openCategory('Comedy')">
+              <span>🎭</span>
+              <p>Comedy</p>
+            </div>
+            <div class="cat-card" onclick="openCategory('Education')">
+              <span>🎓</span>
+              <p>Education</p>
+            </div>
+            <div class="cat-card pink" onclick="openCategory('Technology')">
+              <span>💻</span>
+              <p>Technology</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="explore" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">★ 0</div>
+          </div>
+          <div class="page-title">Aurel, Let's Read!</div>
+
+          <div class="explore-section">
+            <div class="explore-title">🔥 Hot</div>
+            <div class="explore-row">
+              <div class="cat-card" onclick="openCategory('Fantasy')">
+                <span style="color: #000">🌙</span>
+                <p>Fantasy</p>
+              </div>
+              <div
+                class="cat-card pink"
+                onclick="openCategory('Self-Improvement')"
+              >
+                <span style="color: #e91e63">❤️</span>
+                <p>Self-Improvement</p>
+              </div>
+              <div class="cat-card" onclick="openCategory('Mental Health')">
+                <span style="color: #64b5f6">🧠</span>
+                <p>Mental Health</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="explore-section">
+            <div class="explore-title">✔️ Recommendation</div>
+            <div class="explore-row">
+              <div class="cat-card pink" onclick="openCategory('Comedy')">
+                <span style="color: #fbc02d">🎭</span>
+                <p>Comedy</p>
+              </div>
+              <div class="cat-card" onclick="openCategory('Education')">
+                <span style="color: #4caf50">🎓</span>
+                <p>Education</p>
+              </div>
+              <div class="cat-card pink" onclick="openCategory('Technology')">
+                <span style="color: #9c27b0">💻</span>
+                <p>Technology</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="explore-section">
+            <div class="explore-title">🌍 Explore</div>
+            <div class="explore-row">
+              <div class="cat-card" onclick="openCategory('Romance')">
+                <span style="color: #ff9800">📖</span>
+                <p>Romance</p>
+              </div>
+              <div
+                class="cat-card pink"
+                onclick="openCategory('Slice of Life')"
+              >
+                <span style="color: #607d8b">☔</span>
+                <p>Slice of Life</p>
+              </div>
+              <div class="cat-card" onclick="openCategory('Adventure')">
+                <span style="color: #8d6e63">🏕️</span>
+                <p>Adventure</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="category-detail" class="screen">
+          <div class="back-btn" onclick="goBack()">🔙 Back</div>
+          <h2
+            id="cat-detail-title"
+            style="color: var(--primary-pink); margin-bottom: 15px"
+          >
+            Category Name
+          </h2>
+          <div class="book-list-vertical" id="cat-book-list"></div>
+        </div>
+
+        <div id="create" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">★ 10</div>
+          </div>
+          <div class="page-title">Aurel, Let's Create!</div>
+          <div class="create-area">
+            <div class="input-group">
+              <label>📝 Title:</label>
+              <input
+                type="text"
+                id="create-title"
+                placeholder="Enter book title..."
+              />
+            </div>
+            <div class="input-group">
+              <label>💬 Description:</label>
+              <textarea
+                id="create-desc"
+                rows="3"
+                placeholder="Enter description..."
+              ></textarea>
+            </div>
+            <button class="btn btn-login" onclick="submitNewBook()">
+              Publish Book
+            </button>
+          </div>
+        </div>
+
+        <div id="library" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">★ 10</div>
+          </div>
+          <div class="page-title">My Library</div>
+
+          <div class="library-area">
+            <h3 style="color: var(--primary-blue); margin-bottom: 10px">
+              Currently Reading
+            </h3>
+            <div class="library-book">The Summer<br />I Turned Pretty</div>
+
+            <div class="review-section">
+              <b style="font-size: 14px; color: var(--primary-pink)"
+                >Write a Review:</b
+              >
+              <textarea
+                id="review-text"
+                class="review-input"
+                rows="2"
+                placeholder="What do you think about this book?"
+              ></textarea>
+              <button class="btn-small" onclick="addReview()">
+                Submit Review
+              </button>
+              <div class="review-list" id="review-container">
+                <div class="review-item">
+                  <strong>Patricia:</strong> Buku yang sangat emosional!
+                </div>
+              </div>
+            </div>
+
+            <div id="created-books-container" style="display: none">
+              <h3 style="color: var(--primary-blue); margin-bottom: 10px">
+                My Published Books
+              </h3>
+              <div id="my-books-list" class="book-list-vertical"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="profile" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">★ 10</div>
+          </div>
+          <div class="page-title">Aurel's Profile</div>
+
+          <div class="profile-header">
+            <b
+              style="
+                color: var(--primary-blue);
+                font-size: 18px;
+                margin-bottom: 10px;
+              "
+              >Profile</b
+            >
+            <div class="avatar">👩🏽</div>
+            <div class="profile-stats">
+              <div class="stat-box">
+                <h3>54</h3>
+                <p>Following</p>
+              </div>
+              <div class="stat-box">
+                <h3 style="color: var(--primary-blue)">Aurel</h3>
+                <p>10 points</p>
+              </div>
+              <div class="stat-box">
+                <h3>31</h3>
+                <p>Followers</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <div class="section-title">My Books</div>
+            <div class="book-list">
+              <div class="book-item">
+                <div style="background: #90a4ae; color: white">Dilan 1990</div>
+                <p>Dilan 1990</p>
+              </div>
+              <div class="book-item">
+                <div style="background: white; border: 1px solid #ccc">
+                  Psychology
+                </div>
+                <p>The Psychology of Money</p>
+              </div>
+              <div class="book-item">
+                <div style="background: #ffccbc">Teluk Alaska</div>
+                <p>Teluk Alaska</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <div class="section-title">My Missions</div>
+            <div class="mission-box">
+              <div class="mission-icon">🏆</div>
+              <div class="progress-bar-container">
+                <b style="font-size: 14px; color: #333">Read 5 Books</b>
+                <div class="progress-bar">
+                  <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">4/5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="bottom-nav">
+          <div class="nav-item active" onclick="navTo('home', this)">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+          </div>
+          <div class="nav-item" onclick="navTo('explore', this)">
+            <div class="nav-icon">🔍</div>
+            <span>Explore</span>
+          </div>
+          <div class="nav-item nav-create" onclick="navTo('create', this)">
+            <div class="nav-icon">➕</div>
+            <span>Create</span>
+          </div>
+          <div class="nav-item" onclick="navTo('library', this)">
+            <div class="nav-icon">📚</div>
+            <span>Library</span>
+          </div>
+          <div class="nav-item" onclick="navTo('profile', this)">
+            <div class="nav-icon">👤</div>
+            <span>Profile</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <script>
+      let previousScreen = "home";
+
+      // 1. Validasi Login
+      function processLogin() {
+        const email = document.getElementById("login-email").value;
+        const pass = document.getElementById("login-password").value;
+        const errorMsg = document.getElementById("login-error");
+
+        if (email.trim() === "" || pass.trim() === "") {
+          errorMsg.style.display = "block";
+        } else {
+          errorMsg.style.display = "none";
+          document.getElementById("login-screen").classList.remove("active");
+          document.getElementById("main-app").style.display = "flex";
+          document.getElementById("home").classList.add("active");
+        }
+      }
+
+      // 2. Navigasi Menu Bawah
+      function navTo(screenId, element) {
+        document
+          .querySelectorAll("#main-app .screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(screenId).classList.add("active");
+
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((nav) => nav.classList.remove("active"));
+        element.classList.add("active");
+
+        if (screenId !== "category-detail") previousScreen = screenId;
+      }
+
+      // 3. Buka Kategori Buku
+      function openCategory(categoryName) {
+        document
+          .querySelectorAll("#main-app .screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("category-detail").classList.add("active");
+        document.getElementById("cat-detail-title").innerText =
+          categoryName + " Books";
+
+        // Generate dummy books
+        let listHTML = "";
+        for (let i = 1; i <= 3; i++) {
+          listHTML += `
+          <div class="book-item-row">
+            <div class="book-cover-sm">Book ${i}</div>
+            <div>
+              <b style="color: var(--primary-blue); font-size:14px;">Awesome ${categoryName} Vol ${i}</b>
+              <p style="font-size:12px; color:gray;">Author Name</p>
+              <span style="color:#FFB300; font-size:12px;">★★★★☆</span>
+            </div>
+          </div>
+        `;
+        }
+        document.getElementById("cat-book-list").innerHTML = listHTML;
+      }
+
+      function goBack() {
+        document.getElementById("category-detail").classList.remove("active");
+        document.getElementById(previousScreen).classList.add("active");
+      }
+
+      // 4. Submit Buku Baru (Dari Create ke Library)
+      function submitNewBook() {
+        const title = document.getElementById("create-title").value;
+        const desc = document.getElementById("create-desc").value;
+
+        if (title.trim() === "") {
+          alert("Please enter a book title!");
+          return;
+        }
+
+        const container = document.getElementById("created-books-container");
+        const list = document.getElementById("my-books-list");
+
+        container.style.display = "block";
+        list.innerHTML += `
+        <div class="book-item-row">
+          <div class="book-cover-sm" style="background:var(--primary-pink);">NEW</div>
+          <div>
+            <b style="color: var(--primary-blue); font-size:14px;">${title}</b>
+            <p style="font-size:12px; color:gray;">${desc ? desc.substring(0, 30) + "..." : "No description"}</p>
+          </div>
+        </div>
+      `;
+
+        // Bersihkan form
+        document.getElementById("create-title").value = "";
+        document.getElementById("create-desc").value = "";
+
+        alert("Book published successfully! Check your Library.");
+      }
+
+      // 5. Submit Review (Di Library)
+      function addReview() {
+        const reviewInput = document.getElementById("review-text");
+        const text = reviewInput.value;
+
+        if (text.trim() === "") return;
+
+        const container = document.getElementById("review-container");
+        container.innerHTML =
+          `<div class="review-item"><strong>Aurel (You):</strong> ${text}</div>` +
+          container.innerHTML;
+
+        reviewInput.value = ""; // Reset textarea
+      }
+    </script>
+  </body>
+</html>
