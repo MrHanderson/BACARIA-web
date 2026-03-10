@@ -145,7 +145,7 @@
         display: none;
       }
 
-      /* --- Home & Explore --- */
+      /* --- General UI Components --- */
       .search-bar {
         margin: 15px 20px;
         display: flex;
@@ -219,11 +219,6 @@
       .explore-row .cat-card {
         min-width: 80px;
       }
-
-      /* --- Category Detail Screen --- */
-      #category-detail {
-        padding: 20px;
-      }
       .back-btn {
         font-size: 14px;
         color: var(--primary-blue);
@@ -250,7 +245,53 @@
         background: #fce4ec;
       }
 
-      /* --- Library Screen & Star Rating --- */
+      /* --- Gamification & Missions --- */
+      .mission-box {
+        background: #fce4ec;
+        border: 1px solid var(--primary-blue);
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+      }
+      .mission-icon {
+        font-size: 30px;
+        margin-right: 15px;
+      }
+      .progress-bar-container {
+        flex: 1;
+      }
+      .progress-bar {
+        background: #e0e0e0;
+        border-radius: 10px;
+        height: 15px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--primary-blue);
+        margin-top: 5px;
+      }
+      .progress-fill {
+        background: var(--primary-pink);
+        height: 100%;
+        width: 0%;
+        transition: width 0.8s ease-in-out;
+      }
+      .star-rating {
+        margin-bottom: 10px;
+      }
+      .star {
+        font-size: 28px;
+        color: #e0e0e0;
+        cursor: pointer;
+        transition: color 0.2s;
+        margin-right: 2px;
+      }
+      .star.selected {
+        color: #ffb300;
+      }
+
+      /* --- Specific Screens --- */
       .library-area {
         padding: 20px;
         display: flex;
@@ -270,9 +311,6 @@
         color: #c62828;
         font-size: 24px;
         font-weight: bold;
-      }
-      .review-section {
-        margin-top: 15px;
       }
       .review-input {
         width: 100%;
@@ -305,21 +343,6 @@
         padding: 8px;
         border-radius: 4px;
       }
-      .star-rating {
-        margin-bottom: 10px;
-      }
-      .star {
-        font-size: 28px;
-        color: #e0e0e0;
-        cursor: pointer;
-        transition: color 0.2s;
-        margin-right: 2px;
-      }
-      .star.selected {
-        color: #ffb300;
-      }
-
-      /* --- Profile & Gamification (Mission Box) --- */
       .profile-header {
         display: flex;
         flex-direction: column;
@@ -393,38 +416,6 @@
         font-size: 10px;
         font-weight: bold;
         line-height: 1.2;
-      }
-
-      .mission-box {
-        background: #fce4ec;
-        border: 1px solid var(--primary-blue);
-        border-radius: 8px;
-        padding: 15px;
-        display: flex;
-        align-items: center;
-      }
-      .mission-icon {
-        font-size: 30px;
-        margin-right: 15px;
-      }
-      .progress-bar-container {
-        flex: 1;
-      }
-      .progress-bar {
-        background: #e0e0e0;
-        border-radius: 10px;
-        height: 15px;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        border: 1px solid var(--primary-blue);
-        margin-top: 5px;
-      }
-      .progress-fill {
-        background: var(--primary-pink);
-        height: 100%;
-        width: 0%;
-        transition: width 0.8s ease-in-out;
       }
 
       /* --- Bottom Navigation --- */
@@ -564,7 +555,7 @@
         <div id="explore" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ 10</div>
+            <div class="points">★ <span class="global-pts-text">10</span></div>
           </div>
           <div class="page-title">Aurel, Let's Read!</div>
           <div class="explore-section">
@@ -604,29 +595,9 @@
               </div>
             </div>
           </div>
-          <div class="explore-section">
-            <div class="explore-title">🌍 Explore</div>
-            <div class="explore-row">
-              <div class="cat-card" onclick="openCategory('Romance')">
-                <span style="color: #ff9800">📖</span>
-                <p>Romance</p>
-              </div>
-              <div
-                class="cat-card pink"
-                onclick="openCategory('Slice of Life')"
-              >
-                <span style="color: #607d8b">☔</span>
-                <p>Slice of Life</p>
-              </div>
-              <div class="cat-card" onclick="openCategory('Adventure')">
-                <span style="color: #8d6e63">🏕️</span>
-                <p>Adventure</p>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div id="category-detail" class="screen">
+        <div id="category-detail" class="screen" style="padding: 20px">
           <div class="back-btn" onclick="goBack()">🔙 Back</div>
           <h2
             id="cat-detail-title"
@@ -640,7 +611,7 @@
         <div id="reward" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ 10</div>
+            <div class="points">★ <span class="global-pts-text">10</span></div>
           </div>
           <div class="page-title">Your Rewards</div>
           <div style="padding: 15px 20px">
@@ -655,7 +626,7 @@
                 padding: 20px;
                 color: white;
                 text-align: center;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
               "
             >
@@ -664,13 +635,30 @@
               >
                 Total Points
               </h3>
-              <h1
-                id="reward-total-points"
-                style="font-size: 36px; color: #ffd54f"
-              >
-                ★ 10
+              <h1 style="font-size: 36px; color: #ffd54f">
+                ★ <span class="global-pts-text">10</span>
               </h1>
             </div>
+
+            <div style="text-align: center; margin-bottom: 20px">
+              <button
+                class="btn btn-login"
+                style="
+                  background: linear-gradient(135deg, #43a047, #1de9b6);
+                  border: none;
+                  border-radius: 20px;
+                  padding: 10px;
+                  font-size: 14px;
+                  font-weight: bold;
+                  width: 100%;
+                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                "
+                onclick="openGarden()"
+              >
+                🌱 Masuk ke BacaRia's Garden
+              </button>
+            </div>
+
             <h3
               style="
                 color: var(--primary-blue);
@@ -766,10 +754,248 @@
           </div>
         </div>
 
+        <div id="garden" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">★ <span class="global-pts-text">10</span></div>
+          </div>
+          <div
+            class="back-btn"
+            style="margin-left: 20px; margin-top: 10px"
+            onclick="goBackFromGarden()"
+          >
+            🔙 Back to Reward
+          </div>
+
+          <div
+            style="
+              text-align: center;
+              color: var(--primary-blue);
+              margin-bottom: 10px;
+            "
+          >
+            <h2 style="color: #b388ff">BacaRia's Garden</h2>
+            <p
+              style="
+                font-weight: bold;
+                font-size: 16px;
+                margin-top: 5px;
+                color: #5d4037;
+              "
+            >
+              Total Nutrisi:
+              <span id="total-nutrisi" style="color: #8d6e63">100</span> ml
+            </p>
+            <p style="font-size: 11px; color: #888; margin-top: 2px">
+              (💡 Info: 1 Poin = 10 ml Nutrisi)
+            </p>
+          </div>
+
+          <div
+            style="
+              background: linear-gradient(180deg, #e1f5fe 0%, #fff9c4 100%);
+              margin: 0 20px 15px;
+              border-radius: 15px;
+              padding: 20px;
+              border: 2px solid #81d4fa;
+              text-align: center;
+              position: relative;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <div
+              style="
+                font-size: 90px;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+              "
+              id="garden-char"
+            >
+              🌱
+            </div>
+            <div
+              class="progress-bar"
+              style="background: #b3e5fc; border-color: #0288d1; height: 15px"
+            >
+              <div
+                id="evolution-fill"
+                class="progress-fill"
+                style="
+                  background: linear-gradient(90deg, #4fc3f7, #0288d1);
+                  width: 0%;
+                "
+              ></div>
+            </div>
+            <p
+              style="
+                font-size: 11px;
+                margin-top: 8px;
+                font-weight: bold;
+                color: #0277bd;
+              "
+            >
+              <span id="nutrisi-needed">250</span> ml lagi untuk berevolusi
+              menjadi Pohon Remaja
+            </p>
+          </div>
+
+          <div style="padding: 0 20px">
+            <h3 style="font-size: 14px; color: #555; margin-bottom: 10px">
+              Pilihan Benih:
+            </h3>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                scrollbar-width: none;
+              "
+            >
+              <div
+                class="seed-card"
+                style="
+                  min-width: 100px;
+                  border: 2px solid var(--primary-pink);
+                  border-radius: 10px;
+                  padding: 10px;
+                  text-align: center;
+                  background: #fff;
+                  cursor: pointer;
+                "
+              >
+                <div
+                  style="
+                    font-size: 35px;
+                    background: #fce4ec;
+                    border-radius: 8px;
+                    padding: 5px;
+                  "
+                >
+                  🌼
+                </div>
+                <p
+                  style="
+                    font-size: 11px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                    color: #333;
+                  "
+                >
+                  Benih Melati
+                </p>
+                <div style="margin-top: 5px">
+                  <span
+                    style="
+                      font-size: 10px;
+                      background: #ffcdd2;
+                      color: #c62828;
+                      padding: 2px 6px;
+                      border-radius: 4px;
+                      font-weight: bold;
+                    "
+                    >Gratis</span
+                  >
+                </div>
+              </div>
+              <div
+                class="seed-card"
+                style="
+                  min-width: 100px;
+                  border: 2px solid #9fa8da;
+                  border-radius: 10px;
+                  padding: 10px;
+                  text-align: center;
+                  background: #f5f5f5;
+                "
+              >
+                <div
+                  style="
+                    font-size: 35px;
+                    background: #e8eaf6;
+                    border-radius: 8px;
+                    padding: 5px;
+                  "
+                >
+                  🌵
+                </div>
+                <p
+                  style="
+                    font-size: 11px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                    color: #555;
+                  "
+                >
+                  Benih Kaktus
+                </p>
+                <div style="margin-top: 5px">
+                  <span
+                    style="
+                      font-size: 10px;
+                      background: #5c6bc0;
+                      color: #fff;
+                      padding: 2px 6px;
+                      border-radius: 4px;
+                      font-weight: bold;
+                    "
+                    >Adventure</span
+                  >
+                </div>
+              </div>
+              <div
+                class="seed-card"
+                style="
+                  min-width: 100px;
+                  border: 2px solid #d7ccc8;
+                  border-radius: 10px;
+                  padding: 10px;
+                  text-align: center;
+                  background: #efebe9;
+                "
+              >
+                <div
+                  style="
+                    font-size: 35px;
+                    background: #d7ccc8;
+                    border-radius: 8px;
+                    padding: 5px;
+                  "
+                >
+                  🔒
+                </div>
+                <p
+                  style="
+                    font-size: 11px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                    color: #777;
+                  "
+                >
+                  Pohon Sakti
+                </p>
+                <div style="margin-top: 5px">
+                  <span
+                    style="
+                      font-size: 10px;
+                      background: #8d6e63;
+                      color: #fff;
+                      padding: 2px 6px;
+                      border-radius: 4px;
+                      font-weight: bold;
+                    "
+                    >Terkunci</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="library" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ 10</div>
+            <div class="points">★ <span class="global-pts-text">10</span></div>
           </div>
           <div class="page-title">My Library</div>
           <div class="library-area">
@@ -816,7 +1042,7 @@
         <div id="profile" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ 10</div>
+            <div class="points">★ <span class="global-pts-text">10</span></div>
           </div>
           <div class="page-title">Aurel's Profile</div>
           <div class="profile-header">
@@ -836,7 +1062,7 @@
               </div>
               <div class="stat-box">
                 <h3 style="color: var(--primary-blue)">Aurel</h3>
-                <p id="profile-points-text">10 points</p>
+                <p><span class="global-pts-text">10</span> points</p>
               </div>
               <div class="stat-box">
                 <h3>31</h3>
@@ -1000,7 +1226,7 @@
 
       let readingTimer = null;
       let currentReadingSeconds = 0;
-      const targetReadingSeconds = 120;
+      const targetReadingSeconds = 120; // Ubah ke 10 untuk tes presentasi cepat
 
       const booksData = {
         Fantasy: [
@@ -1061,13 +1287,13 @@
             title: "I Have Anxiety",
             author: "Isna Nurjanah",
             img: "images/MH - Anxiety.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Psychology of Emotions",
             author: "David J. Lieberman",
             img: "images/MH - Emotions.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
         Comedy: [
@@ -1075,19 +1301,19 @@
             title: "Ubur-Ubur Lembur",
             author: "Raditya Dika",
             img: "images/comedy - ubur2.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Marmut Merah Jambu",
             author: "Raditya Dika",
             img: "images/comedy - marmut.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Ngenest",
             author: "Ernest Prakasa",
             img: "images/comedy - ernest.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
         Romance: [
@@ -1102,13 +1328,13 @@
             title: "It Starts With Us",
             author: "Colleen Hoover",
             img: "images/romance - start with us.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "It Ends With Us",
             author: "Colleen Hoover",
             img: "images/romance - ends with us.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
         "Slice of Life": [
@@ -1116,19 +1342,19 @@
             title: "Sweet Bean Paste",
             author: "Durian Sukegawa",
             img: "images/SOL - SBP.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "What You Are Looking For",
             author: "Michiko Aoyama",
             img: "images/SOL - cat.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Convenience Store Woman",
             author: "Sayaka Murata",
             img: "images/SOL - convenience.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
         Adventure: [
@@ -1136,19 +1362,19 @@
             title: "Around the World in 80 Days",
             author: "Jules Verne",
             img: "images/adventure - around world.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "The Call of the Wild",
             author: "Jack London",
             img: "images/adventure wild.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Treasure Island",
             author: "Robert Louis Stevenson",
             img: "images/adventure - treasure.png",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
         Technology: [
@@ -1156,19 +1382,19 @@
             title: "Information Technology",
             author: "Álvaro Rocha",
             img: "images/Tech - ITS.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "The Nature of Technology",
             author: "W. Brian Arthur",
             img: "images/Tech - nature.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "The Science Book",
             author: "National Geographic",
             img: "images/Tech - science book.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
         Education: [
@@ -1176,57 +1402,84 @@
             title: "English Literature",
             author: "Henry S. Pancoast",
             img: "images/education - english.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Digital Technology",
             author: "Michelle F. Wright",
             img: "images/education - digital tech.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
           {
             title: "Living Economics",
             author: "Peter J. Boettke",
             img: "images/education - living eco.jpg",
-            story: "Teks cerita buku ini bisa ditulis di sini...",
+            story: "Teks cerita...",
           },
         ],
       };
 
+      // FUNGSI UTAMA: UPDATE UI GAMIFIKASI & GARDEN
       function updateGlobalDataUI() {
-        document.querySelectorAll(".points").forEach((el) => {
-          el.innerText = "★ " + globalPoints;
+        // Update Poin Keseluruhan
+        document.querySelectorAll(".global-pts-text").forEach((el) => {
+          el.innerText = globalPoints;
         });
-        const profilePts = document.getElementById("profile-points-text");
-        if (profilePts) profilePts.innerText = globalPoints + " points";
-        const rewardPts = document.getElementById("reward-total-points");
-        if (rewardPts) rewardPts.innerText = "★ " + globalPoints;
 
+        // Update Misi 1 (Membaca)
         let safeCount =
           booksReadCount > maxMissionBooks ? maxMissionBooks : booksReadCount;
         let pct = (safeCount / maxMissionBooks) * 100;
         let pctFormatted = pct.toFixed(1);
         if (pctFormatted.endsWith(".0")) pctFormatted = Math.round(pct);
+        const m1Fill = document.getElementById("reward-mission1-fill");
+        if (m1Fill) {
+          m1Fill.style.width = pct + "%";
+          document.getElementById("reward-mission1-text").innerText =
+            safeCount + "/3 Books";
+          document.getElementById("reward-mission1-pct").innerText =
+            pctFormatted + "%";
+        }
 
-        document.getElementById("reward-mission1-fill").style.width = pct + "%";
-        document.getElementById("reward-mission1-text").innerText =
-          safeCount + "/3 Books";
-        document.getElementById("reward-mission1-pct").innerText =
-          pctFormatted + "%";
-
+        // Update Misi 2 (Rating)
         let safeRating =
           booksRatedCount > maxRatingBooks ? maxRatingBooks : booksRatedCount;
         let ratingPct = (safeRating / maxRatingBooks) * 100;
         let ratingPctFormatted = ratingPct.toFixed(1);
         if (ratingPctFormatted.endsWith(".0"))
           ratingPctFormatted = Math.round(ratingPct);
+        const m2Fill = document.getElementById("reward-mission2-fill");
+        if (m2Fill) {
+          m2Fill.style.width = ratingPct + "%";
+          document.getElementById("reward-mission2-text").innerText =
+            safeRating + "/5 Ratings";
+          document.getElementById("reward-mission2-pct").innerText =
+            ratingPctFormatted + "%";
+        }
 
-        document.getElementById("reward-mission2-fill").style.width =
-          ratingPct + "%";
-        document.getElementById("reward-mission2-text").innerText =
-          safeRating + "/5 Ratings";
-        document.getElementById("reward-mission2-pct").innerText =
-          ratingPctFormatted + "%";
+        // Update Garden UI (1 Poin = 10 ml Nutrisi)
+        const targetNutrisi = 350;
+        const currentNutrisi = globalPoints * 10;
+        const totalNutrisiEl = document.getElementById("total-nutrisi");
+        if (totalNutrisiEl) {
+          totalNutrisiEl.innerText = currentNutrisi.toLocaleString();
+          let gardenProgress = (currentNutrisi / targetNutrisi) * 100;
+          if (gardenProgress > 100) gardenProgress = 100;
+          document.getElementById("evolution-fill").style.width =
+            gardenProgress + "%";
+
+          let remaining = targetNutrisi - currentNutrisi;
+          if (remaining < 0) remaining = 0;
+          document.getElementById("nutrisi-needed").innerText =
+            remaining.toLocaleString();
+
+          // Ubah icon jika level up
+          if (currentNutrisi >= targetNutrisi) {
+            document.getElementById("garden-char").innerText = "🪴";
+          } else {
+            document.getElementById("garden-char").innerText = "🌱";
+          }
+        }
       }
 
       window.onload = function () {
@@ -1304,7 +1557,11 @@
           .querySelectorAll(".nav-item")
           .forEach((nav) => nav.classList.remove("active"));
         element.classList.add("active");
-        if (screenId !== "category-detail" && screenId !== "read-book")
+        if (
+          screenId !== "category-detail" &&
+          screenId !== "read-book" &&
+          screenId !== "garden"
+        )
           previousScreen = screenId;
       }
 
@@ -1334,7 +1591,19 @@
         document.getElementById("cat-book-list").innerHTML = listHTML;
       }
 
-      // SISTEM RATING BINTANG
+      function openGarden() {
+        document
+          .querySelectorAll("#main-app .screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("garden").classList.add("active");
+        updateGlobalDataUI();
+      }
+
+      function goBackFromGarden() {
+        document.getElementById("garden").classList.remove("active");
+        document.getElementById("reward").classList.add("active");
+      }
+
       let currentRating = 0;
       function setRating(ratingValue) {
         currentRating = ratingValue;
@@ -1351,7 +1620,6 @@
       function addReview() {
         const reviewInput = document.getElementById("review-text");
         const text = reviewInput.value;
-
         if (currentRating === 0 && text.trim() === "") {
           alert(
             "Silakan berikan rating bintang atau tulis ulasan terlebih dahulu!",
@@ -1368,7 +1636,6 @@
         container.innerHTML =
           `<div class="review-item">${starsHtml}<strong>Aurel (You):</strong> ${text}</div>` +
           container.innerHTML;
-
         reviewInput.value = "";
 
         if (currentRating > 0) {
@@ -1460,7 +1727,7 @@
           booksReadCount++;
         }
         alert(
-          "🎉 Selamat! Anda telah membaca buku selama 2 menit.\nAnda mendapatkan +10 Points! Cek menu Reward Anda.",
+          "🎉 Selamat! Anda telah membaca buku selama 2 menit.\nAnda mendapatkan +10 Points! Nutrisi Garden Anda juga bertambah.",
         );
         updateGlobalDataUI();
       }
