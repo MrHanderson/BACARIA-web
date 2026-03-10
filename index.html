@@ -91,7 +91,7 @@
         border-bottom: 2px solid var(--primary-blue);
       }
 
-      /* --- 1. Login Screen --- */
+      /* --- Login Screen --- */
       #login-screen {
         justify-content: center;
         align-items: center;
@@ -145,7 +145,7 @@
         display: none;
       }
 
-      /* --- 2. Home & Explore --- */
+      /* --- Home & Explore --- */
       .search-bar {
         margin: 15px 20px;
         display: flex;
@@ -197,7 +197,6 @@
       .cat-card.pink p {
         background: var(--primary-pink);
       }
-
       .explore-section {
         padding: 15px 20px 0;
       }
@@ -221,7 +220,7 @@
         min-width: 80px;
       }
 
-      /* --- 3. Category Detail Screen --- */
+      /* --- Category Detail Screen --- */
       #category-detail {
         padding: 20px;
       }
@@ -245,48 +244,13 @@
         border-radius: 8px;
         gap: 15px;
         align-items: center;
+        transition: background 0.2s;
       }
-      .book-cover-sm {
-        width: 50px;
-        height: 70px;
-        background: #9fa8da;
-        border-radius: 4px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 10px;
-        text-align: center;
-        color: white;
-        font-weight: bold;
+      .book-item-row:hover {
+        background: #fce4ec;
       }
 
-      /* --- 4. Create Screen --- */
-      .create-area {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .input-group {
-        width: 100%;
-        margin-bottom: 15px;
-      }
-      .input-group label {
-        display: block;
-        color: var(--primary-blue);
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      .input-group input,
-      .input-group textarea {
-        width: 100%;
-        border: 2px dashed var(--primary-pink);
-        padding: 10px;
-        outline: none;
-        box-shadow: 4px 4px 0px #9fa8da;
-      }
-
-      /* --- 5. Library Screen --- */
+      /* --- Library Screen & Star Rating --- */
       .library-area {
         padding: 20px;
         display: flex;
@@ -341,13 +305,21 @@
         padding: 8px;
         border-radius: 4px;
       }
-      #created-books-container {
-        margin-top: 20px;
-        border-top: 2px dashed var(--gray-light);
-        padding-top: 20px;
+      .star-rating {
+        margin-bottom: 10px;
+      }
+      .star {
+        font-size: 28px;
+        color: #e0e0e0;
+        cursor: pointer;
+        transition: color 0.2s;
+        margin-right: 2px;
+      }
+      .star.selected {
+        color: #ffb300;
       }
 
-      /* --- 6. Profile Screen --- */
+      /* --- Profile & Gamification (Mission Box) --- */
       .profile-header {
         display: flex;
         flex-direction: column;
@@ -422,6 +394,7 @@
         font-weight: bold;
         line-height: 1.2;
       }
+
       .mission-box {
         background: #fce4ec;
         border: 1px solid var(--primary-blue);
@@ -448,16 +421,10 @@
         margin-top: 5px;
       }
       .progress-fill {
-        background: #80cbc4;
+        background: var(--primary-pink);
         height: 100%;
-        width: 80%;
-      }
-      .progress-text {
-        text-align: right;
-        font-size: 12px;
-        font-weight: bold;
-        margin-top: 5px;
-        color: #555;
+        width: 0%;
+        transition: width 0.8s ease-in-out;
       }
 
       /* --- Bottom Navigation --- */
@@ -491,7 +458,7 @@
       .nav-item.active .nav-icon {
         filter: grayscale(0%);
       }
-      .nav-create .nav-icon {
+      .nav-reward .nav-icon {
         background-color: var(--primary-blue);
         color: white;
         border-radius: 50%;
@@ -503,6 +470,8 @@
         margin-top: -20px;
         border: 3px solid white;
         filter: none;
+        font-size: 24px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
@@ -514,7 +483,6 @@
         <p style="margin-bottom: 20px; font-weight: bold; color: #555">
           Sign in to your account
         </p>
-
         <div id="login-error" class="error-msg">
           Email and Password cannot be empty!
         </div>
@@ -532,9 +500,10 @@
           placeholder="Password"
           required
         />
-
         <button class="btn btn-login" onclick="processLogin()">LOGIN</button>
-        <button class="btn btn-register">REGISTER</button>
+        <button class="btn btn-register" onclick="processRegister()">
+          REGISTER
+        </button>
       </div>
 
       <div
@@ -577,16 +546,27 @@
               <span>💻</span>
               <p>Technology</p>
             </div>
+            <div class="cat-card" onclick="openCategory('Romance')">
+              <span style="color: #ff9800">📖</span>
+              <p>Romance</p>
+            </div>
+            <div class="cat-card pink" onclick="openCategory('Slice of Life')">
+              <span style="color: #607d8b">☔</span>
+              <p>Slice of Life</p>
+            </div>
+            <div class="cat-card" onclick="openCategory('Adventure')">
+              <span style="color: #8d6e63">🏕️</span>
+              <p>Adventure</p>
+            </div>
           </div>
         </div>
 
         <div id="explore" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ 0</div>
+            <div class="points">★ 10</div>
           </div>
           <div class="page-title">Aurel, Let's Read!</div>
-
           <div class="explore-section">
             <div class="explore-title">🔥 Hot</div>
             <div class="explore-row">
@@ -607,7 +587,6 @@
               </div>
             </div>
           </div>
-
           <div class="explore-section">
             <div class="explore-title">✔️ Recommendation</div>
             <div class="explore-row">
@@ -625,7 +604,6 @@
               </div>
             </div>
           </div>
-
           <div class="explore-section">
             <div class="explore-title">🌍 Explore</div>
             <div class="explore-row">
@@ -659,32 +637,132 @@
           <div class="book-list-vertical" id="cat-book-list"></div>
         </div>
 
-        <div id="create" class="screen">
+        <div id="reward" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
             <div class="points">★ 10</div>
           </div>
-          <div class="page-title">Aurel, Let's Create!</div>
-          <div class="create-area">
-            <div class="input-group">
-              <label>📝 Title:</label>
-              <input
-                type="text"
-                id="create-title"
-                placeholder="Enter book title..."
-              />
+          <div class="page-title">Your Rewards</div>
+          <div style="padding: 15px 20px">
+            <div
+              style="
+                background: linear-gradient(
+                  135deg,
+                  var(--primary-blue),
+                  #5c6bc0
+                );
+                border-radius: 15px;
+                padding: 20px;
+                color: white;
+                text-align: center;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+              "
+            >
+              <h3
+                style="font-weight: normal; font-size: 14px; margin-bottom: 5px"
+              >
+                Total Points
+              </h3>
+              <h1
+                id="reward-total-points"
+                style="font-size: 36px; color: #ffd54f"
+              >
+                ★ 10
+              </h1>
             </div>
-            <div class="input-group">
-              <label>💬 Description:</label>
-              <textarea
-                id="create-desc"
-                rows="3"
-                placeholder="Enter description..."
-              ></textarea>
+            <h3
+              style="
+                color: var(--primary-blue);
+                font-size: 16px;
+                margin-bottom: 15px;
+              "
+            >
+              Daily Missions
+            </h3>
+            <div class="mission-box" style="margin-bottom: 10px">
+              <div class="mission-icon">📖</div>
+              <div class="progress-bar-container">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <b style="font-size: 14px; color: #333">Daily Read</b>
+                  <span
+                    id="reward-mission1-text"
+                    style="
+                      font-size: 12px;
+                      font-weight: bold;
+                      color: var(--primary-pink);
+                    "
+                    >0/3 Books</span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div id="reward-mission1-fill" class="progress-fill"></div>
+                </div>
+                <div
+                  id="reward-mission1-pct"
+                  style="
+                    text-align: right;
+                    font-size: 10px;
+                    font-weight: bold;
+                    color: #555;
+                    margin-top: 3px;
+                  "
+                >
+                  0%
+                </div>
+              </div>
             </div>
-            <button class="btn btn-login" onclick="submitNewBook()">
-              Publish Book
-            </button>
+            <div
+              class="mission-box"
+              style="margin-bottom: 25px; background: #e8eaf6"
+            >
+              <div class="mission-icon">⭐</div>
+              <div class="progress-bar-container">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <b style="font-size: 14px; color: #333">Rate 5 Books</b>
+                  <span
+                    id="reward-mission2-text"
+                    style="
+                      font-size: 12px;
+                      font-weight: bold;
+                      color: var(--primary-pink);
+                    "
+                    >0/5 Ratings</span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div
+                    id="reward-mission2-fill"
+                    class="progress-fill"
+                    style="background: var(--light-blue)"
+                  ></div>
+                </div>
+                <div
+                  id="reward-mission2-pct"
+                  style="
+                    text-align: right;
+                    font-size: 10px;
+                    font-weight: bold;
+                    color: #555;
+                    margin-top: 3px;
+                  "
+                >
+                  0%
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -694,17 +772,28 @@
             <div class="points">★ 10</div>
           </div>
           <div class="page-title">My Library</div>
-
           <div class="library-area">
             <h3 style="color: var(--primary-blue); margin-bottom: 10px">
               Currently Reading
             </h3>
             <div class="library-book">The Summer<br />I Turned Pretty</div>
-
             <div class="review-section">
-              <b style="font-size: 14px; color: var(--primary-pink)"
-                >Write a Review:</b
+              <b
+                style="
+                  font-size: 14px;
+                  color: var(--primary-pink);
+                  display: block;
+                  margin-bottom: 5px;
+                "
+                >Rate this book:</b
               >
+              <div class="star-rating">
+                <span id="star-1" class="star" onclick="setRating(1)">★</span>
+                <span id="star-2" class="star" onclick="setRating(2)">★</span>
+                <span id="star-3" class="star" onclick="setRating(3)">★</span>
+                <span id="star-4" class="star" onclick="setRating(4)">★</span>
+                <span id="star-5" class="star" onclick="setRating(5)">★</span>
+              </div>
               <textarea
                 id="review-text"
                 class="review-input"
@@ -716,16 +805,10 @@
               </button>
               <div class="review-list" id="review-container">
                 <div class="review-item">
+                  <div style="color: #ffb300; margin-bottom: 5px">★★★★★</div>
                   <strong>Patricia:</strong> Buku yang sangat emosional!
                 </div>
               </div>
-            </div>
-
-            <div id="created-books-container" style="display: none">
-              <h3 style="color: var(--primary-blue); margin-bottom: 10px">
-                My Published Books
-              </h3>
-              <div id="my-books-list" class="book-list-vertical"></div>
             </div>
           </div>
         </div>
@@ -736,7 +819,6 @@
             <div class="points">★ 10</div>
           </div>
           <div class="page-title">Aurel's Profile</div>
-
           <div class="profile-header">
             <b
               style="
@@ -754,7 +836,7 @@
               </div>
               <div class="stat-box">
                 <h3 style="color: var(--primary-blue)">Aurel</h3>
-                <p>10 points</p>
+                <p id="profile-points-text">10 points</p>
               </div>
               <div class="stat-box">
                 <h3>31</h3>
@@ -762,7 +844,6 @@
               </div>
             </div>
           </div>
-
           <div class="profile-section">
             <div class="section-title">My Books</div>
             <div class="book-list">
@@ -782,18 +863,103 @@
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="profile-section">
-            <div class="section-title">My Missions</div>
-            <div class="mission-box">
-              <div class="mission-icon">🏆</div>
-              <div class="progress-bar-container">
-                <b style="font-size: 14px; color: #333">Read 5 Books</b>
-                <div class="progress-bar">
-                  <div class="progress-fill"></div>
-                </div>
-                <div class="progress-text">4/5</div>
-              </div>
+        <div id="read-book" class="screen" style="position: relative">
+          <div
+            id="reading-timer-container"
+            style="
+              display: none;
+              position: sticky;
+              top: 0;
+              background: #e0f2f1;
+              border-bottom: 2px solid #26a69a;
+              z-index: 100;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <div
+              id="reading-progress-fill"
+              style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0%;
+                background: #b2dfdb;
+                z-index: 1;
+                transition: width 1s linear;
+              "
+            ></div>
+            <div
+              style="
+                position: relative;
+                z-index: 2;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 20px;
+              "
+            >
+              <b style="color: #00695c; font-size: 14px"
+                >Membaca... (+10 Pts)</b
+              >
+              <span
+                id="reading-time-text"
+                style="color: #00695c; font-size: 16px; font-weight: bold"
+                >00:00 / 02:00</span
+              >
+            </div>
+          </div>
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+          </div>
+          <div
+            class="back-btn"
+            style="margin-left: 20px; margin-top: 10px"
+            onclick="goBackFromRead()"
+          >
+            🔙 Back
+          </div>
+          <div style="padding: 0 20px 20px; text-align: center">
+            <img
+              id="read-book-cover"
+              src=""
+              alt="Cover"
+              style="
+                width: 100px;
+                height: 140px;
+                border-radius: 8px;
+                object-fit: cover;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                margin-bottom: 15px;
+              "
+            />
+            <h2
+              id="read-book-title"
+              style="
+                color: var(--primary-pink);
+                margin-bottom: 20px;
+                font-size: 18px;
+              "
+            >
+              Book Title
+            </h2>
+            <div
+              style="
+                text-align: left;
+                font-size: 14px;
+                line-height: 1.6;
+                color: #444;
+                background: #fff;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid var(--gray-light);
+                height: 400px;
+                overflow-y: auto;
+              "
+            >
+              <div id="read-book-content"></div>
             </div>
           </div>
         </div>
@@ -807,9 +973,9 @@
             <div class="nav-icon">🔍</div>
             <span>Explore</span>
           </div>
-          <div class="nav-item nav-create" onclick="navTo('create', this)">
-            <div class="nav-icon">➕</div>
-            <span>Create</span>
+          <div class="nav-item nav-reward" onclick="navTo('reward', this)">
+            <div class="nav-icon">🎁</div>
+            <span>Reward</span>
           </div>
           <div class="nav-item" onclick="navTo('library', this)">
             <div class="nav-icon">📚</div>
@@ -826,38 +992,322 @@
     <script>
       let previousScreen = "home";
 
-      // 1. Validasi Login
-      function processLogin() {
-        const email = document.getElementById("login-email").value;
-        const pass = document.getElementById("login-password").value;
-        const errorMsg = document.getElementById("login-error");
+      let globalPoints = 10;
+      let booksReadCount = 0;
+      let booksRatedCount = 0;
+      const maxMissionBooks = 3;
+      const maxRatingBooks = 5;
 
-        if (email.trim() === "" || pass.trim() === "") {
-          errorMsg.style.display = "block";
-        } else {
-          errorMsg.style.display = "none";
+      let readingTimer = null;
+      let currentReadingSeconds = 0;
+      const targetReadingSeconds = 120;
+
+      const booksData = {
+        Fantasy: [
+          {
+            title: "The Chronicles of Narnia",
+            author: "C. S. Lewis",
+            img: "images/fantasy - narnia .png",
+            story:
+              "<b>Kisah epik semesta Narnia bermula jauh pada era Victoria di London, ketika dua anak bernama Digory Kirke dan Polly Plummer secara tidak sengaja menjadi korban eksperimen sihir Paman Andrew. Melalui cincin ajaib, mereka terlempar ke Hutan di Antara Dunia-Dunia dan masuk ke dunia Charn yang sedang sekarat. Di sana, Digory tanpa sengaja membangunkan Ratu Jadis, seorang penyihir lalim yang kemudian mengikuti mereka kembali ke London dan menciptakan kekacauan. Dalam usaha mengembalikan Jadis, mereka justru terdampar di sebuah ruang kosong bersama sang penyihir, Paman Andrew, seorang kusir bernama Frank, dan kudanya. Di ruang hampa itulah mereka menjadi saksi mata saat Aslan sang singa agung menyanyikan dunia magis Narnia menjadi ada, menumbuhkan tanah, bintang, dan hewan-hewan yang bisa berbicara. Karena Digory telah membawa kejahatan ke dunia suci tersebut, Aslan mengutusnya mengambil apel ajaib di ujung dunia untuk menumbuhkan pohon pelindung. Setelah berhasil, Aslan mengizinkan Digory membawa satu apel ke bumi untuk menyembuhkan ibunya yang sakit keras. Biji dari apel itu ditanam, tumbuh menjadi pohon besar, dan kayunya kelak dibuat menjadi sebuah lemari pakaian yang menyimpan sisa-sisa sihir Narnia Puluhan tahun kemudian, di tengah kecamuk Perang Dunia Kedua, empat bersaudara Pevensie—Peter, Susan, Edmund, dan Lucy—diungsikan ke rumah tua milik Profesor Digory Kirke. Lucy menjadi yang pertama menemukan jalan kembali ke Narnia melalui lemari pakaian magis tersebut. Dunia penciptaan Aslan itu kini telah jatuh ke dalam cengkeraman Ratu Jadis yang kini menyebut dirinya Penyihir Putih, mengutuk Narnia dengan musim dingin abadi tanpa hari Natal. Konflik memuncak ketika Edmund terpedaya oleh tipu muslihat sang penyihir dan mengkhianati keluarganya. Demi menebus nyawa Edmund dari jerat hukum sihir kuno, Aslan menyerahkan dirinya untuk dibunuh di atas Meja Batu. Namun, sihir penebusan yang lebih kuno membangkitkan Aslan kembali, memicu pertempuran besar yang menumbangkan kekuasaan Penyihir Putih. Keempat bersaudara Pevensie kemudian dinobatkan sebagai raja dan ratu, memimpin Narnia memasuki Zaman Keemasan yang damai dan makmur.Tepat di tengah masa kejayaan pemerintahan Pevensie, sebuah krisis terjadi di perbatasan selatan Narnia. Shasta, seorang anak angkat yang tertindas di negeri Calormen, melarikan diri bersama Bree, seekor kuda Narnia yang bisa berbicara. Di tengah pelarian melintasi padang pasir, mereka bergabung dengan Aravis, seorang gadis bangsawan yang lari dari pernikahan paksa, dan kudanya Hwin. Saat menyelinap di ibu kota Tashbaan, mereka tak sengaja mendengar rencana licik Pangeran Rabadash dari Calormen yang berniat menginvasi Archenland dan menculik Ratu Susan dari Narnia. Shasta memacu kudanya menembus gurun untuk memberi peringatan kepada Raja Lune dari Archenland. Pasukan gabungan Narnia dan Archenland berhasil menghancurkan invasi Rabadash. Dalam kemenangan itu, terungkaplah kebenaran besar bahwa Shasta sebenarnya adalah Pangeran Cor, putra mahkota Archenland yang hilang diculik saat masih bayi.Setelah belasan tahun memerintah di Zaman Keemasan, Pevensie kembali ke bumi dan mendapati diri mereka kembali menjadi anak-anak. Namun, ketika mereka ditarik kembali ke Narnia satu tahun kemudian, seribu tiga ratus tahun waktu Narnia telah berlalu. Kastil kebanggaan mereka, Cair Paravel, telah menjadi reruntuhan, dan Narnia kini dijajah oleh bangsa Telmarine yang memburu makhluk mitologi hingga mereka bersembunyi di hutan lebat. Mereka dipanggil oleh tiupan terompet ajaib Susan yang ditiup oleh Pangeran Caspian, pewaris sah takhta Telmarine yang nyawanya diincar oleh pamannya yang tiran, Raja Miraz. Bersama-sama, Pevensie memimpin makhluk asli Narnia melancarkan pemberontakan besar, dibantu oleh Aslan yang membangunkan kembali dewa-dewa sungai dan roh pepohonan. Raja Miraz berhasil ditumbangkan, takhta dikembalikan kepada Caspian, dan Aslan memberitahu Peter serta Susan bahwa tugas mereka di Narnia telah usai secara permanen karena mereka sudah terlalu dewasa.Beberapa waktu kemudian, Narnia kembali memanggil, namun kali ini hanya Edmund dan Lucy yang masuk bersama sepupu mereka yang keras kepala, Eustace Scrubb. Mereka tersedot ke dalam lukisan laut di dinding kamar dan jatuh tepat di atas geladak kapal Dawn Treader yang dipimpin oleh Raja Caspian. Caspian sedang dalam pelayaran berbahaya menuju lautan timur yang belum dipetakan untuk mencari tujuh bangsawan Narnia yang diasingkan pamannya di masa lalu. Perjalanan ini penuh dengan ujian mematikan; Eustace bahkan dikutuk menjadi naga karena keserakahannya sebelum akhirnya diselamatkan dan disucikan hatinya oleh Aslan. Mereka mengarungi pulau air yang mengubah segalanya menjadi emas, pulau yang mewujudkan mimpi buruk, hingga bertemu bintang yang turun ke bumi. Pelayaran memuncak di Ujung Dunia, tempat tikus pahlawan Reepicheep berlayar sendirian memasuki Negara Aslan, sementara Edmund dan Lucy mendapat perpisahan terakhir mereka dengan Narnia, ditugaskan untuk mengenali Aslan di dunia nyata. Tugas melindungi Narnia kini jatuh ke pundak Eustace yang dipanggil kembali oleh Aslan bersama teman sekolahnya, Jill Pole. Misi mereka sangat berat: menemukan Pangeran Rilian, putra tunggal Raja Caspian yang telah tua dan sekarat. Rilian menghilang sepuluh tahun sebelumnya saat memburu ular hijau raksasa yang membunuh ibunya. Berbekal empat tanda dari Aslan, Eustace, Jill, dan makhluk rawa pesimis bernama Puddleglum berjalan menembus utara yang beku, lolos dari jebakan raksasa kanibal di Harfang, hingga terperosok ke dalam kegelapan Dunia Bawah. Di sana, mereka menemukan Rilian yang diikat pada sebuah Kursi Perak berlapis sihir, dikendalikan sepenuhnya oleh penyihir misterius. Mereka berhasil menghancurkan kursi tersebut, mematahkan mantra pikiran Rilian, dan membunuh sang penyihir saat ia berubah wujud menjadi ular hijau raksasa. Rilian berhasil kembali ke permukaan tepat pada waktunya untuk memeluk ayahnya sesaat sebelum Raja Caspian menghembuskan napas terakhirnya. Berabad-abad kemudian, kedamaian Narnia mencapai titik akhirnya. Seekor kera manipulatif bernama Shift menemukan kulit singa dan memakaikannya pada keledai lugu bernama Puzzle, menipunya agar menyamar sebagai Aslan. Shift bersekongkol dengan pasukan Calormen, menyebarkan doktrin sesat bahwa Aslan dan dewa haus darah Calormen, Tash, adalah entitas yang sama. Raja Tirian, pemimpin terakhir Narnia, berjuang mati-matian melawan kebohongan ini dan berhasil memanggil Eustace serta Jill untuk membantunya. Namun, tipu daya telah mengakar terlalu dalam, memicu pertempuran terakhir yang brutal di depan sebuah kandang kuda. Ketika Tirian dan pasukannya didesak masuk ke dalam kandang yang dikira sebagai tempat kematian, mereka justru melangkah melewati pintu masuk menuju Negara Aslan. Di dunia luar, Aslan memerintahkan kiamat atas Narnia—bintang-bintang berjatuhan, naga melahap daratan, dan lautan menelan semuanya. Namun bagi Tirian, Eustace, Jill, serta tokoh-tokoh masa lalu seperti Peter, Edmund, Lucy, dan Caspian, kandang itu adalah gerbang menuju Narnia Sejati. Sebuah dunia batin yang jauh lebih indah, abadi, dan nyata, tempat mereka terus melangkah lebih tinggi dan lebih dalam menuju kehidupan yang tak pernah berakhir.",
+          },
+          {
+            title: "Shadow and Bone",
+            author: "Leigh Bardugo",
+            img: "images/fantasy - Shadow.png",
+            story:
+              "<b>Kisah fantasi Shadow and Bone membawa kita ke dalam sebuah negara bernama Ravka yang terbelah menjadi dua oleh sebuah anomali magis menakutkan bernama Shadow Fold.  Shadow Fold adalah sebuah lautan kegelapan absolut yang dihuni oleh monster terbang pemakan manusia bernama volcra. Di tengah kehancuran dan perang tanpa henti ini hiduplah Alina Starkov seorang yatim piatu yang bekerja sebagai pembuat peta untuk Pasukan Pertama Ravka bersama sahabat masa kecilnya bernama Malyen Oretsev yang bekerja sebagai pelacak. Kehidupan Alina yang biasa saja berubah drastis ketika resimen mereka ditugaskan menyeberangi Shadow Fold. Dalam perjalanan tersebut kapal pasir mereka diserang oleh kawanan volcra dan saat Mal terluka parah dan hampir mati sebuah kekuatan cahaya yang luar biasa terang meledak dari dalam diri Alina untuk menyelamatkan nyawa sahabatnya. Kekuatan ini mengungkap identitas asli Alina sebagai Sun Summoner atau Pemanggil Matahari yaitu seorang Grisha langka dengan kemampuan mengendalikan cahaya yang telah ditunggu tunggu oleh seluruh rakyat Ravka karena diyakini sebagai satu satunya harapan untuk menghancurkan Shadow Fold selamanya. Mengetahui hal ini Jenderal Kirigan yang dikenal sebagai The Darkling dan merupakan pemimpin Pasukan Kedua atau pasukan elit sihir Grisha segera membawa Alina ke istana Little Palace di ibu kota Os Alta untuk dilatih dan dilindungi. Di sana Alina harus belajar mengendalikan kekuatannya di tengah intrik politik dan kemewahan yang membuatnya merasa terasing sekaligus terpesona terutama oleh pesona gelap sang Darkling. Sang Jenderal meyakinkan Alina bahwa mereka membutuhkan sebuah penguat sihir kuno berupa Rusa Jantan Morozova untuk memaksimalkan kekuatan cahaya Alina agar bisa melenyapkan kegelapan Fold. Namun di tengah pelatihannya yang berat Alina dikejutkan oleh pengakuan Baghra yakni guru sihirnya yang ternyata adalah ibu kandung The Darkling. Baghra mengungkap rahasia kelam bahwa The Darkling sebenarnya adalah sosok abadi yang menciptakan Shadow Fold ratusan tahun lalu dan ia sama sekali tidak berniat menghancurkannya melainkan ingin menjadikan Alina sebagai budak senjata untuk memperluas kegelapan tersebut dan menaklukkan seluruh dunia. Dalam kepanikan Alina melarikan diri dari istana dan berjuang menyusuri alam liar Ravka hingga akhirnya berhasil reuni dengan Mal yang ternyata sedang ditugaskan untuk memburu Rusa Jantan Morozova. Keduanya bekerja sama melacak makhluk mistis tersebut dengan harapan Alina dapat mengklaim kekuatannya sebelum The Darkling menemukannya. Mereka akhirnya menemukan sang Rusa namun Alina menolak untuk membunuhnya karena ia menyadari makhluk itu memiliki kesadarannya sendiri. Sayangnya The Darkling dan pasukannya tiba tepat pada saat itu lalu membunuh sang Rusa dan memaksa pandai besi Grisha untuk melebur tulang rusa tersebut menjadi kalung pengikat di leher Alina. Dengan kalung itu The Darkling menguasai kendali penuh atas kekuatan cahaya Alina tanpa mempedulikan kehendak gadis tersebut. Sang Jenderal kemudian membawa Alina dan para duta besar negara lain masuk ke dalam Shadow Fold lalu menggunakan cahaya Alina untuk melindungi kapal mereka sambil memperluas jangkauan kegelapan menuju kota Novokribirsk sebagai unjuk kekuatan dan ancaman bagi musuh musuhnya. Di momen keputusasaan yang memuncak saat Mal dilemparkan ke luar kapal untuk dimangsa volcra Alina tiba tiba menyadari pencerahan sejati bahwa kekuatan penguat itu bukan milik pembunuhnya melainkan milik orang yang menunjukkan belas kasihan. Dengan pemahaman ini Alina berhasil memutus ikatan kendali The Darkling memanggil cahaya yang membutakan untuk menyelamatkan Mal dan meninggalkan kapal The Darkling di tengah lautan kegelapan agar diserang oleh para volcra. Kisah ini ditutup dengan pelarian Alina dan Mal yang berhasil menyeberangi Laut Sejati menuju benua lain untuk bersembunyi sambil merencanakan langkah selanjutnya demi membebaskan Ravka dari bayang bayang kehancuran.",
+          },
+          {
+            title: "Game of Thrones",
+            author: "George R. R. Martin",
+            img: "images/fantasy - GOT.png",
+            story:
+              "<b>Kisah epik A Game of Thrones membuka lembaran sejarah berdarah benua Westeros yang ditandai dengan ancaman kuno di wilayah paling utara tempat para penjaga Night Watch berhadapan dengan makhluk mitos mengerikan yang bangkit kembali dari tidur panjangnya di balik dinding es raksasa. Jauh di selatan wilayah es tersebut Lord Eddard Stark atau Ned penguasa Winterfell hidup damai bersama keluarganya hingga mendapat kunjungan mendadak dari sahabat lamanya yaitu Raja Robert Baratheon yang meminta Ned menjadi Hand of the King atau tangan kanan raja menyusul kematian misterius pendahulunya Jon Arryn. Keputusan berat Ned untuk menerima tawaran itu membawa bencana beruntun bagi keluarganya yang diawali dengan putranya Bran Stark jatuh dari menara tinggi hingga lumpuh karena sengaja didorong oleh Jaime Lannister setelah Bran tanpa sengaja memergoki perselingkuhan Jaime dengan saudara kembarnya sendiri yakni Ratu Cersei Lannister. Ned kemudian berangkat ke ibu kota Kings Landing bersama dua putrinya Sansa dan Arya sementara putra haramnya Jon Snow memilih bergabung dengan persaudaraan Night Watch di ujung utara dan istrinya Catelyn Stark tetap tinggal untuk merawat Bran sebelum akhirnya pergi secara diam diam ke selatan untuk menyelidiki dalang di balik percobaan pembunuhan kedua terhadap putranya yang lumpuh itu. Di Kings Landing Ned terjebak dalam sarang ular politik penuh intrik tipu daya dan pengkhianatan di mana ia perlahan mulai mengungkap rahasia gelap peninggalan Jon Arryn bahwa ketiga anak Ratu Cersei dan Raja Robert sebenarnya adalah hasil hubungan sedarah sang ratu dengan adiknya Jaime Lannister. Sementara itu ketegangan memuncak di berbagai penjuru Westeros ketika Catelyn Stark menangkap Tyrion Lannister karena mencurigainya sebagai dalang percobaan pembunuhan Bran yang memicu amarah keluarga Lannister dan menyulut percikan perang terbuka. Di seberang Lautan Sempit benua Essos pangeran buronan Viserys Targaryen yang berambisi merebut kembali takhta Westeros menikahkan adik perempuannya Daenerys Targaryen dengan pemimpin suku nomaden Dothraki bernama Khal Drogo sebagai bayaran untuk pasukan militer. Namun Daenerys yang awalnya penakut perlahan bangkit menjadi seorang Khaleesi atau ratu yang tangguh sementara Viserys yang serakah akhirnya mati dibunuh oleh Drogo dengan mahkota emas cair. Kembali di Kings Landing situasi semakin kacau setelah Raja Robert tewas akibat serangan babi hutan saat berburu yang memberi celah bagi Cersei untuk menobatkan putranya Joffrey yang kejam sebagai raja baru. Ned Stark yang mencoba mengungkap kebenaran justru dikhianati oleh sekutunya ditangkap atas tuduhan makar dan secara tragis dipenggal di depan publik atas perintah langsung dari Raja Joffrey yang memicu putra sulung Ned yaitu Robb Stark untuk memimpin pemberontakan besar besaran dari wilayah utara dan mendeklarasikan dirinya sebagai King in the North. Di benua seberang Daenerys juga menghadapi tragedi kehilangan suaminya Khal Drogo serta bayi dalam kandungannya akibat sihir darah penyihir pendendam Mirri Maz Duur. Dalam puncak keputusasaan Daenerys menghukum sang penyihir dengan membakarnya di tumpukan kayu api perabuan suaminya lalu dengan berani ia melangkah masuk ke dalam kobaran api yang menyala nyala sambil membawa tiga butir telur naga purba yang mengeras. Saat fajar menyingsing dan api padam Daenerys bangkit dari abu tanpa luka sedikit pun diiringi kelahiran tiga ekor anak naga yang telah menetas dan menandai kembalinya sihir serta naga ke dunia sekaligus awal baru dari perjalanannya untuk menaklukkan Westeros.",
+          },
+        ],
+        "Self-Improvement": [
+          {
+            title: "Atomic Habits",
+            author: "James Clear",
+            img: "images/SI - Atomic.png",
+            story:
+              "<b>Buku Atomic Habits karya James Clear membedah sains dan praktik tentang bagaimana perubahan kecil yang dilakukan secara konsisten setiap hari dapat menghasilkan dampak yang luar biasa besar dalam jangka panjang melalui efek majemuk. Ferick gagasan utama dari buku ini adalah pentingnya berfokus pada sistem pembentukan kebiasaan daripada sekadar menetapkan tujuan akhir karena pencapaian sejati berakar pada perubahan identitas seseorang yang perlahan lahan mengubah cara pandang terhadap diri sendiri. Clear memperkenalkan siklus kebiasaan yang terdiri dari empat tahap yakni petunjuk gairah tanggapan dan ganjaran yang kemudian diterjemahkan menjadi empat hukum perubahan perilaku. Hukum pertama mengajarkan kita untuk menjadikannya terlihat dengan mendesain lingkungan sedemikian rupa agar petunjuk kebiasaan baik mudah disadari seperti meletakkan buku di atas bantal jika ingin rajin membaca serta menggunakan teknik menumpuk kebiasaan baru di atas rutinitas lama. Hukum kedua menekankan pentingnya menjadikannya menarik melalui penggabungan godaan di mana tindakan yang perlu dilakukan dipasangkan dengan tindakan yang diinginkan serta bergabung dengan komunitas yang menormalisasi perilaku target kita. Hukum ketiga menuntut kita untuk menjadikannya mudah dengan mengurangi hambatan di awal proses dengan mempraktikkan aturan dua menit yaitu menyusutkan kebiasaan baru menjadi tindakan berdurasi maksimal dua menit agar tidak terasa membebani pikiran. Hukum keempat mengharuskan kita menjadikannya memuaskan dengan memberikan penghargaan langsung setelah kebiasaan selesai dilakukan agar otak mengasosiasikan tindakan tersebut dengan perasaan positif dan menggunakan pelacak kebiasaan visual untuk menjaga motivasi agar rantai rutinitas tidak terputus. Sebaliknya untuk menghentikan kebiasaan buruk kita harus membalikkan keempat hukum tersebut menjadi menjadikannya tidak terlihat tidak menarik sulit dan mengecewakan. Buku ini juga membahas strategi tingkat lanjut seperti aturan Goldilocks yang menyatakan bahwa manusia mencapai motivasi puncak saat mengerjakan tugas yang tingkat kesulitannya pas berada di ambang batas kemampuan mereka serta pentingnya melakukan peninjauan dan refleksi berkala agar rutinitas otomatis tidak membuat kita berhenti bertumbuh sehingga perbaikan satu persen setiap hari pada akhirnya membangun fondasi kokoh bagi keberhasilan yang berkelanjutan..",
+          },
+          {
+            title: "How to be Happy",
+            author: "Lee Crutchley",
+            img: "images/SI- Happy.png",
+            story:
+              "<b>Perjalanan di dalam lembaran ini dimulai bukan dengan janji manis tentang kebahagiaan melainkan dengan sebuah pengakuan jujur bahwa saat dunia terasa sangat gelap tujuan paling masuk akal bukanlah menjadi bahagia seketika melainkan berusaha menjadi sedikit lebih tidak sedih dari sebelumnya. Begitu halamannya terbuka kamu langsung dibawa masuk ke dalam ruang interaktif yang memintamu untuk berhadapan dengan perasaanmu sendiri secara telanjang tanpa teori psikologi yang rumit. Langkah pertama dalam kisah ini mengharuskanmu untuk mengakui seberapa buruk keadaan dan perasaanmu hari ini di mana kamu diberikan ruang aman untuk menuliskan segala hal yang membuatmu merasa hancur tanpa perlu berpura pura tegar. Setelah beban pengakuan itu dituangkan narasi berlanjut pada tindakan tindakan pembebasan fisik yang nyata seperti mencoret coret halaman dengan penuh amarah merobek kertas untuk meluapkan frustrasi yang terpendam atau sekadar menggambar pola pola acak demi menghentikan laju pikiran buruk yang terus berputar putar di dalam kepala. Ketika badai emosi mulai mereda perlahan lahan kamu dituntun untuk melatih kembali indramu agar peka terhadap kebaikan kecil di sekitarmu dengan cara mencatat hal hal sederhana yang masih bisa memberi rasa nyaman misalnya hangatnya secangkir teh di sore hari atau suara rintik hujan yang menenangkan. Lembaran selanjutnya bertindak layaknya teman yang duduk diam di sampingmu saat kamu kehabisan energi mengajakmu untuk memetakan kebiasaan kebiasaan yang memperburuk keadaan seperti kurang tidur atau makan sembarangan lalu perlahan membimbingmu untuk membangun kembali rutinitas dari titik yang paling remeh. Cerita ini juga membawamu keluar dari isolasi pikiran melalui instruksi untuk sekadar duduk di luar dan memperhatikan orang orang yang berlalu lalang menyadarkanmu bahwa kehidupan terus bergerak dan kamu tetap menjadi bagian dari semesta ini meski hatimu sedang terasa sangat asing. Mendekati akhir perjalanannya kamu diajak untuk menyusun strategi bertahan hidup pribadi berupa daftar tindakan darurat yang harus segera dilakukan ketika ombak kesedihan tiba tiba datang menerjang kembali. Seluruh lembaran ini mengalir sebagai sebuah kisah pertahanan diri di mana setiap halaman yang diselesaikan adalah satu langkah kecil menjauh dari keputusasaan hingga akhirnya kamu tiba di titik di mana beban di dada terasa sedikit lebih ringan memampukanmu untuk terus melangkah maju menyongsong hari esok tanpa paksaan untuk memalsukan senyuman. ",
+          },
+          {
+            title: "The Psychology of Money",
+            author: "Morgan Housel",
+            img: "images/SI - Moneyuu.png",
+            story:
+              "<b>Cerita dalam buku ini dibuka dengan sebuah perbandingan nyata antara dua nasib manusia yang sangat kontras yaitu seorang petugas kebersihan bernama Ronald Read dan seorang eksekutif sukses lulusan Harvard bernama Richard Fuscone. Ronald Read menjalani hidup yang sangat sederhana dan tenang namun setelah ia wafat dunia dikejutkan dengan harta warisannya yang mencapai delapan juta dolar hasil dari konsistensi menabung di saham perusahaan berkualitas selama puluhan tahun. Di sisi lain Richard Fuscone yang memiliki segalanya justru bangkrut total karena sifat serakah dan gaya hidup yang sangat boros hingga ia terpaksa menjual rumah mewahnya dengan harga sangat murah. Kejadian ini membuktikan bahwa perilaku terhadap uang jauh lebih menentukan masa depan finansial daripada seberapa tinggi tingkat pendidikan seseorang. Narasi kemudian membawa kita pada pemahaman tentang keberuntungan dan risiko di mana keberhasilan seseorang seringkali dipengaruhi oleh kekuatan besar di luar kendali mereka sehingga kita diajak untuk tidak terlalu sombong saat menang atau terlalu menyalahkan diri sendiri saat gagal. Kisah berlanjut pada rahasia terbesar kekayaan Warren Buffett yang seringkali disalahpahami orang banyak di mana kunci utamanya bukanlah murni pada kecerdasan investasinya melainkan pada faktor waktu yang sangat lama. Sebagian besar kekayaan Buffett baru terbentuk setelah ia melewati usia enam puluh lima tahun karena ia membiarkan bunga majemuk bekerja tanpa gangguan selama lebih dari delapan dekade. Namun narasi ini memberikan peringatan keras melalui kisah tokoh tokoh lain yang sudah memiliki uang jutaan dolar tetapi tetap merasa kurang hingga akhirnya mereka melakukan tindakan ilegal atau terlalu berisiko yang membuat mereka kehilangan nama baik serta kemerdekaan mereka. Pelajaran besar yang ditekankan di sini adalah pentingnya memiliki titik cukup agar kita tidak mempertaruhkan hal yang kita butuhkan demi mengejar hal yang sebenarnya tidak penting bagi kita. Kebebasan menjadi inti dari narasi berikutnya di mana nilai tertinggi dari uang sebenarnya adalah kemampuan untuk mengendalikan waktu sendiri. Memiliki kemampuan untuk bangun di pagi hari dan berkata bahwa aku bisa melakukan apa saja yang aku mau hari ini adalah dividen tertinggi yang bisa diberikan oleh uang kepada manusia. Namun untuk mencapai itu seseorang harus memahami perbedaan antara menjadi kaya yakni memiliki pendapatan besar saat ini dan menjadi makmur yakni memiliki aset yang tidak terlihat yang disimpan untuk masa depan. Kekayaan seringkali bersifat pamer sedangkan kemakmuran adalah opsi yang kita miliki untuk tidak membeli sesuatu sekarang agar memiliki kebebasan di kemudian hari. Buku ini juga menceritakan pentingnya ruang untuk kesalahan dalam setiap rencana keuangan karena masa depan selalu penuh dengan kejutan yang tidak terduga. Memiliki cadangan kas yang terasa tidak produktif sebenarnya adalah bentuk asuransi agar kita tidak terpaksa menjual aset di saat harga sedang jatuh atau saat terjadi krisis global. Narasi ini ditutup dengan kesadaran bahwa setiap individu sedang memainkan permainan yang berbeda beda di mana strategi yang masuk akal bagi seorang trader harian bisa menjadi bencana bagi seorang investor jangka panjang. Oleh karena itu sangat penting untuk tidak terpengaruh oleh kebisingan orang lain dan fokus pada apa yang membuat kita bisa tidur nyenyak di malam hari karena ketenangan pikiran adalah bentuk kesuksesan finansial yang paling hakiki.",
+          },
+        ],
+        "Mental Health": [
+          {
+            title: "Seni Bersikap Bodo Amat",
+            author: "Mark Manson",
+            img: "images/MH - Bomat.jpg",
+            story:
+              "<b>sebuah tamparan realitas tentang sosok Charles Bukowski seorang penulis yang tidak pernah berusaha keras untuk menjadi hebat namun justru meraih kesuksesan karena ia jujur pada kegagalannya. Narasi ini membawa kita pada kesadaran bahwa budaya modern saat ini terlalu memaksa manusia untuk selalu positif dan mengejar kesempurnaan yang justru menciptakan siklus kecemasan tanpa akhir. Kita diajak untuk memahami hukum kebalikan di mana semakin kita mati matian mengejar perasaan positif maka kita akan semakin merasa tidak puas sedangkan menerima pengalaman negatif justru merupakan pengalaman positif itu sendiri. Mark Manson membawa kita pada sebuah filosofi tentang keterbatasan energi mental di mana kita tidak mungkin peduli pada semua hal yang terjadi di dunia ini. Kunci hidup yang baik bukanlah tentang memedulikan lebih banyak hal melainkan tentang memedulikan hal hal yang benar benar penting dan membuang sisanya yang tidak berarti atau bersikap bodo amat terhadap gangguan gangguan sepele yang menguras emosi. Alur pemikiran kemudian bergeser pada sebuah kebenaran pahit bahwa penderitaan adalah bagian yang tidak terpisahkan dari kehidupan manusia dan tidak akan pernah hilang sepenuhnya. Masalah akan selalu ada dan yang bisa kita lakukan hanyalah memilih masalah apa yang ingin kita hadapi atau penderitaan apa yang sanggup kita jalani. Kebahagiaan sejati tidak datang dari ketiadaan masalah melainkan dari proses menyelesaikan masalah tersebut secara terus menerus. Narasi ini juga menghancurkan konsep tentang menjadi istimewa yang sering diagung agungkan media karena kenyataannya sebagian besar manusia adalah rata rata dalam banyak hal dan menerima fakta ini justru memberikan kebebasan untuk mulai bertumbuh tanpa beban ekspektasi yang tidak realistis. Kita diperkenalkan pada pentingnya memilih standar nilai yang baik yang berada di bawah kendali diri sendiri seperti kejutan kerendahhatian dan kejujuran dibandingkan nilai nilai buruk yang bergantung pada faktor eksternal seperti popularitas atau kekayaan materi semata. Lebih dalam lagi cerita ini mengajarkan tentang tanggung jawab penuh atas segala sesuatu yang terjadi dalam hidup kita meski itu bukan kesalahan kita. Kita mungkin tidak bersalah atas kejadian buruk yang menimpa namun kita selalu bertanggung jawab atas bagaimana kita memberikan respon terhadap kejadian tersebut. Narasi kemudian menantang kita untuk meragukan segala keyakinan yang kita miliki tentang diri sendiri karena merasa paling benar adalah musuh utama dari pertumbuhan. Kegagalan diposisikan sebagai guru terbaik dan satu satunya cara untuk menjadi mahir dalam sesuatu adalah dengan bersedia melakukan kesalahan berkali kali. Bagian akhir dari perjalanan ini membawa kita pada kesadaran tentang kematian yang tak terelakkan di mana mengingat bahwa kita semua akan mati justru menjadi kompas paling jernih untuk menentukan apa yang benar benar berharga dalam hidup. Dengan menyadari bahwa waktu kita terbatas kita akan berhenti memedulikan hal hal yang dangkal dan mulai fokus membangun warisan yang bermakna serta menjalin hubungan yang tulus dengan orang orang di sekitar kita.",
+          },
+          {
+            title: "I Have Anxiety",
+            author: "Isna Nurjanah",
+            img: "images/MH - Anxiety.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Psychology of Emotions",
+            author: "David J. Lieberman",
+            img: "images/MH - Emotions.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+        Comedy: [
+          {
+            title: "Ubur-Ubur Lembur",
+            author: "Raditya Dika",
+            img: "images/comedy - ubur2.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Marmut Merah Jambu",
+            author: "Raditya Dika",
+            img: "images/comedy - marmut.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Ngenest",
+            author: "Ernest Prakasa",
+            img: "images/comedy - ernest.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+        Romance: [
+          {
+            title: "Dilan 1990",
+            author: "Pidi Baiq",
+            img: "images/romance - dilan.png",
+            story:
+              "<b>Bab 1: Milea</b><br><br>Namaku Milea. Saat itu tahun 1990, aku baru saja pindah ke Bandung dari Jakarta. Di sanalah aku bertemu dengan Dilan.",
+          },
+          {
+            title: "It Starts With Us",
+            author: "Colleen Hoover",
+            img: "images/romance - start with us.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "It Ends With Us",
+            author: "Colleen Hoover",
+            img: "images/romance - ends with us.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+        "Slice of Life": [
+          {
+            title: "Sweet Bean Paste",
+            author: "Durian Sukegawa",
+            img: "images/SOL - SBP.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "What You Are Looking For",
+            author: "Michiko Aoyama",
+            img: "images/SOL - cat.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Convenience Store Woman",
+            author: "Sayaka Murata",
+            img: "images/SOL - convenience.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+        Adventure: [
+          {
+            title: "Around the World in 80 Days",
+            author: "Jules Verne",
+            img: "images/adventure - around world.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "The Call of the Wild",
+            author: "Jack London",
+            img: "images/adventure wild.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Treasure Island",
+            author: "Robert Louis Stevenson",
+            img: "images/adventure - treasure.png",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+        Technology: [
+          {
+            title: "Information Technology",
+            author: "Álvaro Rocha",
+            img: "images/Tech - ITS.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "The Nature of Technology",
+            author: "W. Brian Arthur",
+            img: "images/Tech - nature.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "The Science Book",
+            author: "National Geographic",
+            img: "images/Tech - science book.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+        Education: [
+          {
+            title: "English Literature",
+            author: "Henry S. Pancoast",
+            img: "images/education - english.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Digital Technology",
+            author: "Michelle F. Wright",
+            img: "images/education - digital tech.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+          {
+            title: "Living Economics",
+            author: "Peter J. Boettke",
+            img: "images/education - living eco.jpg",
+            story: "Teks cerita buku ini bisa ditulis di sini...",
+          },
+        ],
+      };
+
+      function updateGlobalDataUI() {
+        document.querySelectorAll(".points").forEach((el) => {
+          el.innerText = "★ " + globalPoints;
+        });
+        const profilePts = document.getElementById("profile-points-text");
+        if (profilePts) profilePts.innerText = globalPoints + " points";
+        const rewardPts = document.getElementById("reward-total-points");
+        if (rewardPts) rewardPts.innerText = "★ " + globalPoints;
+
+        let safeCount =
+          booksReadCount > maxMissionBooks ? maxMissionBooks : booksReadCount;
+        let pct = (safeCount / maxMissionBooks) * 100;
+        let pctFormatted = pct.toFixed(1);
+        if (pctFormatted.endsWith(".0")) pctFormatted = Math.round(pct);
+
+        document.getElementById("reward-mission1-fill").style.width = pct + "%";
+        document.getElementById("reward-mission1-text").innerText =
+          safeCount + "/3 Books";
+        document.getElementById("reward-mission1-pct").innerText =
+          pctFormatted + "%";
+
+        let safeRating =
+          booksRatedCount > maxRatingBooks ? maxRatingBooks : booksRatedCount;
+        let ratingPct = (safeRating / maxRatingBooks) * 100;
+        let ratingPctFormatted = ratingPct.toFixed(1);
+        if (ratingPctFormatted.endsWith(".0"))
+          ratingPctFormatted = Math.round(ratingPct);
+
+        document.getElementById("reward-mission2-fill").style.width =
+          ratingPct + "%";
+        document.getElementById("reward-mission2-text").innerText =
+          safeRating + "/5 Ratings";
+        document.getElementById("reward-mission2-pct").innerText =
+          ratingPctFormatted + "%";
+      }
+
+      window.onload = function () {
+        updateGlobalDataUI();
+        if (localStorage.getItem("isLoggedIn") === "true") {
           document.getElementById("login-screen").classList.remove("active");
           document.getElementById("main-app").style.display = "flex";
           document.getElementById("home").classList.add("active");
         }
+      };
+
+      function processRegister() {
+        const email = document.getElementById("login-email").value;
+        const pass = document.getElementById("login-password").value;
+        const errorMsg = document.getElementById("login-error");
+        if (email.trim() === "" || pass.trim() === "") {
+          errorMsg.innerText = "Email and Password cannot be empty!";
+          errorMsg.style.color = "red";
+          errorMsg.style.display = "block";
+        } else if (!email.endsWith("@gmail.com")) {
+          errorMsg.innerText = "Please use a valid @gmail.com address!";
+          errorMsg.style.color = "red";
+          errorMsg.style.display = "block";
+        } else {
+          localStorage.setItem("regEmail", email);
+          localStorage.setItem("regPass", pass);
+          errorMsg.style.color = "green";
+          errorMsg.innerText = "Registration successful! Please login.";
+          errorMsg.style.display = "block";
+        }
       }
 
-      // 2. Navigasi Menu Bawah
+      function processLogin() {
+        const email = document.getElementById("login-email").value;
+        const pass = document.getElementById("login-password").value;
+        const errorMsg = document.getElementById("login-error");
+        const savedEmail = localStorage.getItem("regEmail");
+        const savedPass = localStorage.getItem("regPass");
+        const defaultEmail = "aurel@gmail.com";
+        const defaultPass = "buku123";
+
+        if (email.trim() === "" || pass.trim() === "") {
+          errorMsg.innerText = "Email and Password cannot be empty!";
+          errorMsg.style.color = "red";
+          errorMsg.style.display = "block";
+        } else if (!email.endsWith("@gmail.com")) {
+          errorMsg.innerText = "Please use a valid @gmail.com address!";
+          errorMsg.style.color = "red";
+          errorMsg.style.display = "block";
+        } else {
+          if (
+            (email === savedEmail && pass === savedPass) ||
+            (email === defaultEmail && pass === defaultPass)
+          ) {
+            errorMsg.style.display = "none";
+            localStorage.setItem("isLoggedIn", "true");
+            document.getElementById("login-screen").classList.remove("active");
+            document.getElementById("main-app").style.display = "flex";
+            document.getElementById("home").classList.add("active");
+            updateGlobalDataUI();
+          } else {
+            errorMsg.style.color = "red";
+            errorMsg.innerText = "Incorrect Email or Password!";
+            errorMsg.style.display = "block";
+          }
+        }
+      }
+
       function navTo(screenId, element) {
         document
           .querySelectorAll("#main-app .screen")
           .forEach((s) => s.classList.remove("active"));
         document.getElementById(screenId).classList.add("active");
-
         document
           .querySelectorAll(".nav-item")
           .forEach((nav) => nav.classList.remove("active"));
         element.classList.add("active");
-
-        if (screenId !== "category-detail") previousScreen = screenId;
+        if (screenId !== "category-detail" && screenId !== "read-book")
+          previousScreen = screenId;
       }
 
-      // 3. Buka Kategori Buku
       function openCategory(categoryName) {
         document
           .querySelectorAll("#main-app .screen")
@@ -866,21 +1316,94 @@
         document.getElementById("cat-detail-title").innerText =
           categoryName + " Books";
 
-        // Generate dummy books
         let listHTML = "";
-        for (let i = 1; i <= 3; i++) {
+        const selectedBooks = booksData[categoryName] || [];
+
+        selectedBooks.forEach((book, index) => {
           listHTML += `
-          <div class="book-item-row">
-            <div class="book-cover-sm">Book ${i}</div>
+          <div class="book-item-row" onclick="readBook('${categoryName}', ${index})" style="cursor: pointer;">
+            <img src="${book.img}" alt="Cover ${book.title}" style="width: 55px; height: 80px; border-radius: 4px; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
             <div>
-              <b style="color: var(--primary-blue); font-size:14px;">Awesome ${categoryName} Vol ${i}</b>
-              <p style="font-size:12px; color:gray;">Author Name</p>
-              <span style="color:#FFB300; font-size:12px;">★★★★☆</span>
+              <b style="color: var(--primary-blue); font-size:14px;">${book.title}</b>
+              <p style="font-size:12px; color:gray;">${book.author}</p>
+              <span style="color:#FFB300; font-size:12px;">★★★★★</span>
             </div>
           </div>
         `;
-        }
+        });
         document.getElementById("cat-book-list").innerHTML = listHTML;
+      }
+
+      // SISTEM RATING BINTANG
+      let currentRating = 0;
+      function setRating(ratingValue) {
+        currentRating = ratingValue;
+        for (let i = 1; i <= 5; i++) {
+          let starElement = document.getElementById("star-" + i);
+          if (i <= ratingValue) {
+            starElement.classList.add("selected");
+          } else {
+            starElement.classList.remove("selected");
+          }
+        }
+      }
+
+      function addReview() {
+        const reviewInput = document.getElementById("review-text");
+        const text = reviewInput.value;
+
+        if (currentRating === 0 && text.trim() === "") {
+          alert(
+            "Silakan berikan rating bintang atau tulis ulasan terlebih dahulu!",
+          );
+          return;
+        }
+
+        let starsHtml = "";
+        if (currentRating > 0) {
+          starsHtml = `<div style="color: #ffb300; margin-bottom: 5px; font-size:16px;">${"★".repeat(currentRating)}${"☆".repeat(5 - currentRating)}</div>`;
+        }
+
+        const container = document.getElementById("review-container");
+        container.innerHTML =
+          `<div class="review-item">${starsHtml}<strong>Aurel (You):</strong> ${text}</div>` +
+          container.innerHTML;
+
+        reviewInput.value = "";
+
+        if (currentRating > 0) {
+          if (booksRatedCount < maxRatingBooks) {
+            booksRatedCount++;
+            alert(
+              "Berhasil memberi rating! Progres misi 'Rate 5 Books' bertambah.",
+            );
+            updateGlobalDataUI();
+          }
+          currentRating = 0;
+          for (let i = 1; i <= 5; i++) {
+            document.getElementById("star-" + i).classList.remove("selected");
+          }
+        }
+      }
+
+      let screenBeforeRead = "category-detail";
+      function readBook(categoryName, bookIndex) {
+        const book = booksData[categoryName][bookIndex];
+        const activeScreen = document.querySelector(".screen.active");
+        if (activeScreen) {
+          screenBeforeRead = activeScreen.id;
+        }
+
+        document
+          .querySelectorAll("#main-app .screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("read-book").classList.add("active");
+
+        document.getElementById("read-book-title").innerText = book.title;
+        document.getElementById("read-book-cover").src = book.img;
+        document.getElementById("read-book-content").innerHTML = book.story;
+
+        startReadingTimer();
       }
 
       function goBack() {
@@ -888,52 +1411,59 @@
         document.getElementById(previousScreen).classList.add("active");
       }
 
-      // 4. Submit Buku Baru (Dari Create ke Library)
-      function submitNewBook() {
-        const title = document.getElementById("create-title").value;
-        const desc = document.getElementById("create-desc").value;
-
-        if (title.trim() === "") {
-          alert("Please enter a book title!");
-          return;
-        }
-
-        const container = document.getElementById("created-books-container");
-        const list = document.getElementById("my-books-list");
-
-        container.style.display = "block";
-        list.innerHTML += `
-        <div class="book-item-row">
-          <div class="book-cover-sm" style="background:var(--primary-pink);">NEW</div>
-          <div>
-            <b style="color: var(--primary-blue); font-size:14px;">${title}</b>
-            <p style="font-size:12px; color:gray;">${desc ? desc.substring(0, 30) + "..." : "No description"}</p>
-          </div>
-        </div>
-      `;
-
-        // Bersihkan form
-        document.getElementById("create-title").value = "";
-        document.getElementById("create-desc").value = "";
-
-        alert("Book published successfully! Check your Library.");
+      function goBackFromRead() {
+        stopReadingTimer();
+        document.getElementById("read-book").classList.remove("active");
+        document.getElementById(screenBeforeRead).classList.add("active");
       }
 
-      // 5. Submit Review (Di Library)
-      function addReview() {
-        const reviewInput = document.getElementById("review-text");
-        const text = reviewInput.value;
+      function startReadingTimer() {
+        currentReadingSeconds = 0;
+        document.getElementById("reading-timer-container").style.display =
+          "block";
+        updateTimerUI();
 
-        if (text.trim() === "") return;
+        clearInterval(readingTimer);
+        readingTimer = setInterval(() => {
+          currentReadingSeconds++;
+          updateTimerUI();
 
-        const container = document.getElementById("review-container");
-        container.innerHTML =
-          `<div class="review-item"><strong>Aurel (You):</strong> ${text}</div>` +
-          container.innerHTML;
+          if (currentReadingSeconds >= targetReadingSeconds) {
+            completeReadingSession();
+          }
+        }, 1000);
+      }
 
-        reviewInput.value = ""; // Reset textarea
+      function stopReadingTimer() {
+        clearInterval(readingTimer);
+        document.getElementById("reading-timer-container").style.display =
+          "none";
+      }
+
+      function updateTimerUI() {
+        let mins = Math.floor(currentReadingSeconds / 60);
+        let secs = currentReadingSeconds % 60;
+        let timeString =
+          (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+        document.getElementById("reading-time-text").innerText =
+          timeString + " / 02:00";
+
+        let pct = (currentReadingSeconds / targetReadingSeconds) * 100;
+        document.getElementById("reading-progress-fill").style.width =
+          pct + "%";
+      }
+
+      function completeReadingSession() {
+        stopReadingTimer();
+        globalPoints += 10;
+        if (booksReadCount < maxMissionBooks) {
+          booksReadCount++;
+        }
+        alert(
+          "🎉 Selamat! Anda telah membaca buku selama 2 menit.\nAnda mendapatkan +10 Points! Cek menu Reward Anda.",
+        );
+        updateGlobalDataUI();
       }
     </script>
   </body>
 </html>
-
