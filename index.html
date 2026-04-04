@@ -15,11 +15,25 @@
         --text-dark: #333333;
         --gray-light: #e0e0e0;
       }
+
+      /* --- DARK MODE VARIABLES --- */
+      body.dark-mode {
+        --primary-blue: #9fa8da;
+        --primary-pink: #f48fb1;
+        --bg-color: #121212;
+        --white: #1e1e1e;
+        --text-dark: #e0e0e0;
+        --gray-light: #333333;
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: "Segoe UI", sans-serif;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
       }
       body {
         background-color: #cfd8dc;
@@ -27,6 +41,9 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+      }
+      body.dark-mode {
+        background-color: #000000;
       }
 
       /* --- App Container --- */
@@ -57,6 +74,7 @@
         overflow-y: auto;
         padding-bottom: 70px;
         background-color: var(--white);
+        color: var(--text-dark);
       }
       .screen.active {
         display: flex;
@@ -82,6 +100,9 @@
         color: #ffb300;
         font-weight: bold;
         font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
       .page-title {
         color: #b388ff;
@@ -89,6 +110,18 @@
         font-weight: bold;
         padding: 0 20px 10px;
         border-bottom: 2px solid var(--primary-blue);
+      }
+
+      .dark-mode-btn {
+        cursor: pointer;
+        font-size: 18px;
+        background: #eee;
+        border-radius: 50%;
+        padding: 2px 8px;
+        box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      body.dark-mode .dark-mode-btn {
+        background: #444;
       }
 
       /* --- Login Screen --- */
@@ -118,6 +151,8 @@
         border: 2px solid var(--primary-blue);
         border-radius: 8px;
         outline: none;
+        background: var(--bg-color);
+        color: var(--text-dark);
       }
       .btn {
         width: 100%;
@@ -153,6 +188,7 @@
         border: 2px solid #5c6bc0;
         border-radius: 25px;
         padding: 8px 15px;
+        background: var(--bg-color);
       }
       .search-bar input {
         border: none;
@@ -161,6 +197,7 @@
         margin-left: 10px;
         font-size: 16px;
         color: #5c6bc0;
+        background: transparent;
       }
       .category-grid {
         display: grid;
@@ -177,6 +214,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        background: var(--white);
       }
       .cat-card.pink {
         border-color: var(--primary-pink);
@@ -205,7 +243,7 @@
         font-weight: bold;
         margin-bottom: 10px;
         color: var(--primary-pink);
-        background: #fce4ec;
+        background: var(--gray-light);
         padding: 2px 10px;
         border-radius: 10px;
         width: fit-content;
@@ -215,6 +253,7 @@
         gap: 15px;
         overflow-x: auto;
         padding-bottom: 10px;
+        scrollbar-width: none;
       }
       .explore-row .cat-card {
         min-width: 80px;
@@ -239,15 +278,12 @@
         border-radius: 8px;
         gap: 15px;
         align-items: center;
-        transition: background 0.2s;
-      }
-      .book-item-row:hover {
-        background: #fce4ec;
+        background: var(--bg-color);
       }
 
       /* --- Gamification & Missions --- */
       .mission-box {
-        background: #fce4ec;
+        background: var(--bg-color);
         border: 1px solid var(--primary-blue);
         border-radius: 8px;
         padding: 15px;
@@ -262,7 +298,7 @@
         flex: 1;
       }
       .progress-bar {
-        background: #e0e0e0;
+        background: var(--gray-light);
         border-radius: 10px;
         height: 15px;
         width: 100%;
@@ -289,6 +325,42 @@
       }
       .star.selected {
         color: #ffb300;
+      }
+
+      /* --- SWIPE READING VIEWPORT --- */
+      .reading-viewport {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        width: 100%;
+        height: 380px;
+        border-radius: 8px;
+        border: 1px solid var(--gray-light);
+        background: var(--bg-color);
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+      }
+      .reading-viewport::-webkit-scrollbar {
+        display: none;
+      } /* Hide scrollbar Chrome/Safari */
+      .page-content {
+        min-width: 100%;
+        padding: 20px;
+        scroll-snap-align: start;
+        text-align: justify;
+        line-height: 1.8;
+        font-size: 14px;
+        color: var(--text-dark);
+      }
+      .page-content p {
+        text-indent: 1.5em;
+        margin-bottom: 10px;
+      }
+      .page-indicator {
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        margin-top: 10px;
+        font-weight: bold;
       }
 
       /* --- Specific Screens --- */
@@ -320,6 +392,8 @@
         outline: none;
         resize: none;
         margin-bottom: 5px;
+        background: var(--bg-color);
+        color: var(--text-dark);
       }
       .btn-small {
         background: var(--primary-blue);
@@ -337,11 +411,12 @@
       }
       .review-item {
         font-size: 12px;
-        color: #555;
+        color: var(--text-dark);
         margin-bottom: 5px;
-        background: #fce4ec;
+        background: var(--bg-color);
         padding: 8px;
         border-radius: 4px;
+        border: 1px solid var(--gray-light);
       }
       .profile-header {
         display: flex;
@@ -467,6 +542,12 @@
     </style>
   </head>
   <body>
+    <audio
+      id="page-flip-audio"
+      src="https://actions.google.com/sounds/v1/foley/page_turn.ogg"
+      preload="auto"
+    ></audio>
+
     <div class="app-container">
       <div id="login-screen" class="screen active">
         <div class="login-icon">📖</div>
@@ -504,6 +585,9 @@
         <div id="home" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+            </div>
           </div>
           <div class="search-bar">
             <span>🔍</span
@@ -555,7 +639,10 @@
         <div id="explore" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ <span class="global-pts-text">10</span></div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+              ★ <span class="global-pts-text">10</span>
+            </div>
           </div>
           <div class="page-title">Aurel, Let's Read!</div>
           <div class="explore-section">
@@ -611,7 +698,10 @@
         <div id="reward" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ <span class="global-pts-text">10</span></div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+              ★ <span class="global-pts-text">10</span>
+            </div>
           </div>
           <div class="page-title">Your Rewards</div>
           <div style="padding: 15px 20px">
@@ -678,7 +768,9 @@
                     align-items: center;
                   "
                 >
-                  <b style="font-size: 14px; color: #333">Daily Read</b>
+                  <b style="font-size: 14px; color: var(--text-dark)"
+                    >Daily Read</b
+                  >
                   <span
                     id="reward-mission1-text"
                     style="
@@ -708,7 +800,7 @@
             </div>
             <div
               class="mission-box"
-              style="margin-bottom: 25px; background: #e8eaf6"
+              style="margin-bottom: 25px; background: var(--bg-color)"
             >
               <div class="mission-icon">⭐</div>
               <div class="progress-bar-container">
@@ -719,7 +811,9 @@
                     align-items: center;
                   "
                 >
-                  <b style="font-size: 14px; color: #333">Rate 5 Books</b>
+                  <b style="font-size: 14px; color: var(--text-dark)"
+                    >Rate 5 Books</b
+                  >
                   <span
                     id="reward-mission2-text"
                     style="
@@ -757,7 +851,10 @@
         <div id="garden" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ <span class="global-pts-text">10</span></div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+              ★ <span class="global-pts-text">10</span>
+            </div>
           </div>
           <div
             class="back-btn"
@@ -780,7 +877,7 @@
                 font-weight: bold;
                 font-size: 16px;
                 margin-top: 5px;
-                color: #5d4037;
+                color: var(--text-dark);
               "
             >
               Total Nutrisi:
@@ -990,12 +1087,75 @@
               </div>
             </div>
           </div>
+
+          <div style="padding: 0 20px; margin-top: 15px">
+            <h3
+              style="
+                font-size: 15px;
+                color: var(--text-dark);
+                margin-bottom: 10px;
+                border-bottom: 1px dashed var(--gray-light);
+                padding-bottom: 5px;
+              "
+            >
+              Koleksi Tanaman:
+            </h3>
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px"
+            >
+              <div
+                style="
+                  background: var(--bg-color);
+                  border: 1px solid var(--gray-light);
+                  border-radius: 10px;
+                  padding: 10px;
+                  text-align: center;
+                "
+              >
+                <div style="font-size: 35px">🌿</div>
+                <p
+                  style="
+                    font-size: 11px;
+                    font-weight: bold;
+                    color: #43a047;
+                    margin-top: 5px;
+                  "
+                >
+                  Melati Remaja
+                </p>
+              </div>
+              <div
+                style="
+                  background: var(--bg-color);
+                  border: 1px solid var(--gray-light);
+                  border-radius: 10px;
+                  padding: 10px;
+                  text-align: center;
+                "
+              >
+                <div style="font-size: 35px">🌸</div>
+                <p
+                  style="
+                    font-size: 11px;
+                    font-weight: bold;
+                    color: #e91e63;
+                    margin-top: 5px;
+                  "
+                >
+                  Mawar Sakura
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div id="library" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ <span class="global-pts-text">10</span></div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+              ★ <span class="global-pts-text">10</span>
+            </div>
           </div>
           <div class="page-title">My Library</div>
           <div class="library-area">
@@ -1042,7 +1202,10 @@
         <div id="profile" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">★ <span class="global-pts-text">10</span></div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+              ★ <span class="global-pts-text">10</span>
+            </div>
           </div>
           <div class="page-title">Aurel's Profile</div>
           <div class="profile-header">
@@ -1091,7 +1254,13 @@
           </div>
         </div>
 
-        <div id="read-book" class="screen" style="position: relative">
+        <div
+          id="read-book"
+          class="screen"
+          style="position: relative"
+          onmousemove="resetIdleTimer()"
+          ontouchstart="resetIdleTimer()"
+        >
           <div
             id="reading-timer-container"
             style="
@@ -1147,45 +1316,30 @@
           >
             🔙 Back
           </div>
+
           <div style="padding: 0 20px 20px; text-align: center">
-            <img
-              id="read-book-cover"
-              src=""
-              alt="Cover"
-              style="
-                width: 100px;
-                height: 140px;
-                border-radius: 8px;
-                object-fit: cover;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                margin-bottom: 15px;
-              "
-            />
             <h2
               id="read-book-title"
               style="
                 color: var(--primary-pink);
-                margin-bottom: 20px;
+                margin-bottom: 5px;
                 font-size: 18px;
               "
             >
               Book Title
             </h2>
+            <p style="font-size: 11px; color: gray; margin-bottom: 15px">
+              (👉 Geser layar ke kiri/kanan untuk pindah halaman)
+            </p>
+
             <div
-              style="
-                text-align: left;
-                font-size: 14px;
-                line-height: 1.6;
-                color: #444;
-                background: #fff;
-                padding: 15px;
-                border-radius: 8px;
-                border: 1px solid var(--gray-light);
-                height: 400px;
-                overflow-y: auto;
-              "
-            >
-              <div id="read-book-content"></div>
+              id="read-book-content"
+              class="reading-viewport"
+              onscroll="handlePageScroll()"
+            ></div>
+
+            <div class="page-indicator" id="page-indicator-text">
+              Halaman 1 dari 1
             </div>
           </div>
         </div>
@@ -1218,6 +1372,17 @@
     <script>
       let previousScreen = "home";
 
+      // 1. FUNGSI DARK MODE
+      let isDarkMode = false;
+      function toggleDarkMode() {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) {
+          document.body.classList.add("dark-mode");
+        } else {
+          document.body.classList.remove("dark-mode");
+        }
+      }
+
       let globalPoints = 10;
       let booksReadCount = 0;
       let booksRatedCount = 0;
@@ -1226,7 +1391,7 @@
 
       let readingTimer = null;
       let currentReadingSeconds = 0;
-      const targetReadingSeconds = 120; // Ubah ke 10 untuk tes presentasi cepat
+      const targetReadingSeconds = 120; // Ubah ke 10 atau 15 detik jika untuk demo dosen
 
       const booksData = {
         Fantasy: [
@@ -1235,21 +1400,21 @@
             author: "C. S. Lewis",
             img: "images/fantasy - narnia .png",
             story:
-              "<b>Kisah epik semesta Narnia bermula jauh pada era Victoria di London, ketika dua anak bernama Digory Kirke dan Polly Plummer secara tidak sengaja menjadi korban eksperimen sihir Paman Andrew. Melalui cincin ajaib, mereka terlempar ke Hutan di Antara Dunia-Dunia dan masuk ke dunia Charn yang sedang sekarat. Di sana, Digory tanpa sengaja membangunkan Ratu Jadis, seorang penyihir lalim yang kemudian mengikuti mereka kembali ke London dan menciptakan kekacauan. Dalam usaha mengembalikan Jadis, mereka justru terdampar di sebuah ruang kosong bersama sang penyihir, Paman Andrew, seorang kusir bernama Frank, dan kudanya. Di ruang hampa itulah mereka menjadi saksi mata saat Aslan sang singa agung menyanyikan dunia magis Narnia menjadi ada, menumbuhkan tanah, bintang, dan hewan-hewan yang bisa berbicara. Karena Digory telah membawa kejahatan ke dunia suci tersebut, Aslan mengutusnya mengambil apel ajaib di ujung dunia untuk menumbuhkan pohon pelindung. Setelah berhasil, Aslan mengizinkan Digory membawa satu apel ke bumi untuk menyembuhkan ibunya yang sakit keras. Biji dari apel itu ditanam, tumbuh menjadi pohon besar, dan kayunya kelak dibuat menjadi sebuah lemari pakaian yang menyimpan sisa-sisa sihir Narnia Puluhan tahun kemudian, di tengah kecamuk Perang Dunia Kedua, empat bersaudara Pevensie—Peter, Susan, Edmund, dan Lucy—diungsikan ke rumah tua milik Profesor Digory Kirke. Lucy menjadi yang pertama menemukan jalan kembali ke Narnia melalui lemari pakaian magis tersebut. Dunia penciptaan Aslan itu kini telah jatuh ke dalam cengkeraman Ratu Jadis yang kini menyebut dirinya Penyihir Putih, mengutuk Narnia dengan musim dingin abadi tanpa hari Natal. Konflik memuncak ketika Edmund terpedaya oleh tipu muslihat sang penyihir dan mengkhianati keluarganya. Demi menebus nyawa Edmund dari jerat hukum sihir kuno, Aslan menyerahkan dirinya untuk dibunuh di atas Meja Batu. Namun, sihir penebusan yang lebih kuno membangkitkan Aslan kembali, memicu pertempuran besar yang menumbangkan kekuasaan Penyihir Putih. Keempat bersaudara Pevensie kemudian dinobatkan sebagai raja dan ratu, memimpin Narnia memasuki Zaman Keemasan yang damai dan makmur.Tepat di tengah masa kejayaan pemerintahan Pevensie, sebuah krisis terjadi di perbatasan selatan Narnia. Shasta, seorang anak angkat yang tertindas di negeri Calormen, melarikan diri bersama Bree, seekor kuda Narnia yang bisa berbicara. Di tengah pelarian melintasi padang pasir, mereka bergabung dengan Aravis, seorang gadis bangsawan yang lari dari pernikahan paksa, dan kudanya Hwin. Saat menyelinap di ibu kota Tashbaan, mereka tak sengaja mendengar rencana licik Pangeran Rabadash dari Calormen yang berniat menginvasi Archenland dan menculik Ratu Susan dari Narnia. Shasta memacu kudanya menembus gurun untuk memberi peringatan kepada Raja Lune dari Archenland. Pasukan gabungan Narnia dan Archenland berhasil menghancurkan invasi Rabadash. Dalam kemenangan itu, terungkaplah kebenaran besar bahwa Shasta sebenarnya adalah Pangeran Cor, putra mahkota Archenland yang hilang diculik saat masih bayi.Setelah belasan tahun memerintah di Zaman Keemasan, Pevensie kembali ke bumi dan mendapati diri mereka kembali menjadi anak-anak. Namun, ketika mereka ditarik kembali ke Narnia satu tahun kemudian, seribu tiga ratus tahun waktu Narnia telah berlalu. Kastil kebanggaan mereka, Cair Paravel, telah menjadi reruntuhan, dan Narnia kini dijajah oleh bangsa Telmarine yang memburu makhluk mitologi hingga mereka bersembunyi di hutan lebat. Mereka dipanggil oleh tiupan terompet ajaib Susan yang ditiup oleh Pangeran Caspian, pewaris sah takhta Telmarine yang nyawanya diincar oleh pamannya yang tiran, Raja Miraz. Bersama-sama, Pevensie memimpin makhluk asli Narnia melancarkan pemberontakan besar, dibantu oleh Aslan yang membangunkan kembali dewa-dewa sungai dan roh pepohonan. Raja Miraz berhasil ditumbangkan, takhta dikembalikan kepada Caspian, dan Aslan memberitahu Peter serta Susan bahwa tugas mereka di Narnia telah usai secara permanen karena mereka sudah terlalu dewasa.Beberapa waktu kemudian, Narnia kembali memanggil, namun kali ini hanya Edmund dan Lucy yang masuk bersama sepupu mereka yang keras kepala, Eustace Scrubb. Mereka tersedot ke dalam lukisan laut di dinding kamar dan jatuh tepat di atas geladak kapal Dawn Treader yang dipimpin oleh Raja Caspian. Caspian sedang dalam pelayaran berbahaya menuju lautan timur yang belum dipetakan untuk mencari tujuh bangsawan Narnia yang diasingkan pamannya di masa lalu. Perjalanan ini penuh dengan ujian mematikan; Eustace bahkan dikutuk menjadi naga karena keserakahannya sebelum akhirnya diselamatkan dan disucikan hatinya oleh Aslan. Mereka mengarungi pulau air yang mengubah segalanya menjadi emas, pulau yang mewujudkan mimpi buruk, hingga bertemu bintang yang turun ke bumi. Pelayaran memuncak di Ujung Dunia, tempat tikus pahlawan Reepicheep berlayar sendirian memasuki Negara Aslan, sementara Edmund dan Lucy mendapat perpisahan terakhir mereka dengan Narnia, ditugaskan untuk mengenali Aslan di dunia nyata. Tugas melindungi Narnia kini jatuh ke pundak Eustace yang dipanggil kembali oleh Aslan bersama teman sekolahnya, Jill Pole. Misi mereka sangat berat: menemukan Pangeran Rilian, putra tunggal Raja Caspian yang telah tua dan sekarat. Rilian menghilang sepuluh tahun sebelumnya saat memburu ular hijau raksasa yang membunuh ibunya. Berbekal empat tanda dari Aslan, Eustace, Jill, dan makhluk rawa pesimis bernama Puddleglum berjalan menembus utara yang beku, lolos dari jebakan raksasa kanibal di Harfang, hingga terperosok ke dalam kegelapan Dunia Bawah. Di sana, mereka menemukan Rilian yang diikat pada sebuah Kursi Perak berlapis sihir, dikendalikan sepenuhnya oleh penyihir misterius. Mereka berhasil menghancurkan kursi tersebut, mematahkan mantra pikiran Rilian, dan membunuh sang penyihir saat ia berubah wujud menjadi ular hijau raksasa. Rilian berhasil kembali ke permukaan tepat pada waktunya untuk memeluk ayahnya sesaat sebelum Raja Caspian menghembuskan napas terakhirnya. Berabad-abad kemudian, kedamaian Narnia mencapai titik akhirnya. Seekor kera manipulatif bernama Shift menemukan kulit singa dan memakaikannya pada keledai lugu bernama Puzzle, menipunya agar menyamar sebagai Aslan. Shift bersekongkol dengan pasukan Calormen, menyebarkan doktrin sesat bahwa Aslan dan dewa haus darah Calormen, Tash, adalah entitas yang sama. Raja Tirian, pemimpin terakhir Narnia, berjuang mati-matian melawan kebohongan ini dan berhasil memanggil Eustace serta Jill untuk membantunya. Namun, tipu daya telah mengakar terlalu dalam, memicu pertempuran terakhir yang brutal di depan sebuah kandang kuda. Ketika Tirian dan pasukannya didesak masuk ke dalam kandang yang dikira sebagai tempat kematian, mereka justru melangkah melewati pintu masuk menuju Negara Aslan. Di dunia luar, Aslan memerintahkan kiamat atas Narnia—bintang-bintang berjatuhan, naga melahap daratan, dan lautan menelan semuanya. Namun bagi Tirian, Eustace, Jill, serta tokoh-tokoh masa lalu seperti Peter, Edmund, Lucy, dan Caspian, kandang itu adalah gerbang menuju Narnia Sejati. Sebuah dunia batin yang jauh lebih indah, abadi, dan nyata, tempat mereka terus melangkah lebih tinggi dan lebih dalam menuju kehidupan yang tak pernah berakhir.",
+              "<b>Bab 1: Lemari Pakaian Tua</b><br><br>Empat bersaudara Pevensie—Peter, Susan, Edmund, dan Lucy—dievakuasi ke sebuah rumah besar di pedesaan saat perang.<br><br>Suatu hari, saat mereka sedang bermain petak umpet di rumah yang sangat luas itu, Lucy memutuskan untuk bersembunyi di dalam sebuah lemari pakaian raksasa di ruang kosong.<br><br>Saat ia melangkah mundur lebih dalam, ia tidak merasakan dinding kayu lemari. Ia justru merasakan hembusan angin dingin dan ranting pohon cemara bersalju. Ia telah masuk ke dunia magis Narnia.",
           },
           {
             title: "Shadow and Bone",
             author: "Leigh Bardugo",
             img: "images/fantasy - Shadow.png",
             story:
-              "<b>Kisah fantasi Shadow and Bone membawa kita ke dalam sebuah negara bernama Ravka yang terbelah menjadi dua oleh sebuah anomali magis menakutkan bernama Shadow Fold.  Shadow Fold adalah sebuah lautan kegelapan absolut yang dihuni oleh monster terbang pemakan manusia bernama volcra. Di tengah kehancuran dan perang tanpa henti ini hiduplah Alina Starkov seorang yatim piatu yang bekerja sebagai pembuat peta untuk Pasukan Pertama Ravka bersama sahabat masa kecilnya bernama Malyen Oretsev yang bekerja sebagai pelacak. Kehidupan Alina yang biasa saja berubah drastis ketika resimen mereka ditugaskan menyeberangi Shadow Fold. Dalam perjalanan tersebut kapal pasir mereka diserang oleh kawanan volcra dan saat Mal terluka parah dan hampir mati sebuah kekuatan cahaya yang luar biasa terang meledak dari dalam diri Alina untuk menyelamatkan nyawa sahabatnya. Kekuatan ini mengungkap identitas asli Alina sebagai Sun Summoner atau Pemanggil Matahari yaitu seorang Grisha langka dengan kemampuan mengendalikan cahaya yang telah ditunggu tunggu oleh seluruh rakyat Ravka karena diyakini sebagai satu satunya harapan untuk menghancurkan Shadow Fold selamanya. Mengetahui hal ini Jenderal Kirigan yang dikenal sebagai The Darkling dan merupakan pemimpin Pasukan Kedua atau pasukan elit sihir Grisha segera membawa Alina ke istana Little Palace di ibu kota Os Alta untuk dilatih dan dilindungi. Di sana Alina harus belajar mengendalikan kekuatannya di tengah intrik politik dan kemewahan yang membuatnya merasa terasing sekaligus terpesona terutama oleh pesona gelap sang Darkling. Sang Jenderal meyakinkan Alina bahwa mereka membutuhkan sebuah penguat sihir kuno berupa Rusa Jantan Morozova untuk memaksimalkan kekuatan cahaya Alina agar bisa melenyapkan kegelapan Fold. Namun di tengah pelatihannya yang berat Alina dikejutkan oleh pengakuan Baghra yakni guru sihirnya yang ternyata adalah ibu kandung The Darkling. Baghra mengungkap rahasia kelam bahwa The Darkling sebenarnya adalah sosok abadi yang menciptakan Shadow Fold ratusan tahun lalu dan ia sama sekali tidak berniat menghancurkannya melainkan ingin menjadikan Alina sebagai budak senjata untuk memperluas kegelapan tersebut dan menaklukkan seluruh dunia. Dalam kepanikan Alina melarikan diri dari istana dan berjuang menyusuri alam liar Ravka hingga akhirnya berhasil reuni dengan Mal yang ternyata sedang ditugaskan untuk memburu Rusa Jantan Morozova. Keduanya bekerja sama melacak makhluk mistis tersebut dengan harapan Alina dapat mengklaim kekuatannya sebelum The Darkling menemukannya. Mereka akhirnya menemukan sang Rusa namun Alina menolak untuk membunuhnya karena ia menyadari makhluk itu memiliki kesadarannya sendiri. Sayangnya The Darkling dan pasukannya tiba tepat pada saat itu lalu membunuh sang Rusa dan memaksa pandai besi Grisha untuk melebur tulang rusa tersebut menjadi kalung pengikat di leher Alina. Dengan kalung itu The Darkling menguasai kendali penuh atas kekuatan cahaya Alina tanpa mempedulikan kehendak gadis tersebut. Sang Jenderal kemudian membawa Alina dan para duta besar negara lain masuk ke dalam Shadow Fold lalu menggunakan cahaya Alina untuk melindungi kapal mereka sambil memperluas jangkauan kegelapan menuju kota Novokribirsk sebagai unjuk kekuatan dan ancaman bagi musuh musuhnya. Di momen keputusasaan yang memuncak saat Mal dilemparkan ke luar kapal untuk dimangsa volcra Alina tiba tiba menyadari pencerahan sejati bahwa kekuatan penguat itu bukan milik pembunuhnya melainkan milik orang yang menunjukkan belas kasihan. Dengan pemahaman ini Alina berhasil memutus ikatan kendali The Darkling memanggil cahaya yang membutakan untuk menyelamatkan Mal dan meninggalkan kapal The Darkling di tengah lautan kegelapan agar diserang oleh para volcra. Kisah ini ditutup dengan pelarian Alina dan Mal yang berhasil menyeberangi Laut Sejati menuju benua lain untuk bersembunyi sambil merencanakan langkah selanjutnya demi membebaskan Ravka dari bayang bayang kehancuran.",
+              "<b>Bab 1: Peta Kegelapan</b><br><br>Dunia terbelah oleh Shadow Fold, hamparan kegelapan buatan yang dipenuhi monster. Alina Starkov seorang pembuat peta biasa tiba tiba memancarkan kekuatan cahaya.<br><br>Mengetahui hal ini Jenderal Kirigan yang dikenal sebagai The Darkling dan merupakan pemimpin pasukan elit sihir Grisha segera membawa Alina ke istana.",
           },
           {
             title: "Game of Thrones",
             author: "George R. R. Martin",
             img: "images/fantasy - GOT.png",
             story:
-              "<b>Kisah epik A Game of Thrones membuka lembaran sejarah berdarah benua Westeros yang ditandai dengan ancaman kuno di wilayah paling utara tempat para penjaga Night Watch berhadapan dengan makhluk mitos mengerikan yang bangkit kembali dari tidur panjangnya di balik dinding es raksasa. Jauh di selatan wilayah es tersebut Lord Eddard Stark atau Ned penguasa Winterfell hidup damai bersama keluarganya hingga mendapat kunjungan mendadak dari sahabat lamanya yaitu Raja Robert Baratheon yang meminta Ned menjadi Hand of the King atau tangan kanan raja menyusul kematian misterius pendahulunya Jon Arryn. Keputusan berat Ned untuk menerima tawaran itu membawa bencana beruntun bagi keluarganya yang diawali dengan putranya Bran Stark jatuh dari menara tinggi hingga lumpuh karena sengaja didorong oleh Jaime Lannister setelah Bran tanpa sengaja memergoki perselingkuhan Jaime dengan saudara kembarnya sendiri yakni Ratu Cersei Lannister. Ned kemudian berangkat ke ibu kota Kings Landing bersama dua putrinya Sansa dan Arya sementara putra haramnya Jon Snow memilih bergabung dengan persaudaraan Night Watch di ujung utara dan istrinya Catelyn Stark tetap tinggal untuk merawat Bran sebelum akhirnya pergi secara diam diam ke selatan untuk menyelidiki dalang di balik percobaan pembunuhan kedua terhadap putranya yang lumpuh itu. Di Kings Landing Ned terjebak dalam sarang ular politik penuh intrik tipu daya dan pengkhianatan di mana ia perlahan mulai mengungkap rahasia gelap peninggalan Jon Arryn bahwa ketiga anak Ratu Cersei dan Raja Robert sebenarnya adalah hasil hubungan sedarah sang ratu dengan adiknya Jaime Lannister. Sementara itu ketegangan memuncak di berbagai penjuru Westeros ketika Catelyn Stark menangkap Tyrion Lannister karena mencurigainya sebagai dalang percobaan pembunuhan Bran yang memicu amarah keluarga Lannister dan menyulut percikan perang terbuka. Di seberang Lautan Sempit benua Essos pangeran buronan Viserys Targaryen yang berambisi merebut kembali takhta Westeros menikahkan adik perempuannya Daenerys Targaryen dengan pemimpin suku nomaden Dothraki bernama Khal Drogo sebagai bayaran untuk pasukan militer. Namun Daenerys yang awalnya penakut perlahan bangkit menjadi seorang Khaleesi atau ratu yang tangguh sementara Viserys yang serakah akhirnya mati dibunuh oleh Drogo dengan mahkota emas cair. Kembali di Kings Landing situasi semakin kacau setelah Raja Robert tewas akibat serangan babi hutan saat berburu yang memberi celah bagi Cersei untuk menobatkan putranya Joffrey yang kejam sebagai raja baru. Ned Stark yang mencoba mengungkap kebenaran justru dikhianati oleh sekutunya ditangkap atas tuduhan makar dan secara tragis dipenggal di depan publik atas perintah langsung dari Raja Joffrey yang memicu putra sulung Ned yaitu Robb Stark untuk memimpin pemberontakan besar besaran dari wilayah utara dan mendeklarasikan dirinya sebagai King in the North. Di benua seberang Daenerys juga menghadapi tragedi kehilangan suaminya Khal Drogo serta bayi dalam kandungannya akibat sihir darah penyihir pendendam Mirri Maz Duur. Dalam puncak keputusasaan Daenerys menghukum sang penyihir dengan membakarnya di tumpukan kayu api perabuan suaminya lalu dengan berani ia melangkah masuk ke dalam kobaran api yang menyala nyala sambil membawa tiga butir telur naga purba yang mengeras. Saat fajar menyingsing dan api padam Daenerys bangkit dari abu tanpa luka sedikit pun diiringi kelahiran tiga ekor anak naga yang telah menetas dan menandai kembalinya sihir serta naga ke dunia sekaligus awal baru dari perjalanannya untuk menaklukkan Westeros.",
+              "<b>Prologue</b><br><br>Di benua Westeros, musim panas bisa berlangsung selama bertahun tahun, begitu pula musim dingin.<br><br>Sesuatu yang gelap dan mati telah bangkit kembali. The White Walkers bukan sekadar mitos, dan mereka sedang berjalan perlahan menuju peradaban manusia yang sedang sibuk memperebutkan takhta.",
           },
         ],
         "Self-Improvement": [
@@ -1258,21 +1423,19 @@
             author: "James Clear",
             img: "images/SI - Atomic.png",
             story:
-              "<b>Buku Atomic Habits karya James Clear membedah sains dan praktik tentang bagaimana perubahan kecil yang dilakukan secara konsisten setiap hari dapat menghasilkan dampak yang luar biasa besar dalam jangka panjang melalui efek majemuk. Ferick gagasan utama dari buku ini adalah pentingnya berfokus pada sistem pembentukan kebiasaan daripada sekadar menetapkan tujuan akhir karena pencapaian sejati berakar pada perubahan identitas seseorang yang perlahan lahan mengubah cara pandang terhadap diri sendiri. Clear memperkenalkan siklus kebiasaan yang terdiri dari empat tahap yakni petunjuk gairah tanggapan dan ganjaran yang kemudian diterjemahkan menjadi empat hukum perubahan perilaku. Hukum pertama mengajarkan kita untuk menjadikannya terlihat dengan mendesain lingkungan sedemikian rupa agar petunjuk kebiasaan baik mudah disadari seperti meletakkan buku di atas bantal jika ingin rajin membaca serta menggunakan teknik menumpuk kebiasaan baru di atas rutinitas lama. Hukum kedua menekankan pentingnya menjadikannya menarik melalui penggabungan godaan di mana tindakan yang perlu dilakukan dipasangkan dengan tindakan yang diinginkan serta bergabung dengan komunitas yang menormalisasi perilaku target kita. Hukum ketiga menuntut kita untuk menjadikannya mudah dengan mengurangi hambatan di awal proses dengan mempraktikkan aturan dua menit yaitu menyusutkan kebiasaan baru menjadi tindakan berdurasi maksimal dua menit agar tidak terasa membebani pikiran. Hukum keempat mengharuskan kita menjadikannya memuaskan dengan memberikan penghargaan langsung setelah kebiasaan selesai dilakukan agar otak mengasosiasikan tindakan tersebut dengan perasaan positif dan menggunakan pelacak kebiasaan visual untuk menjaga motivasi agar rantai rutinitas tidak terputus. Sebaliknya untuk menghentikan kebiasaan buruk kita harus membalikkan keempat hukum tersebut menjadi menjadikannya tidak terlihat tidak menarik sulit dan mengecewakan. Buku ini juga membahas strategi tingkat lanjut seperti aturan Goldilocks yang menyatakan bahwa manusia mencapai motivasi puncak saat mengerjakan tugas yang tingkat kesulitannya pas berada di ambang batas kemampuan mereka serta pentingnya melakukan peninjauan dan refleksi berkala agar rutinitas otomatis tidak membuat kita berhenti bertumbuh sehingga perbaikan satu persen setiap hari pada akhirnya membangun fondasi kokoh bagi keberhasilan yang berkelanjutan..",
+              "<b>Bab 1: Kekuatan Kebiasaan Kecil</b><br><br>Perubahan kecil yang dilakukan secara konsisten setiap hari akan menghasilkan perbedaan masif dalam jangka panjang.<br><br>Fokuslah membangun sistem dari hal hal kecil yang hanya memakan waktu dua menit, dan perlahan mengubah identitas diri kita dari dalam ke luar.",
           },
           {
             title: "How to be Happy",
             author: "Lee Crutchley",
             img: "images/SI- Happy.png",
-            story:
-              "<b>Perjalanan di dalam lembaran ini dimulai bukan dengan janji manis tentang kebahagiaan melainkan dengan sebuah pengakuan jujur bahwa saat dunia terasa sangat gelap tujuan paling masuk akal bukanlah menjadi bahagia seketika melainkan berusaha menjadi sedikit lebih tidak sedih dari sebelumnya. Begitu halamannya terbuka kamu langsung dibawa masuk ke dalam ruang interaktif yang memintamu untuk berhadapan dengan perasaanmu sendiri secara telanjang tanpa teori psikologi yang rumit. Langkah pertama dalam kisah ini mengharuskanmu untuk mengakui seberapa buruk keadaan dan perasaanmu hari ini di mana kamu diberikan ruang aman untuk menuliskan segala hal yang membuatmu merasa hancur tanpa perlu berpura pura tegar. Setelah beban pengakuan itu dituangkan narasi berlanjut pada tindakan tindakan pembebasan fisik yang nyata seperti mencoret coret halaman dengan penuh amarah merobek kertas untuk meluapkan frustrasi yang terpendam atau sekadar menggambar pola pola acak demi menghentikan laju pikiran buruk yang terus berputar putar di dalam kepala. Ketika badai emosi mulai mereda perlahan lahan kamu dituntun untuk melatih kembali indramu agar peka terhadap kebaikan kecil di sekitarmu dengan cara mencatat hal hal sederhana yang masih bisa memberi rasa nyaman misalnya hangatnya secangkir teh di sore hari atau suara rintik hujan yang menenangkan. Lembaran selanjutnya bertindak layaknya teman yang duduk diam di sampingmu saat kamu kehabisan energi mengajakmu untuk memetakan kebiasaan kebiasaan yang memperburuk keadaan seperti kurang tidur atau makan sembarangan lalu perlahan membimbingmu untuk membangun kembali rutinitas dari titik yang paling remeh. Cerita ini juga membawamu keluar dari isolasi pikiran melalui instruksi untuk sekadar duduk di luar dan memperhatikan orang orang yang berlalu lalang menyadarkanmu bahwa kehidupan terus bergerak dan kamu tetap menjadi bagian dari semesta ini meski hatimu sedang terasa sangat asing. Mendekati akhir perjalanannya kamu diajak untuk menyusun strategi bertahan hidup pribadi berupa daftar tindakan darurat yang harus segera dilakukan ketika ombak kesedihan tiba tiba datang menerjang kembali. Seluruh lembaran ini mengalir sebagai sebuah kisah pertahanan diri di mana setiap halaman yang diselesaikan adalah satu langkah kecil menjauh dari keputusasaan hingga akhirnya kamu tiba di titik di mana beban di dada terasa sedikit lebih ringan memampukanmu untuk terus melangkah maju menyongsong hari esok tanpa paksaan untuk memalsukan senyuman. ",
+            story: "Teks cerita...",
           },
           {
             title: "The Psychology of Money",
             author: "Morgan Housel",
             img: "images/SI - Moneyuu.png",
-            story:
-              "<b>Cerita dalam buku ini dibuka dengan sebuah perbandingan nyata antara dua nasib manusia yang sangat kontras yaitu seorang petugas kebersihan bernama Ronald Read dan seorang eksekutif sukses lulusan Harvard bernama Richard Fuscone. Ronald Read menjalani hidup yang sangat sederhana dan tenang namun setelah ia wafat dunia dikejutkan dengan harta warisannya yang mencapai delapan juta dolar hasil dari konsistensi menabung di saham perusahaan berkualitas selama puluhan tahun. Di sisi lain Richard Fuscone yang memiliki segalanya justru bangkrut total karena sifat serakah dan gaya hidup yang sangat boros hingga ia terpaksa menjual rumah mewahnya dengan harga sangat murah. Kejadian ini membuktikan bahwa perilaku terhadap uang jauh lebih menentukan masa depan finansial daripada seberapa tinggi tingkat pendidikan seseorang. Narasi kemudian membawa kita pada pemahaman tentang keberuntungan dan risiko di mana keberhasilan seseorang seringkali dipengaruhi oleh kekuatan besar di luar kendali mereka sehingga kita diajak untuk tidak terlalu sombong saat menang atau terlalu menyalahkan diri sendiri saat gagal. Kisah berlanjut pada rahasia terbesar kekayaan Warren Buffett yang seringkali disalahpahami orang banyak di mana kunci utamanya bukanlah murni pada kecerdasan investasinya melainkan pada faktor waktu yang sangat lama. Sebagian besar kekayaan Buffett baru terbentuk setelah ia melewati usia enam puluh lima tahun karena ia membiarkan bunga majemuk bekerja tanpa gangguan selama lebih dari delapan dekade. Namun narasi ini memberikan peringatan keras melalui kisah tokoh tokoh lain yang sudah memiliki uang jutaan dolar tetapi tetap merasa kurang hingga akhirnya mereka melakukan tindakan ilegal atau terlalu berisiko yang membuat mereka kehilangan nama baik serta kemerdekaan mereka. Pelajaran besar yang ditekankan di sini adalah pentingnya memiliki titik cukup agar kita tidak mempertaruhkan hal yang kita butuhkan demi mengejar hal yang sebenarnya tidak penting bagi kita. Kebebasan menjadi inti dari narasi berikutnya di mana nilai tertinggi dari uang sebenarnya adalah kemampuan untuk mengendalikan waktu sendiri. Memiliki kemampuan untuk bangun di pagi hari dan berkata bahwa aku bisa melakukan apa saja yang aku mau hari ini adalah dividen tertinggi yang bisa diberikan oleh uang kepada manusia. Namun untuk mencapai itu seseorang harus memahami perbedaan antara menjadi kaya yakni memiliki pendapatan besar saat ini dan menjadi makmur yakni memiliki aset yang tidak terlihat yang disimpan untuk masa depan. Kekayaan seringkali bersifat pamer sedangkan kemakmuran adalah opsi yang kita miliki untuk tidak membeli sesuatu sekarang agar memiliki kebebasan di kemudian hari. Buku ini juga menceritakan pentingnya ruang untuk kesalahan dalam setiap rencana keuangan karena masa depan selalu penuh dengan kejutan yang tidak terduga. Memiliki cadangan kas yang terasa tidak produktif sebenarnya adalah bentuk asuransi agar kita tidak terpaksa menjual aset di saat harga sedang jatuh atau saat terjadi krisis global. Narasi ini ditutup dengan kesadaran bahwa setiap individu sedang memainkan permainan yang berbeda beda di mana strategi yang masuk akal bagi seorang trader harian bisa menjadi bencana bagi seorang investor jangka panjang. Oleh karena itu sangat penting untuk tidak terpengaruh oleh kebisingan orang lain dan fokus pada apa yang membuat kita bisa tidur nyenyak di malam hari karena ketenangan pikiran adalah bentuk kesuksesan finansial yang paling hakiki.",
+            story: "Teks cerita...",
           },
         ],
         "Mental Health": [
@@ -1280,8 +1443,7 @@
             title: "Seni Bersikap Bodo Amat",
             author: "Mark Manson",
             img: "images/MH - Bomat.jpg",
-            story:
-              "<b>sebuah tamparan realitas tentang sosok Charles Bukowski seorang penulis yang tidak pernah berusaha keras untuk menjadi hebat namun justru meraih kesuksesan karena ia jujur pada kegagalannya. Narasi ini membawa kita pada kesadaran bahwa budaya modern saat ini terlalu memaksa manusia untuk selalu positif dan mengejar kesempurnaan yang justru menciptakan siklus kecemasan tanpa akhir. Kita diajak untuk memahami hukum kebalikan di mana semakin kita mati matian mengejar perasaan positif maka kita akan semakin merasa tidak puas sedangkan menerima pengalaman negatif justru merupakan pengalaman positif itu sendiri. Mark Manson membawa kita pada sebuah filosofi tentang keterbatasan energi mental di mana kita tidak mungkin peduli pada semua hal yang terjadi di dunia ini. Kunci hidup yang baik bukanlah tentang memedulikan lebih banyak hal melainkan tentang memedulikan hal hal yang benar benar penting dan membuang sisanya yang tidak berarti atau bersikap bodo amat terhadap gangguan gangguan sepele yang menguras emosi. Alur pemikiran kemudian bergeser pada sebuah kebenaran pahit bahwa penderitaan adalah bagian yang tidak terpisahkan dari kehidupan manusia dan tidak akan pernah hilang sepenuhnya. Masalah akan selalu ada dan yang bisa kita lakukan hanyalah memilih masalah apa yang ingin kita hadapi atau penderitaan apa yang sanggup kita jalani. Kebahagiaan sejati tidak datang dari ketiadaan masalah melainkan dari proses menyelesaikan masalah tersebut secara terus menerus. Narasi ini juga menghancurkan konsep tentang menjadi istimewa yang sering diagung agungkan media karena kenyataannya sebagian besar manusia adalah rata rata dalam banyak hal dan menerima fakta ini justru memberikan kebebasan untuk mulai bertumbuh tanpa beban ekspektasi yang tidak realistis. Kita diperkenalkan pada pentingnya memilih standar nilai yang baik yang berada di bawah kendali diri sendiri seperti kejutan kerendahhatian dan kejujuran dibandingkan nilai nilai buruk yang bergantung pada faktor eksternal seperti popularitas atau kekayaan materi semata. Lebih dalam lagi cerita ini mengajarkan tentang tanggung jawab penuh atas segala sesuatu yang terjadi dalam hidup kita meski itu bukan kesalahan kita. Kita mungkin tidak bersalah atas kejadian buruk yang menimpa namun kita selalu bertanggung jawab atas bagaimana kita memberikan respon terhadap kejadian tersebut. Narasi kemudian menantang kita untuk meragukan segala keyakinan yang kita miliki tentang diri sendiri karena merasa paling benar adalah musuh utama dari pertumbuhan. Kegagalan diposisikan sebagai guru terbaik dan satu satunya cara untuk menjadi mahir dalam sesuatu adalah dengan bersedia melakukan kesalahan berkali kali. Bagian akhir dari perjalanan ini membawa kita pada kesadaran tentang kematian yang tak terelakkan di mana mengingat bahwa kita semua akan mati justru menjadi kompas paling jernih untuk menentukan apa yang benar benar berharga dalam hidup. Dengan menyadari bahwa waktu kita terbatas kita akan berhenti memedulikan hal hal yang dangkal dan mulai fokus membangun warisan yang bermakna serta menjalin hubungan yang tulus dengan orang orang di sekitar kita.",
+            story: "Teks cerita...",
           },
           {
             title: "I Have Anxiety",
@@ -1322,7 +1484,7 @@
             author: "Pidi Baiq",
             img: "images/romance - dilan.png",
             story:
-              "<b>Bab 1: Milea</b><br><br>Namaku Milea. Saat itu tahun 1990, aku baru saja pindah ke Bandung dari Jakarta. Di sanalah aku bertemu dengan Dilan.",
+              "<b>Bab 1: Milea</b><br><br>Namaku Milea. Saat itu tahun 1990, aku baru saja pindah ke Bandung dari Jakarta.<br><br>Di hari pertama sekolah, ada suara motor menderu di sebelahku. Di sanalah aku pertama kali bertegur sapa dengan Dilan, cowok dengan gaya pendekatan paling aneh.",
           },
           {
             title: "It Starts With Us",
@@ -1419,14 +1581,11 @@
         ],
       };
 
-      // FUNGSI UTAMA: UPDATE UI GAMIFIKASI & GARDEN
       function updateGlobalDataUI() {
-        // Update Poin Keseluruhan
         document.querySelectorAll(".global-pts-text").forEach((el) => {
           el.innerText = globalPoints;
         });
 
-        // Update Misi 1 (Membaca)
         let safeCount =
           booksReadCount > maxMissionBooks ? maxMissionBooks : booksReadCount;
         let pct = (safeCount / maxMissionBooks) * 100;
@@ -1441,7 +1600,6 @@
             pctFormatted + "%";
         }
 
-        // Update Misi 2 (Rating)
         let safeRating =
           booksRatedCount > maxRatingBooks ? maxRatingBooks : booksRatedCount;
         let ratingPct = (safeRating / maxRatingBooks) * 100;
@@ -1457,7 +1615,6 @@
             ratingPctFormatted + "%";
         }
 
-        // Update Garden UI (1 Poin = 10 ml Nutrisi)
         const targetNutrisi = 350;
         const currentNutrisi = globalPoints * 10;
         const totalNutrisiEl = document.getElementById("total-nutrisi");
@@ -1467,13 +1624,11 @@
           if (gardenProgress > 100) gardenProgress = 100;
           document.getElementById("evolution-fill").style.width =
             gardenProgress + "%";
-
           let remaining = targetNutrisi - currentNutrisi;
           if (remaining < 0) remaining = 0;
           document.getElementById("nutrisi-needed").innerText =
             remaining.toLocaleString();
 
-          // Ubah icon jika level up
           if (currentNutrisi >= targetNutrisi) {
             document.getElementById("garden-char").innerText = "🪴";
           } else {
@@ -1574,12 +1729,12 @@
           categoryName + " Books";
 
         let listHTML = "";
-        const selectedBooks = booksData[categoryName] || [];
+        const selectedBooks = booksData[categoryName] || booksData["Fantasy"];
 
         selectedBooks.forEach((book, index) => {
           listHTML += `
           <div class="book-item-row" onclick="readBook('${categoryName}', ${index})" style="cursor: pointer;">
-            <img src="${book.img}" alt="Cover ${book.title}" style="width: 55px; height: 80px; border-radius: 4px; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+            <img src="${book.img}" alt="Cover" style="width: 55px; height: 80px; border-radius: 4px; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
             <div>
               <b style="color: var(--primary-blue); font-size:14px;">${book.title}</b>
               <p style="font-size:12px; color:gray;">${book.author}</p>
@@ -1653,9 +1808,16 @@
         }
       }
 
+      // --- LOGIKA MEMBACA BUKU (SWIPE & IDLE) ---
       let screenBeforeRead = "category-detail";
+      let currentPageIndex = 0;
+      let totalPages = 0;
+      let idleTimeout = null;
+      let isIdle = false;
+
       function readBook(categoryName, bookIndex) {
-        const book = booksData[categoryName][bookIndex];
+        const books = booksData[categoryName] || booksData["Fantasy"];
+        const book = books[bookIndex];
         const activeScreen = document.querySelector(".screen.active");
         if (activeScreen) {
           screenBeforeRead = activeScreen.id;
@@ -1667,10 +1829,46 @@
         document.getElementById("read-book").classList.add("active");
 
         document.getElementById("read-book-title").innerText = book.title;
-        document.getElementById("read-book-cover").src = book.img;
-        document.getElementById("read-book-content").innerHTML = book.story;
+
+        // Memecah cerita berdasarkan tag <br><br> menjadi halaman yang bisa di-swipe
+        let paragraphs = book.story.split("<br><br>");
+        totalPages = paragraphs.length;
+        let pagesHtml = "";
+
+        paragraphs.forEach((p, i) => {
+          pagesHtml += `<div class="page-content"><p>${p}</p></div>`;
+        });
+
+        let container = document.getElementById("read-book-content");
+        container.innerHTML = pagesHtml;
+        container.scrollLeft = 0;
+        currentPageIndex = 0;
+        document.getElementById("page-indicator-text").innerText =
+          `Halaman 1 dari ${totalPages}`;
 
         startReadingTimer();
+      }
+
+      function handlePageScroll() {
+        resetIdleTimer(); // Reset idle jika ada sentuhan/scroll
+
+        let container = document.getElementById("read-book-content");
+        let newIndex = Math.round(container.scrollLeft / container.clientWidth);
+
+        if (newIndex !== currentPageIndex) {
+          currentPageIndex = newIndex;
+          document.getElementById("page-indicator-text").innerText =
+            `Halaman ${currentPageIndex + 1} dari ${totalPages}`;
+
+          // Mainkan efek suara kertas
+          let audio = document.getElementById("page-flip-audio");
+          if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch((e) => {
+              /* Abaikan error pada browser strict autoplay */
+            });
+          }
+        }
       }
 
       function goBack() {
@@ -1680,23 +1878,30 @@
 
       function goBackFromRead() {
         stopReadingTimer();
+        clearTimeout(idleTimeout);
         document.getElementById("read-book").classList.remove("active");
         document.getElementById(screenBeforeRead).classList.add("active");
       }
 
       function startReadingTimer() {
         currentReadingSeconds = 0;
+        isIdle = false;
         document.getElementById("reading-timer-container").style.display =
           "block";
         updateTimerUI();
 
+        resetIdleTimer(); // Mulai deteksi Anti-AFK
+
         clearInterval(readingTimer);
         readingTimer = setInterval(() => {
-          currentReadingSeconds++;
-          updateTimerUI();
+          if (!isIdle) {
+            // Hanya hitung jika tidak diam
+            currentReadingSeconds++;
+            updateTimerUI();
 
-          if (currentReadingSeconds >= targetReadingSeconds) {
-            completeReadingSession();
+            if (currentReadingSeconds >= targetReadingSeconds) {
+              completeReadingSession();
+            }
           }
         }, 1000);
       }
@@ -1722,6 +1927,7 @@
 
       function completeReadingSession() {
         stopReadingTimer();
+        clearTimeout(idleTimeout);
         globalPoints += 10;
         if (booksReadCount < maxMissionBooks) {
           booksReadCount++;
@@ -1730,6 +1936,26 @@
           "🎉 Selamat! Anda telah membaca buku selama 2 menit.\nAnda mendapatkan +10 Points! Nutrisi Garden Anda juga bertambah.",
         );
         updateGlobalDataUI();
+      }
+
+      // FUNGSI ANTI-AFK (IDLE DETECTION)
+      function resetIdleTimer() {
+        // Cek hanya saat berada di layar baca buku
+        if (!document.getElementById("read-book").classList.contains("active"))
+          return;
+
+        isIdle = false;
+        clearTimeout(idleTimeout);
+
+        // Atur batas waktu diam 15 detik
+        idleTimeout = setTimeout(() => {
+          isIdle = true;
+          alert(
+            "Are you still there? Kamu terdeteksi diam terlalu lama.\nKlik OK untuk lanjut membaca dan menjalankan timer kembali.",
+          );
+          isIdle = false;
+          resetIdleTimer();
+        }, 15000);
       }
     </script>
   </body>
