@@ -111,7 +111,6 @@
         padding: 0 20px 10px;
         border-bottom: 2px solid var(--primary-blue);
       }
-
       .dark-mode-btn {
         cursor: pointer;
         font-size: 18px;
@@ -279,6 +278,7 @@
         gap: 15px;
         align-items: center;
         background: var(--bg-color);
+        position: relative;
       }
 
       /* --- Gamification & Missions --- */
@@ -337,11 +337,11 @@
         border-radius: 8px;
         border: 1px solid var(--gray-light);
         background: var(--bg-color);
-        scrollbar-width: none; /* Hide scrollbar Firefox */
+        scrollbar-width: none;
       }
       .reading-viewport::-webkit-scrollbar {
         display: none;
-      } /* Hide scrollbar Chrome/Safari */
+      }
       .page-content {
         min-width: 100%;
         padding: 20px;
@@ -363,17 +363,107 @@
         font-weight: bold;
       }
 
-      /* --- Specific Screens --- */
-      .library-area {
-        padding: 20px;
+      /* --- Profile & Letterboxd Styles --- */
+      .profile-header-new {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 20px 10px;
+        border-bottom: 1px solid var(--gray-light);
+      }
+      .avatar {
+        width: 80px;
+        height: 80px;
+        background: #bcaaa4;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .lb-menu {
+        width: 100%;
         display: flex;
         flex-direction: column;
       }
+      .lb-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--gray-light);
+        font-size: 14px;
+        color: var(--text-dark);
+        cursor: pointer;
+      }
+      .lb-row:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+      }
+      body.dark-mode .lb-row:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      .lb-row .title {
+        font-weight: 500;
+      }
+      .lb-row .stats {
+        color: #888;
+        font-weight: bold;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .profile-section {
+        padding: 15px 20px;
+      }
+      .section-title {
+        color: var(--text-dark);
+        font-weight: bold;
+        margin-bottom: 12px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--gray-light);
+        padding-bottom: 5px;
+      }
+      .book-list {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scrollbar-width: none;
+      }
+      .book-item {
+        text-align: center;
+        width: 85px;
+        flex-shrink: 0;
+      }
+      .book-item img {
+        width: 85px;
+        height: 120px;
+        border-radius: 6px;
+        object-fit: cover;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 5px;
+      }
+      .book-item p {
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1.2;
+        color: var(--text-dark);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* --- Library/Forum --- */
       .library-book {
         width: 100%;
-        height: 200px;
+        height: 150px;
         background: #ffcdd2;
-        border-radius: 15px;
+        border-radius: 10px;
         margin-bottom: 15px;
         display: flex;
         justify-content: center;
@@ -381,12 +471,12 @@
         text-align: center;
         font-family: cursive;
         color: #c62828;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
       }
       .review-input {
         width: 100%;
-        border: 1px solid var(--primary-blue);
+        border: 1px solid var(--gray-light);
         padding: 10px;
         border-radius: 5px;
         outline: none;
@@ -417,80 +507,6 @@
         padding: 8px;
         border-radius: 4px;
         border: 1px solid var(--gray-light);
-      }
-      .profile-header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        border-bottom: 1px solid var(--gray-light);
-      }
-      .avatar {
-        width: 80px;
-        height: 80px;
-        background: #bcaaa4;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 40px;
-        margin-bottom: 10px;
-      }
-      .profile-stats {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
-      }
-      .stat-box h3 {
-        color: var(--text-dark);
-        font-size: 22px;
-      }
-      .stat-box p {
-        font-size: 12px;
-        color: #666;
-      }
-      .profile-section {
-        padding: 15px 20px;
-      }
-      .section-title {
-        color: var(--primary-blue);
-        font-weight: bold;
-        margin-bottom: 10px;
-        font-size: 16px;
-      }
-      .book-list {
-        display: flex;
-        gap: 10px;
-        overflow-x: auto;
-        padding-bottom: 10px;
-        scrollbar-width: none;
-      }
-      .book-item {
-        text-align: center;
-        width: 80px;
-        flex-shrink: 0;
-      }
-      .book-item div {
-        width: 80px;
-        height: 80px;
-        background: #e0e0e0;
-        border-radius: 8px;
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        padding: 5px;
-        font-weight: bold;
-        color: #333;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      .book-item p {
-        font-size: 10px;
-        font-weight: bold;
-        line-height: 1.2;
       }
 
       /* --- Bottom Navigation --- */
@@ -552,7 +568,7 @@
       <div id="login-screen" class="screen active">
         <div class="login-icon">📖</div>
         <h1 class="login-logo"><span>Baca</span>Ria</h1>
-        <p style="margin-bottom: 20px; font-weight: bold; color: #555">
+        <p style="margin-bottom: 20px; font-weight: bold; color: gray">
           Sign in to your account
         </p>
         <div id="login-error" class="error-msg">
@@ -692,6 +708,9 @@
           >
             Category Name
           </h2>
+          <p style="font-size: 11px; color: gray; margin-bottom: 10px">
+            (Klik tombol hati ❤️ untuk menambah ke Favorit)
+          </p>
           <div class="book-list-vertical" id="cat-book-list"></div>
         </div>
 
@@ -742,6 +761,7 @@
                   font-weight: bold;
                   width: 100%;
                   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                  color: white;
                 "
                 onclick="openGarden()"
               >
@@ -798,10 +818,7 @@
                 </div>
               </div>
             </div>
-            <div
-              class="mission-box"
-              style="margin-bottom: 25px; background: var(--bg-color)"
-            >
+            <div class="mission-box" style="margin-bottom: 25px">
               <div class="mission-icon">⭐</div>
               <div class="progress-bar-container">
                 <div
@@ -1040,51 +1057,6 @@
                   >
                 </div>
               </div>
-              <div
-                class="seed-card"
-                style="
-                  min-width: 100px;
-                  border: 2px solid #d7ccc8;
-                  border-radius: 10px;
-                  padding: 10px;
-                  text-align: center;
-                  background: #efebe9;
-                "
-              >
-                <div
-                  style="
-                    font-size: 35px;
-                    background: #d7ccc8;
-                    border-radius: 8px;
-                    padding: 5px;
-                  "
-                >
-                  🔒
-                </div>
-                <p
-                  style="
-                    font-size: 11px;
-                    font-weight: bold;
-                    margin-top: 5px;
-                    color: #777;
-                  "
-                >
-                  Pohon Sakti
-                </p>
-                <div style="margin-top: 5px">
-                  <span
-                    style="
-                      font-size: 10px;
-                      background: #8d6e63;
-                      color: #fff;
-                      padding: 2px 6px;
-                      border-radius: 4px;
-                      font-weight: bold;
-                    "
-                    >Terkunci</span
-                  >
-                </div>
-              </div>
             </div>
           </div>
 
@@ -1124,32 +1096,11 @@
                   Melati Remaja
                 </p>
               </div>
-              <div
-                style="
-                  background: var(--bg-color);
-                  border: 1px solid var(--gray-light);
-                  border-radius: 10px;
-                  padding: 10px;
-                  text-align: center;
-                "
-              >
-                <div style="font-size: 35px">🌸</div>
-                <p
-                  style="
-                    font-size: 11px;
-                    font-weight: bold;
-                    color: #e91e63;
-                    margin-top: 5px;
-                  "
-                >
-                  Mawar Sakura
-                </p>
-              </div>
             </div>
           </div>
         </div>
 
-        <div id="library" class="screen">
+        <div id="forum" class="screen">
           <div class="header-top">
             <div class="header-logo">📖 <span>Baca</span>Ria</div>
             <div class="points">
@@ -1157,12 +1108,194 @@
               ★ <span class="global-pts-text">10</span>
             </div>
           </div>
-          <div class="page-title">My Library</div>
-          <div class="library-area">
-            <h3 style="color: var(--primary-blue); margin-bottom: 10px">
-              Currently Reading
+          <div class="page-title">Community Forum</div>
+
+          <div style="padding: 20px">
+            <div
+              style="
+                background: var(--bg-color);
+                border: 1px solid var(--primary-pink);
+                border-radius: 10px;
+                padding: 15px;
+                margin-bottom: 20px;
+              "
+            >
+              <textarea
+                id="forum-input"
+                style="
+                  width: 100%;
+                  border: none;
+                  outline: none;
+                  background: transparent;
+                  resize: none;
+                  color: var(--text-dark);
+                  font-size: 14px;
+                "
+                rows="3"
+                placeholder="Diskusikan buku yang baru kamu baca..."
+              ></textarea>
+              <button
+                class="btn btn-login"
+                style="margin-bottom: 0; padding: 8px; border-radius: 8px"
+                onclick="addForumPost()"
+              >
+                Post Diskusi
+              </button>
+            </div>
+
+            <h3
+              style="
+                color: var(--primary-blue);
+                margin-bottom: 15px;
+                font-size: 16px;
+              "
+            >
+              Top Discussions
             </h3>
-            <div class="library-book">The Summer<br />I Turned Pretty</div>
+            <div id="forum-posts-container">
+              <div
+                style="
+                  background: var(--bg-color);
+                  border: 1px solid var(--gray-light);
+                  border-radius: 8px;
+                  padding: 15px;
+                  margin-bottom: 10px;
+                "
+              >
+                <div
+                  style="display: flex; align-items: center; margin-bottom: 8px"
+                >
+                  <div
+                    style="
+                      width: 30px;
+                      height: 30px;
+                      background: #bcaaa4;
+                      border-radius: 50%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      margin-right: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    👩
+                  </div>
+                  <div>
+                    <b style="font-size: 14px; color: var(--primary-blue)"
+                      >Patricia</b
+                    ><br />
+                    <span style="font-size: 10px; color: gray"
+                      >• 2 hours ago</span
+                    >
+                  </div>
+                </div>
+                <p
+                  style="
+                    font-size: 13px;
+                    line-height: 1.5;
+                    color: var(--text-dark);
+                  "
+                >
+                  Baru saja menyelesaikan membaca <b>Shadow and Bone</b>! Gila
+                  banget sih plot twist dari The Darkling. 😱
+                </p>
+                <div
+                  style="
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--primary-pink);
+                    font-weight: bold;
+                  "
+                >
+                  💬 14 Replies
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="profile" class="screen">
+          <div class="header-top">
+            <div class="header-logo">📖 <span>Baca</span>Ria</div>
+            <div class="points">
+              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
+            </div>
+          </div>
+
+          <div class="profile-header-new">
+            <div class="avatar">👩🏽</div>
+            <h2
+              style="
+                color: var(--primary-blue);
+                font-size: 22px;
+                margin-top: 5px;
+              "
+            >
+              Aurel
+            </h2>
+            <p
+              style="
+                color: #ffb300;
+                font-size: 14px;
+                font-weight: bold;
+                margin-top: 2px;
+              "
+            >
+              ★ <span class="global-pts-text">10</span> points
+            </p>
+          </div>
+
+          <div class="lb-menu">
+            <div class="lb-row">
+              <span class="title">Books</span>
+              <span class="stats"
+                ><span id="lb-books-count">3</span> <span>›</span></span
+              >
+            </div>
+            <div class="lb-row">
+              <span class="title">Diary</span>
+              <span class="stats">12 <span>›</span></span>
+            </div>
+            <div class="lb-row">
+              <span class="title">Reviews</span>
+              <span class="stats">5 <span>›</span></span>
+            </div>
+            <div class="lb-row">
+              <span class="title">Watchlist (TBR)</span>
+              <span class="stats">8 <span>›</span></span>
+            </div>
+            <div class="lb-row">
+              <span class="title" style="color: var(--primary-pink)"
+                >Favorites</span
+              >
+              <span class="stats"
+                ><span id="lb-fav-count">0</span>
+                <span style="color: var(--primary-pink)">›</span></span
+              >
+            </div>
+            <div class="lb-row">
+              <span class="title">Following</span>
+              <span class="stats">54 <span>›</span></span>
+            </div>
+            <div class="lb-row">
+              <span class="title">Followers</span>
+              <span class="stats">31 <span>›</span></span>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <div class="section-title">Favorite Books ❤️</div>
+            <div class="book-list" id="favorite-books-list">
+              <p style="font-size: 12px; color: gray; font-style: italic">
+                Belum ada buku favorit. Beri hati ❤️ pada buku untuk
+                menambahkannya ke sini.
+              </p>
+            </div>
+          </div>
+
+          <div class="profile-section" style="border-top: none">
+            <div class="section-title">Currently Reading</div>
+            <div class="library-book">The Chronicles<br />of Narnia</div>
             <div class="review-section">
               <b
                 style="
@@ -1194,61 +1327,6 @@
                   <div style="color: #ffb300; margin-bottom: 5px">★★★★★</div>
                   <strong>Patricia:</strong> Buku yang sangat emosional!
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="profile" class="screen">
-          <div class="header-top">
-            <div class="header-logo">📖 <span>Baca</span>Ria</div>
-            <div class="points">
-              <div class="dark-mode-btn" onclick="toggleDarkMode()">🌙</div>
-              ★ <span class="global-pts-text">10</span>
-            </div>
-          </div>
-          <div class="page-title">Aurel's Profile</div>
-          <div class="profile-header">
-            <b
-              style="
-                color: var(--primary-blue);
-                font-size: 18px;
-                margin-bottom: 10px;
-              "
-              >Profile</b
-            >
-            <div class="avatar">👩🏽</div>
-            <div class="profile-stats">
-              <div class="stat-box">
-                <h3>54</h3>
-                <p>Following</p>
-              </div>
-              <div class="stat-box">
-                <h3 style="color: var(--primary-blue)">Aurel</h3>
-                <p><span class="global-pts-text">10</span> points</p>
-              </div>
-              <div class="stat-box">
-                <h3>31</h3>
-                <p>Followers</p>
-              </div>
-            </div>
-          </div>
-          <div class="profile-section">
-            <div class="section-title">My Books</div>
-            <div class="book-list">
-              <div class="book-item">
-                <div style="background: #90a4ae; color: white">Dilan 1990</div>
-                <p>Dilan 1990</p>
-              </div>
-              <div class="book-item">
-                <div style="background: white; border: 1px solid #ccc">
-                  Psychology
-                </div>
-                <p>The Psychology of Money</p>
-              </div>
-              <div class="book-item">
-                <div style="background: #ffccbc">Teluk Alaska</div>
-                <p>Teluk Alaska</p>
               </div>
             </div>
           </div>
@@ -1329,14 +1407,75 @@
               Book Title
             </h2>
             <p style="font-size: 11px; color: gray; margin-bottom: 15px">
-              (👉 Geser layar ke kiri/kanan untuk pindah halaman)
+              (👉 Geser atau klik panah untuk pindah halaman)
             </p>
 
             <div
-              id="read-book-content"
-              class="reading-viewport"
-              onscroll="handlePageScroll()"
-            ></div>
+              style="
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <button
+                id="prev-page-btn"
+                onclick="prevPage()"
+                style="
+                  position: absolute;
+                  left: -15px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  z-index: 10;
+                  background: rgba(255, 255, 255, 0.3);
+                  backdrop-filter: blur(6px);
+                  -webkit-backdrop-filter: blur(6px);
+                  color: var(--primary-pink);
+                  border: 1px solid rgba(216, 27, 96, 0.3);
+                  border-radius: 50%;
+                  width: 30px;
+                  height: 30px;
+                  cursor: pointer;
+                  display: none;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                  font-size: 18px;
+                "
+              >
+                &#10094;
+              </button>
+
+              <div
+                id="read-book-content"
+                class="reading-viewport"
+                onscroll="handlePageScroll()"
+              ></div>
+
+              <button
+                id="next-page-btn"
+                onclick="nextPage()"
+                style="
+                  position: absolute;
+                  right: -15px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  z-index: 10;
+                  background: rgba(255, 255, 255, 0.3);
+                  backdrop-filter: blur(6px);
+                  -webkit-backdrop-filter: blur(6px);
+                  color: var(--primary-pink);
+                  border: 1px solid rgba(216, 27, 96, 0.3);
+                  border-radius: 50%;
+                  width: 30px;
+                  height: 30px;
+                  cursor: pointer;
+                  display: none;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                  font-size: 18px;
+                "
+              >
+                &#10095;
+              </button>
+            </div>
 
             <div class="page-indicator" id="page-indicator-text">
               Halaman 1 dari 1
@@ -1357,9 +1496,9 @@
             <div class="nav-icon">🎁</div>
             <span>Reward</span>
           </div>
-          <div class="nav-item" onclick="navTo('library', this)">
-            <div class="nav-icon">📚</div>
-            <span>Library</span>
+          <div class="nav-item" onclick="navTo('forum', this)">
+            <div class="nav-icon">💬</div>
+            <span>Forum</span>
           </div>
           <div class="nav-item" onclick="navTo('profile', this)">
             <div class="nav-icon">👤</div>
@@ -1372,7 +1511,6 @@
     <script>
       let previousScreen = "home";
 
-      // 1. FUNGSI DARK MODE
       let isDarkMode = false;
       function toggleDarkMode() {
         isDarkMode = !isDarkMode;
@@ -1391,7 +1529,10 @@
 
       let readingTimer = null;
       let currentReadingSeconds = 0;
-      const targetReadingSeconds = 120; // Ubah ke 10 atau 15 detik jika untuk demo dosen
+      const targetReadingSeconds = 120; // Ubah ke 10 detik jika untuk demo
+
+      // --- ARRAY BUKU FAVORIT ---
+      let favoriteBooks = [];
 
       const booksData = {
         Fantasy: [
@@ -1400,21 +1541,21 @@
             author: "C. S. Lewis",
             img: "images/fantasy - narnia .png",
             story:
-              "<b>Bab 1: Lemari Pakaian Tua</b><br><br>Empat bersaudara Pevensie—Peter, Susan, Edmund, dan Lucy—dievakuasi ke sebuah rumah besar di pedesaan saat perang.<br><br>Suatu hari, saat mereka sedang bermain petak umpet di rumah yang sangat luas itu, Lucy memutuskan untuk bersembunyi di dalam sebuah lemari pakaian raksasa di ruang kosong.<br><br>Saat ia melangkah mundur lebih dalam, ia tidak merasakan dinding kayu lemari. Ia justru merasakan hembusan angin dingin dan ranting pohon cemara bersalju. Ia telah masuk ke dunia magis Narnia.",
+              "<b>Kisah epik semesta Narnia bermula jauh pada era Victoria di London, ketika dua anak bernama Digory Kirke dan Polly Plummer secara tidak sengaja menjadi korban eksperimen sihir Paman Andrew. Melalui cincin ajaib, mereka terlempar ke Hutan di Antara Dunia-Dunia dan masuk ke dunia Charn yang sedang sekarat. Di sana, Digory tanpa sengaja membangunkan Ratu Jadis, seorang penyihir lalim yang kemudian mengikuti mereka kembali ke London dan menciptakan kekacauan. Dalam usaha mengembalikan Jadis, mereka justru terdampar di sebuah ruang kosong bersama sang penyihir, Paman Andrew, seorang kusir bernama Frank, dan kudanya. Di ruang hampa itulah mereka menjadi saksi mata saat Aslan sang singa agung menyanyikan dunia magis Narnia menjadi ada, menumbuhkan tanah, bintang, dan hewan-hewan yang bisa berbicara.<br><br>Karena Digory telah membawa kejahatan ke dunia suci tersebut, Aslan mengutusnya mengambil apel ajaib di ujung dunia untuk menumbuhkan pohon pelindung. Setelah berhasil, Aslan mengizinkan Digory membawa satu apel ke bumi untuk menyembuhkan ibunya yang sakit keras. Biji dari apel itu ditanam, tumbuh menjadi pohon besar, dan kayunya kelak dibuat menjadi sebuah lemari pakaian yang menyimpan sisa-sisa sihir Narnia Puluhan tahun kemudian, di tengah kecamuk Perang Dunia Kedua, empat bersaudara Pevensie—Peter, Susan, Edmund, dan Lucy—diungsikan ke rumah tua milik Profesor Digory Kirke.<br><br>Lucy menjadi yang pertama menemukan jalan kembali ke Narnia melalui lemari pakaian magis tersebut. Dunia penciptaan Aslan itu kini telah jatuh ke dalam cengkeraman Ratu Jadis yang kini menyebut dirinya Penyihir Putih, mengutuk Narnia dengan musim dingin abadi tanpa hari Natal. Konflik memuncak ketika Edmund terpedaya oleh tipu muslihat sang penyihir dan mengkhianati keluarganya. Demi menebus nyawa Edmund dari jerat hukum sihir kuno, Aslan menyerahkan dirinya untuk dibunuh di atas Meja Batu.<br><br>Namun, sihir penebusan yang lebih kuno membangkitkan Aslan kembali, memicu pertempuran besar yang menumbangkan kekuasaan Penyihir Putih. Keempat bersaudara Pevensie kemudian dinobatkan sebagai raja dan ratu, memimpin Narnia memasuki Zaman Keemasan yang damai dan makmur. Tepat di tengah masa kejayaan pemerintahan Pevensie, sebuah krisis terjadi di perbatasan selatan Narnia. Shasta, seorang anak angkat yang tertindas di negeri Calormen, melarikan diri bersama Bree, seekor kuda Narnia yang bisa berbicara.<br><br>Di tengah pelarian melintasi padang pasir, mereka bergabung dengan Aravis, seorang gadis bangsawan yang lari dari pernikahan paksa, dan kudanya Hwin. Saat menyelinap di ibu kota Tashbaan, mereka tak sengaja mendengar rencana licik Pangeran Rabadash dari Calormen yang berniat menginvasi Archenland dan menculik Ratu Susan dari Narnia. Shasta memacu kudanya menembus gurun untuk memberi peringatan kepada Raja Lune dari Archenland.<br><br>Pasukan gabungan Narnia dan Archenland berhasil menghancurkan invasi Rabadash. Dalam kemenangan itu, terungkaplah kebenaran besar bahwa Shasta sebenarnya adalah Pangeran Cor, putra mahkota Archenland yang hilang diculik saat masih bayi. Setelah belasan tahun memerintah di Zaman Keemasan, Pevensie kembali ke bumi dan mendapati diri mereka kembali menjadi anak-anak. Namun, ketika mereka ditarik kembali ke Narnia satu tahun kemudian, seribu tiga ratus tahun waktu Narnia telah berlalu.<br><br>Kastil kebanggaan mereka, Cair Paravel, telah menjadi reruntuhan, dan Narnia kini dijajah oleh bangsa Telmarine yang memburu makhluk mitologi hingga mereka bersembunyi di hutan lebat. Mereka dipanggil oleh tiupan terompet ajaib Susan yang ditiup oleh Pangeran Caspian, pewaris sah takhta Telmarine yang nyawanya diincar oleh pamannya yang tiran, Raja Miraz. Bersama-sama, Pevensie memimpin makhluk asli Narnia melancarkan pemberontakan besar, dibantu oleh Aslan yang membangunkan kembali dewa-dewa sungai dan roh pepohonan.<br><br>Raja Miraz berhasil ditumbangkan, takhta dikembalikan kepada Caspian, dan Aslan memberitahu Peter serta Susan bahwa tugas mereka di Narnia telah usai secara permanen karena mereka sudah terlalu dewasa. Beberapa waktu kemudian, Narnia kembali memanggil, namun kali ini hanya Edmund dan Lucy yang masuk bersama sepupu mereka yang keras kepala, Eustace Scrubb. Mereka tersedot ke dalam lukisan laut di dinding kamar dan jatuh tepat di atas geladak kapal Dawn Treader yang dipimpin oleh Raja Caspian.<br><br>Caspian sedang dalam pelayaran berbahaya menuju lautan timur yang belum dipetakan untuk mencari tujuh bangsawan Narnia yang diasingkan pamannya di masa lalu. Perjalanan ini penuh dengan ujian mematikan; Eustace bahkan dikutuk menjadi naga karena keserakahannya sebelum akhirnya diselamatkan dan disucikan hatinya oleh Aslan. Mereka mengarungi pulau air yang mengubah segalanya menjadi emas, pulau yang mewujudkan mimpi buruk, hingga bertemu bintang yang turun ke bumi.<br><br>Pelayaran memuncak di Ujung Dunia, tempat tikus pahlawan Reepicheep berlayar sendirian memasuki Negara Aslan, sementara Edmund dan Lucy mendapat perpisahan terakhir mereka dengan Narnia, ditugaskan untuk mengenali Aslan di dunia nyata. Tugas melindungi Narnia kini jatuh ke pundak Eustace yang dipanggil kembali oleh Aslan bersama teman sekolahnya, Jill Pole. Misi mereka sangat berat: menemukan Pangeran Rilian, putra tunggal Raja Caspian yang telah tua dan sekarat.<br><br>Rilian menghilang sepuluh tahun sebelumnya saat memburu ular hijau raksasa yang membunuh ibunya. Berbekal empat tanda dari Aslan, Eustace, Jill, dan makhluk rawa pesimis bernama Puddleglum berjalan menembus utara yang beku, lolos dari jebakan raksasa kanibal di Harfang, hingga terperosok ke dalam kegelapan Dunia Bawah. Di sana, mereka menemukan Rilian yang diikat pada sebuah Kursi Perak berlapis sihir, dikendalikan sepenuhnya oleh penyihir misterius.<br><br>Mereka berhasil menghancurkan kursi tersebut, mematahkan mantra pikiran Rilian, dan membunuh sang penyihir saat ia berubah wujud menjadi ular hijau raksasa. Rilian berhasil kembali ke permukaan tepat pada waktunya untuk memeluk ayahnya sesaat sebelum Raja Caspian menghembuskan napas terakhirnya. Berabad-abad kemudian, kedamaian Narnia mencapai titik akhirnya. Seekor kera manipulatif bernama Shift menemukan kulit singa dan memakaikannya pada keledai lugu bernama Puzzle, menipunya agar menyamar sebagai Aslan.<br><br>Shift bersekongkol dengan pasukan Calormen, menyebarkan doktrin sesat bahwa Aslan dan dewa haus darah Calormen, Tash, adalah entitas yang sama. Raja Tirian, pemimpin terakhir Narnia, berjuang mati-matian melawan kebohongan ini dan berhasil memanggil Eustace serta Jill untuk membantunya. Namun, tipu daya telah mengakar terlalu dalam, memicu pertempuran terakhir yang brutal di depan sebuah kandang kuda.<br><br>Ketika Tirian dan pasukannya didesak masuk ke dalam kandang yang dikira sebagai tempat kematian, mereka justru melangkah melewati pintu masuk menuju Negara Aslan. Di dunia luar, Aslan memerintahkan kiamat atas Narnia—bintang-bintang berjatuhan, naga melahap daratan, dan lautan menelan semuanya. Namun bagi Tirian, Eustace, Jill, serta tokoh-tokoh masa lalu seperti Peter, Edmund, Lucy, dan Caspian, kandang itu adalah gerbang menuju Narnia Sejati. Sebuah dunia batin yang jauh lebih indah, abadi, dan nyata, tempat mereka terus melangkah lebih tinggi dan lebih dalam menuju kehidupan yang tak pernah berakhir.",
           },
           {
             title: "Shadow and Bone",
             author: "Leigh Bardugo",
             img: "images/fantasy - Shadow.png",
             story:
-              "<b>Bab 1: Peta Kegelapan</b><br><br>Dunia terbelah oleh Shadow Fold, hamparan kegelapan buatan yang dipenuhi monster. Alina Starkov seorang pembuat peta biasa tiba tiba memancarkan kekuatan cahaya.<br><br>Mengetahui hal ini Jenderal Kirigan yang dikenal sebagai The Darkling dan merupakan pemimpin pasukan elit sihir Grisha segera membawa Alina ke istana.",
+              "<b>Kisah fantasi Shadow and Bone membawa kita ke dalam sebuah negara bernama Ravka yang terbelah menjadi dua oleh sebuah anomali magis menakutkan bernama Shadow Fold.<br><br>Shadow Fold adalah sebuah lautan kegelapan absolut yang dihuni oleh monster terbang pemakan manusia bernama volcra. Di tengah kehancuran dan perang tanpa henti ini hiduplah Alina Starkov seorang yatim piatu yang bekerja sebagai pembuat peta untuk Pasukan Pertama Ravka bersama sahabat masa kecilnya bernama Malyen Oretsev yang bekerja sebagai pelacak.<br><br>Kehidupan Alina yang biasa saja berubah drastis ketika resimen mereka ditugaskan menyeberangi Shadow Fold. Dalam perjalanan tersebut kapal pasir mereka diserang oleh kawanan volcra dan saat Mal terluka parah dan hampir mati sebuah kekuatan cahaya yang luar biasa terang meledak dari dalam diri Alina untuk menyelamatkan nyawa sahabatnya.<br><br>Kekuatan ini mengungkap identitas asli Alina sebagai Sun Summoner atau Pemanggil Matahari yaitu seorang Grisha langka dengan kemampuan mengendalikan cahaya yang telah ditunggu tunggu oleh seluruh rakyat Ravka karena diyakini sebagai satu satunya harapan untuk menghancurkan Shadow Fold selamanya.<br><br>Mengetahui hal ini Jenderal Kirigan yang dikenal sebagai The Darkling dan merupakan pemimpin Pasukan Kedua atau pasukan elit sihir Grisha segera membawa Alina ke istana Little Palace di ibu kota Os Alta untuk dilatih dan dilindungi. Di sana Alina harus belajar mengendalikan kekuatannya di tengah intrik politik dan kemewahan yang membuatnya merasa terasing sekaligus terpesona terutama oleh pesona gelap sang Darkling.<br><br>Sang Jenderal meyakinkan Alina bahwa mereka membutuhkan sebuah penguat sihir kuno berupa Rusa Jantan Morozova untuk memaksimalkan kekuatan cahaya Alina agar bisa melenyapkan kegelapan Fold. Namun di tengah pelatihannya yang berat Alina dikejutkan oleh pengakuan Baghra yakni guru sihirnya yang ternyata adalah ibu kandung The Darkling.<br><br>Baghra mengungkap rahasia kelam bahwa The Darkling sebenarnya adalah sosok abadi yang menciptakan Shadow Fold ratusan tahun lalu dan ia sama sekali tidak berniat menghancurkannya melainkan ingin menjadikan Alina sebagai budak senjata untuk memperluas kegelapan tersebut dan menaklukkan seluruh dunia. Dalam kepanikan Alina melarikan diri dari istana dan berjuang menyusuri alam liar Ravka hingga akhirnya berhasil reuni dengan Mal yang ternyata sedang ditugaskan untuk memburu Rusa Jantan Morozova.<br><br>Keduanya bekerja sama melacak makhluk mistis tersebut dengan harapan Alina dapat mengklaim kekuatannya sebelum The Darkling menemukannya. Mereka akhirnya menemukan sang Rusa namun Alina menolak untuk membunuhnya karena ia menyadari makhluk itu memiliki kesadarannya sendiri. Sayangnya The Darkling dan pasukannya tiba tepat pada saat itu lalu membunuh sang Rusa dan memaksa pandai besi Grisha untuk melebur tulang rusa tersebut menjadi kalung pengikat di leher Alina.<br><br>Dengan kalung itu The Darkling menguasai kendali penuh atas kekuatan cahaya Alina tanpa mempedulikan kehendak gadis tersebut. Sang Jenderal kemudian membawa Alina dan para duta besar negara lain masuk ke dalam Shadow Fold lalu menggunakan cahaya Alina untuk melindungi kapal mereka sambil memperluas jangkauan kegelapan menuju kota Novokribirsk sebagai unjuk kekuatan dan ancaman bagi musuh musuhnya.<br><br>Di momen keputusasaan yang memuncak saat Mal dilemparkan ke luar kapal untuk dimangsa volcra Alina tiba tiba menyadari pencerahan sejati bahwa kekuatan penguat itu bukan milik pembunuhnya melainkan milik orang yang menunjukkan belas kasihan.<br><br>Dengan pemahaman ini Alina berhasil memutus ikatan kendali The Darkling memanggil cahaya yang membutakan untuk menyelamatkan Mal dan meninggalkan kapal The Darkling di tengah lautan kegelapan agar diserang oleh para volcra. Kisah ini ditutup dengan pelarian Alina dan Mal yang berhasil menyeberangi Laut Sejati menuju benua lain untuk bersembunyi sambil merencanakan langkah selanjutnya demi membebaskan Ravka dari bayang bayang kehancuran.",
           },
           {
             title: "Game of Thrones",
             author: "George R. R. Martin",
             img: "images/fantasy - GOT.png",
             story:
-              "<b>Prologue</b><br><br>Di benua Westeros, musim panas bisa berlangsung selama bertahun tahun, begitu pula musim dingin.<br><br>Sesuatu yang gelap dan mati telah bangkit kembali. The White Walkers bukan sekadar mitos, dan mereka sedang berjalan perlahan menuju peradaban manusia yang sedang sibuk memperebutkan takhta.",
+              "<b>Kisah epik A Game of Thrones membuka lembaran sejarah berdarah benua Westeros yang ditandai dengan ancaman kuno di wilayah paling utara tempat para penjaga Night Watch berhadapan dengan makhluk mitos mengerikan yang bangkit kembali dari tidur panjangnya di balik dinding es raksasa.<br><br>Jauh di selatan wilayah es tersebut Lord Eddard Stark atau Ned penguasa Winterfell hidup damai bersama keluarganya hingga mendapat kunjungan mendadak dari sahabat lamanya yaitu Raja Robert Baratheon yang meminta Ned menjadi Hand of the King atau tangan kanan raja menyusul kematian misterius pendahulunya Jon Arryn.<br><br>Keputusan berat Ned untuk menerima tawaran itu membawa bencana beruntun bagi keluarganya yang diawali dengan putranya Bran Stark jatuh dari menara tinggi hingga lumpuh karena sengaja didorong oleh Jaime Lannister setelah Bran tanpa sengaja memergoki perselingkuhan Jaime dengan saudara kembarnya sendiri yakni Ratu Cersei Lannister.<br><br>Ned kemudian berangkat ke ibu kota Kings Landing bersama dua putrinya Sansa dan Arya sementara putra haramnya Jon Snow memilih bergabung dengan persaudaraan Night Watch di ujung utara dan istrinya Catelyn Stark tetap tinggal untuk merawat Bran sebelum akhirnya pergi secara diam diam ke selatan untuk menyelidiki dalang di balik percobaan pembunuhan kedua terhadap putranya yang lumpuh itu.<br><br>Di Kings Landing Ned terjebak dalam sarang ular politik penuh intrik tipu daya dan pengkhianatan di mana ia perlahan mulai mengungkap rahasia gelap peninggalan Jon Arryn bahwa ketiga anak Ratu Cersei dan Raja Robert sebenarnya adalah hasil hubungan sedarah sang ratu dengan adiknya Jaime Lannister.<br><br>Sementara itu ketegangan memuncak di berbagai penjuru Westeros ketika Catelyn Stark menangkap Tyrion Lannister karena mencurigainya sebagai dalang percobaan pembunuhan Bran yang memicu amarah keluarga Lannister dan menyulut percikan perang terbuka.<br><br>Di seberang Lautan Sempit benua Essos pangeran buronan Viserys Targaryen yang berambisi merebut kembali takhta Westeros menikahkan adik perempuannya Daenerys Targaryen dengan pemimpin suku nomaden Dothraki bernama Khal Drogo sebagai bayaran untuk pasukan militer.<br><br>Namun Daenerys yang awalnya penakut perlahan bangkit menjadi seorang Khaleesi atau ratu yang tangguh sementara Viserys yang serakah akhirnya mati dibunuh oleh Drogo dengan mahkota emas cair. Kembali di Kings Landing situasi semakin kacau setelah Raja Robert tewas akibat serangan babi hutan saat berburu yang memberi celah bagi Cersei untuk menobatkan putranya Joffrey yang kejam sebagai raja baru.<br><br>Ned Stark yang mencoba mengungkap kebenaran justru dikhianati oleh sekutunya ditangkap atas tuduhan makar dan secara tragis dipenggal di depan publik atas perintah langsung dari Raja Joffrey yang memicu putra sulung Ned yaitu Robb Stark untuk memimpin pemberontakan besar besaran dari wilayah utara dan mendeklarasikan dirinya sebagai King in the North.<br><br>Di benua seberang Daenerys juga menghadapi tragedi kehilangan suaminya Khal Drogo serta bayi dalam kandungannya akibat sihir darah penyihir pendendam Mirri Maz Duur. Dalam puncak keputusasaan Daenerys menghukum sang penyihir dengan membakarnya di tumpukan kayu api perabuan suaminya lalu dengan berani ia melangkah masuk ke dalam kobaran api yang menyala nyala sambil membawa tiga butir telur naga purba yang mengeras.<br><br>Saat fajar menyingsing dan api padam Daenerys bangkit dari abu tanpa luka sedikit pun diiringi kelahiran tiga ekor anak naga yang telah menetas dan menandai kembalinya sihir serta naga ke dunia sekaligus awal baru dari perjalanannya untuk menaklukkan Westeros.",
           },
         ],
         "Self-Improvement": [
@@ -1423,59 +1564,7 @@
             author: "James Clear",
             img: "images/SI - Atomic.png",
             story:
-              "<b>Bab 1: Kekuatan Kebiasaan Kecil</b><br><br>Perubahan kecil yang dilakukan secara konsisten setiap hari akan menghasilkan perbedaan masif dalam jangka panjang.<br><br>Fokuslah membangun sistem dari hal hal kecil yang hanya memakan waktu dua menit, dan perlahan mengubah identitas diri kita dari dalam ke luar.",
-          },
-          {
-            title: "How to be Happy",
-            author: "Lee Crutchley",
-            img: "images/SI- Happy.png",
-            story: "Teks cerita...",
-          },
-          {
-            title: "The Psychology of Money",
-            author: "Morgan Housel",
-            img: "images/SI - Moneyuu.png",
-            story: "Teks cerita...",
-          },
-        ],
-        "Mental Health": [
-          {
-            title: "Seni Bersikap Bodo Amat",
-            author: "Mark Manson",
-            img: "images/MH - Bomat.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "I Have Anxiety",
-            author: "Isna Nurjanah",
-            img: "images/MH - Anxiety.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Psychology of Emotions",
-            author: "David J. Lieberman",
-            img: "images/MH - Emotions.jpg",
-            story: "Teks cerita...",
-          },
-        ],
-        Comedy: [
-          {
-            title: "Ubur-Ubur Lembur",
-            author: "Raditya Dika",
-            img: "images/comedy - ubur2.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Marmut Merah Jambu",
-            author: "Raditya Dika",
-            img: "images/comedy - marmut.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Ngenest",
-            author: "Ernest Prakasa",
-            img: "images/comedy - ernest.jpg",
-            story: "Teks cerita...",
+              "<b>Buku Atomic Habits karya James Clear membedah sains dan praktik tentang bagaimana perubahan kecil yang dilakukan secara konsisten setiap hari dapat menghasilkan dampak yang luar biasa besar dalam jangka panjang melalui efek majemuk.<br><br>Ferick gagasan utama dari buku ini adalah pentingnya berfokus pada sistem pembentukan kebiasaan daripada sekadar menetapkan tujuan akhir karena pencapaian sejati berakar pada perubahan identitas seseorang yang perlahan lahan mengubah cara pandang terhadap diri sendiri.<br><br>Clear memperkenalkan siklus kebiasaan yang terdiri dari empat tahap yakni petunjuk gairah tanggapan dan ganjaran yang kemudian diterjemahkan menjadi empat hukum perubahan perilaku. Hukum pertama mengajarkan kita untuk menjadikannya terlihat dengan mendesain lingkungan sedemikian rupa agar petunjuk kebiasaan baik mudah disadari seperti meletakkan buku di atas bantal jika ingin rajin membaca serta menggunakan teknik menumpuk kebiasaan baru di atas rutinitas lama.<br><br>Hukum kedua menekankan pentingnya menjadikannya menarik melalui penggabungan godaan di mana tindakan yang perlu dilakukan dipasangkan dengan tindakan yang diinginkan serta bergabung dengan komunitas yang menormalisasi perilaku target kita.<br><br>Hukum ketiga menuntut kita untuk menjadikannya mudah dengan mengurangi hambatan di awal proses dengan mempraktikkan aturan dua menit yaitu menyusutkan kebiasaan baru menjadi tindakan berdurasi maksimal dua menit agar tidak terasa membebani pikiran.<br><br>Hukum keempat mengharuskan kita menjadikannya memuaskan dengan memberikan penghargaan langsung setelah kebiasaan selesai dilakukan agar otak mengasosiasikan tindakan tersebut dengan perasaan positif dan menggunakan pelacak kebiasaan visual untuk menjaga motivasi agar rantai rutinitas tidak terputus.<br><br>Sebaliknya untuk menghentikan kebiasaan buruk kita harus membalikkan keempat hukum tersebut menjadi menjadikannya tidak terlihat tidak menarik sulit dan mengecewakan. Buku ini juga membahas strategi tingkat lanjut seperti aturan Goldilocks yang menyatakan bahwa manusia mencapai motivasi puncak saat mengerjakan tugas yang tingkat kesulitannya pas berada di ambang batas kemampuan mereka serta pentingnya melakukan peninjauan dan refleksi berkala agar rutinitas otomatis tidak membuat kita berhenti bertumbuh sehingga perbaikan satu persen setiap hari pada akhirnya membangun fondasi kokoh bagi keberhasilan yang berkelanjutan.",
           },
         ],
         Romance: [
@@ -1484,99 +1573,7 @@
             author: "Pidi Baiq",
             img: "images/romance - dilan.png",
             story:
-              "<b>Bab 1: Milea</b><br><br>Namaku Milea. Saat itu tahun 1990, aku baru saja pindah ke Bandung dari Jakarta.<br><br>Di hari pertama sekolah, ada suara motor menderu di sebelahku. Di sanalah aku pertama kali bertegur sapa dengan Dilan, cowok dengan gaya pendekatan paling aneh.",
-          },
-          {
-            title: "It Starts With Us",
-            author: "Colleen Hoover",
-            img: "images/romance - start with us.png",
-            story: "Teks cerita...",
-          },
-          {
-            title: "It Ends With Us",
-            author: "Colleen Hoover",
-            img: "images/romance - ends with us.png",
-            story: "Teks cerita...",
-          },
-        ],
-        "Slice of Life": [
-          {
-            title: "Sweet Bean Paste",
-            author: "Durian Sukegawa",
-            img: "images/SOL - SBP.png",
-            story: "Teks cerita...",
-          },
-          {
-            title: "What You Are Looking For",
-            author: "Michiko Aoyama",
-            img: "images/SOL - cat.png",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Convenience Store Woman",
-            author: "Sayaka Murata",
-            img: "images/SOL - convenience.png",
-            story: "Teks cerita...",
-          },
-        ],
-        Adventure: [
-          {
-            title: "Around the World in 80 Days",
-            author: "Jules Verne",
-            img: "images/adventure - around world.png",
-            story: "Teks cerita...",
-          },
-          {
-            title: "The Call of the Wild",
-            author: "Jack London",
-            img: "images/adventure wild.png",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Treasure Island",
-            author: "Robert Louis Stevenson",
-            img: "images/adventure - treasure.png",
-            story: "Teks cerita...",
-          },
-        ],
-        Technology: [
-          {
-            title: "Information Technology",
-            author: "Álvaro Rocha",
-            img: "images/Tech - ITS.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "The Nature of Technology",
-            author: "W. Brian Arthur",
-            img: "images/Tech - nature.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "The Science Book",
-            author: "National Geographic",
-            img: "images/Tech - science book.jpg",
-            story: "Teks cerita...",
-          },
-        ],
-        Education: [
-          {
-            title: "English Literature",
-            author: "Henry S. Pancoast",
-            img: "images/education - english.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Digital Technology",
-            author: "Michelle F. Wright",
-            img: "images/education - digital tech.jpg",
-            story: "Teks cerita...",
-          },
-          {
-            title: "Living Economics",
-            author: "Peter J. Boettke",
-            img: "images/education - living eco.jpg",
-            story: "Teks cerita...",
+              "<b>Bab 1: Milea</b><br><br>Namaku Milea. Saat itu tahun 1990, aku baru saja pindah ke Bandung dari Jakarta.<br><br>Di hari pertama sekolah, ada suara motor menderu di sebelahku. Di sanalah aku pertama kali bertegur sapa dengan Dilan, cowok dengan gaya pendekatan paling unik yang pernah aku kenal.",
           },
         ],
       };
@@ -1635,6 +1632,10 @@
             document.getElementById("garden-char").innerText = "🌱";
           }
         }
+
+        // Update Angka Favorit di Menu Letterboxd
+        document.getElementById("lb-fav-count").innerText =
+          favoriteBooks.length;
       }
 
       window.onload = function () {
@@ -1729,21 +1730,65 @@
           categoryName + " Books";
 
         let listHTML = "";
-        const selectedBooks = booksData[categoryName] || booksData["Fantasy"];
+        const selectedBooks = booksData[categoryName] || [];
 
         selectedBooks.forEach((book, index) => {
+          let bookId = categoryName + "-" + index;
+          let isFav = favoriteBooks.some((b) => b.id === bookId);
+          let heartIcon = isFav ? "❤️" : "🤍";
+
           listHTML += `
           <div class="book-item-row" onclick="readBook('${categoryName}', ${index})" style="cursor: pointer;">
             <img src="${book.img}" alt="Cover" style="width: 55px; height: 80px; border-radius: 4px; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
-            <div>
+            <div style="flex: 1;">
               <b style="color: var(--primary-blue); font-size:14px;">${book.title}</b>
               <p style="font-size:12px; color:gray;">${book.author}</p>
               <span style="color:#FFB300; font-size:12px;">★★★★★</span>
+            </div>
+            <div onclick="toggleFavorite(event, '${categoryName}', ${index})" style="font-size: 22px; padding: 5px; z-index: 10;">
+              ${heartIcon}
             </div>
           </div>
         `;
         });
         document.getElementById("cat-book-list").innerHTML = listHTML;
+      }
+
+      // FUNGSI TOGGLE FAVORIT (NEW)
+      function toggleFavorite(event, categoryName, bookIndex) {
+        event.stopPropagation(); // Mencegah buku terbuka saat klik hati
+        const book = booksData[categoryName][bookIndex];
+        const bookId = categoryName + "-" + bookIndex;
+
+        const existingIndex = favoriteBooks.findIndex((b) => b.id === bookId);
+        if (existingIndex > -1) {
+          favoriteBooks.splice(existingIndex, 1);
+        } else {
+          favoriteBooks.push({ ...book, id: bookId });
+        }
+
+        // Refresh UI
+        openCategory(categoryName);
+        updateFavoritesUI();
+        updateGlobalDataUI();
+      }
+
+      function updateFavoritesUI() {
+        const list = document.getElementById("favorite-books-list");
+        if (favoriteBooks.length === 0) {
+          list.innerHTML = `<p style="font-size: 12px; color: gray; font-style: italic;">Belum ada buku favorit. Beri hati ❤️ pada buku untuk menambahkannya ke sini.</p>`;
+          return;
+        }
+
+        let html = "";
+        favoriteBooks.forEach((book) => {
+          html += `
+              <div class="book-item" style="width: 85px;">
+                <img src="${book.img}" alt="Fav" style="width: 85px; height: 120px; border-radius: 6px; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); margin-bottom: 5px;">
+                <p style="font-size: 10px; font-weight: bold; line-height: 1.2; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${book.title}</p>
+              </div>`;
+        });
+        list.innerHTML = html;
       }
 
       function openGarden() {
@@ -1757,6 +1802,30 @@
       function goBackFromGarden() {
         document.getElementById("garden").classList.remove("active");
         document.getElementById("reward").classList.add("active");
+      }
+
+      // FUNGSI FORUM (NEW)
+      function addForumPost() {
+        const inputField = document.getElementById("forum-input");
+        const text = inputField.value;
+        if (text.trim() === "") return;
+
+        const container = document.getElementById("forum-posts-container");
+        const newPost = `
+          <div style="background: var(--bg-color); border: 1px solid var(--gray-light); border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+             <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <div style="width: 30px; height: 30px; background: #bcaaa4; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 14px;">👩🏽</div>
+                <div>
+                   <b style="font-size: 14px; color: var(--primary-blue);">Aurel (You)</b><br>
+                   <span style="font-size: 10px; color: gray;">• Just now</span>
+                </div>
+             </div>
+             <p style="font-size: 13px; line-height: 1.5; color: var(--text-dark);">${text}</p>
+             <div style="margin-top: 10px; font-size: 12px; color: var(--primary-pink); font-weight: bold;">💬 0 Replies</div>
+          </div>
+        `;
+        container.innerHTML = newPost + container.innerHTML;
+        inputField.value = "";
       }
 
       let currentRating = 0;
@@ -1808,7 +1877,7 @@
         }
       }
 
-      // --- LOGIKA MEMBACA BUKU (SWIPE & IDLE) ---
+      // --- LOGIKA MEMBACA BUKU (SWIPE, PANAH & IDLE) ---
       let screenBeforeRead = "category-detail";
       let currentPageIndex = 0;
       let totalPages = 0;
@@ -1830,7 +1899,7 @@
 
         document.getElementById("read-book-title").innerText = book.title;
 
-        // Memecah cerita berdasarkan tag <br><br> menjadi halaman yang bisa di-swipe
+        // Memecah cerita menjadi halaman-halaman
         let paragraphs = book.story.split("<br><br>");
         totalPages = paragraphs.length;
         let pagesHtml = "";
@@ -1846,12 +1915,42 @@
         document.getElementById("page-indicator-text").innerText =
           `Halaman 1 dari ${totalPages}`;
 
+        updatePageButtons();
         startReadingTimer();
       }
 
-      function handlePageScroll() {
-        resetIdleTimer(); // Reset idle jika ada sentuhan/scroll
+      function updatePageButtons() {
+        const prevBtn = document.getElementById("prev-page-btn");
+        const nextBtn = document.getElementById("next-page-btn");
 
+        if (totalPages <= 1) {
+          prevBtn.style.display = "none";
+          nextBtn.style.display = "none";
+          return;
+        }
+
+        prevBtn.style.display = currentPageIndex > 0 ? "block" : "none";
+        nextBtn.style.display =
+          currentPageIndex < totalPages - 1 ? "block" : "none";
+      }
+
+      function prevPage() {
+        resetIdleTimer();
+        const container = document.getElementById("read-book-content");
+        container.scrollBy({
+          left: -container.clientWidth,
+          behavior: "smooth",
+        });
+      }
+
+      function nextPage() {
+        resetIdleTimer();
+        const container = document.getElementById("read-book-content");
+        container.scrollBy({ left: container.clientWidth, behavior: "smooth" });
+      }
+
+      function handlePageScroll() {
+        resetIdleTimer();
         let container = document.getElementById("read-book-content");
         let newIndex = Math.round(container.scrollLeft / container.clientWidth);
 
@@ -1859,8 +1958,8 @@
           currentPageIndex = newIndex;
           document.getElementById("page-indicator-text").innerText =
             `Halaman ${currentPageIndex + 1} dari ${totalPages}`;
+          updatePageButtons();
 
-          // Mainkan efek suara kertas
           let audio = document.getElementById("page-flip-audio");
           if (audio) {
             audio.currentTime = 0;
@@ -1890,12 +1989,11 @@
           "block";
         updateTimerUI();
 
-        resetIdleTimer(); // Mulai deteksi Anti-AFK
+        resetIdleTimer();
 
         clearInterval(readingTimer);
         readingTimer = setInterval(() => {
           if (!isIdle) {
-            // Hanya hitung jika tidak diam
             currentReadingSeconds++;
             updateTimerUI();
 
@@ -1938,20 +2036,17 @@
         updateGlobalDataUI();
       }
 
-      // FUNGSI ANTI-AFK (IDLE DETECTION)
       function resetIdleTimer() {
-        // Cek hanya saat berada di layar baca buku
         if (!document.getElementById("read-book").classList.contains("active"))
           return;
 
         isIdle = false;
         clearTimeout(idleTimeout);
 
-        // Atur batas waktu diam 15 detik
         idleTimeout = setTimeout(() => {
           isIdle = true;
           alert(
-            "Are you still there? Kamu terdeteksi diam terlalu lama.\nKlik OK untuk lanjut membaca dan menjalankan timer kembali.",
+            "Heyy kamu terdeteksi diam terlalu lama.\nKlik OK untuk lanjut membaca dan menjalankan timer kembali.",
           );
           isIdle = false;
           resetIdleTimer();
