@@ -242,7 +242,7 @@
         font-weight: bold;
         margin-bottom: 10px;
         color: var(--primary-pink);
-        background: var(--gray-light);
+        background: #fce4ec;
         padding: 2px 10px;
         border-radius: 10px;
         width: fit-content;
@@ -363,7 +363,58 @@
         font-weight: bold;
       }
 
-      /* --- Profile & Letterboxd Styles --- */
+      /* --- Specific Screens (Review & Profile) --- */
+      .library-book {
+        width: 100%;
+        height: 200px;
+        background: #ffcdd2;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: cursive;
+        color: #c62828;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .review-input {
+        width: 100%;
+        border: 1px solid var(--gray-light);
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+        resize: none;
+        margin-bottom: 5px;
+        background: var(--bg-color);
+        color: var(--text-dark);
+      }
+      .btn-small {
+        background: var(--primary-blue);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .review-list {
+        margin-top: 10px;
+        border-left: 3px solid var(--primary-pink);
+        padding-left: 10px;
+      }
+      .review-item {
+        font-size: 12px;
+        color: var(--text-dark);
+        margin-bottom: 5px;
+        background: var(--bg-color);
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid var(--gray-light);
+      }
+
+      /* --- Letterboxd Profile Styles --- */
       .profile-header-new {
         display: flex;
         flex-direction: column;
@@ -383,7 +434,6 @@
         margin-bottom: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
-
       .lb-menu {
         width: 100%;
         display: flex;
@@ -415,6 +465,34 @@
         display: flex;
         align-items: center;
         gap: 8px;
+      }
+
+      .list-item-row {
+        display: flex;
+        border: 1px solid var(--gray-light);
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        gap: 15px;
+        align-items: center;
+        background: var(--bg-color);
+      }
+      .user-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-bottom: 1px solid var(--gray-light);
+        padding: 10px 0;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        background: #9fa8da;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
       }
 
       .profile-section {
@@ -458,55 +536,76 @@
         text-overflow: ellipsis;
       }
 
-      /* --- Library/Forum --- */
-      .library-book {
-        width: 100%;
-        height: 150px;
-        background: #ffcdd2;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-family: cursive;
-        color: #c62828;
-        font-size: 20px;
-        font-weight: bold;
-      }
-      .review-input {
-        width: 100%;
-        border: 1px solid var(--gray-light);
+      /* --- NEW GARDEN STYLES --- */
+      .garden-seed-card {
+        min-width: 105px;
+        border-radius: 12px;
         padding: 10px;
-        border-radius: 5px;
-        outline: none;
-        resize: none;
-        margin-bottom: 5px;
-        background: var(--bg-color);
-        color: var(--text-dark);
-      }
-      .btn-small {
-        background: var(--primary-blue);
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 5px;
+        text-align: center;
         cursor: pointer;
-        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        border: 2px solid transparent;
       }
-      .review-list {
-        margin-top: 10px;
-        border-left: 3px solid var(--primary-pink);
-        padding-left: 10px;
+      .garden-seed-card.active {
+        border-color: var(--primary-blue);
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       }
-      .review-item {
-        font-size: 12px;
-        color: var(--text-dark);
+      .garden-seed-icon {
+        font-size: 45px;
         margin-bottom: 5px;
-        background: var(--bg-color);
-        padding: 8px;
-        border-radius: 4px;
-        border: 1px solid var(--gray-light);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .garden-seed-title {
+        font-size: 12px;
+        font-weight: 900;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        margin-bottom: 5px;
+      }
+      .garden-seed-genre {
+        font-size: 9px;
+        background: rgba(255, 255, 255, 0.8);
+        color: #333;
+        padding: 3px 6px;
+        border-radius: 10px;
+        font-weight: bold;
+        display: inline-block;
+      }
+
+      .main-pot-display {
+        background: linear-gradient(180deg, #e1f5fe 0%, #fff9c4 100%);
+        margin: 0 20px 15px;
+        border-radius: 15px;
+        padding: 25px 20px;
+        border: 3px solid #81d4fa;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+      }
+      body.dark-mode .main-pot-display {
+        background: linear-gradient(180deg, #1a237e 0%, #311b92 100%);
+        border-color: #5c6bc0;
+      }
+      .pot-character {
+        font-size: 100px;
+        line-height: 1;
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
       }
 
       /* --- Bottom Navigation --- */
@@ -704,12 +803,12 @@
           <div class="back-btn" onclick="goBack()">🔙 Back</div>
           <h2
             id="cat-detail-title"
-            style="color: var(--primary-pink); margin-bottom: 15px"
+            style="color: var(--primary-pink); margin-bottom: 5px"
           >
             Category Name
           </h2>
-          <p style="font-size: 11px; color: gray; margin-bottom: 10px">
-            (Klik tombol hati ❤️ untuk menambah ke Favorit)
+          <p style="font-size: 11px; color: gray; margin-bottom: 15px">
+            (Pilih ❤️ untuk Favorit, 🔖 untuk TBR/Watchlist)
           </p>
           <div class="book-list-vertical" id="cat-book-list"></div>
         </div>
@@ -748,7 +847,6 @@
                 ★ <span class="global-pts-text">10</span>
               </h1>
             </div>
-
             <div style="text-align: center; margin-bottom: 20px">
               <button
                 class="btn btn-login"
@@ -768,7 +866,6 @@
                 🌱 Masuk ke BacaRia's Garden
               </button>
             </div>
-
             <h3
               style="
                 color: var(--primary-blue);
@@ -818,7 +915,10 @@
                 </div>
               </div>
             </div>
-            <div class="mission-box" style="margin-bottom: 25px">
+            <div
+              class="mission-box"
+              style="margin-bottom: 25px; background: var(--bg-color)"
+            >
               <div class="mission-icon">⭐</div>
               <div class="progress-bar-container">
                 <div
@@ -905,162 +1005,31 @@
             </p>
           </div>
 
-          <div
-            style="
-              background: linear-gradient(180deg, #e1f5fe 0%, #fff9c4 100%);
-              margin: 0 20px 15px;
-              border-radius: 15px;
-              padding: 20px;
-              border: 2px solid #81d4fa;
-              text-align: center;
-              position: relative;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            "
-          >
-            <div
-              style="
-                font-size: 90px;
-                margin-bottom: 10px;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-              "
-              id="garden-char"
-            >
-              🌱
-            </div>
-            <div
-              class="progress-bar"
-              style="background: #b3e5fc; border-color: #0288d1; height: 15px"
-            >
-              <div
-                id="evolution-fill"
-                class="progress-fill"
-                style="
-                  background: linear-gradient(90deg, #4fc3f7, #0288d1);
-                  width: 0%;
-                "
-              ></div>
-            </div>
-            <p
-              style="
-                font-size: 11px;
-                margin-top: 8px;
-                font-weight: bold;
-                color: #0277bd;
-              "
-            >
-              <span id="nutrisi-needed">250</span> ml lagi untuk berevolusi
-              menjadi Pohon Remaja
-            </p>
-          </div>
+          <div id="main-pot" class="main-pot-display"></div>
 
           <div style="padding: 0 20px">
-            <h3 style="font-size: 14px; color: #555; margin-bottom: 10px">
+            <h3
+              style="
+                font-size: 14px;
+                color: var(--text-dark);
+                margin-bottom: 10px;
+              "
+            >
               Pilihan Benih:
             </h3>
             <div
+              id="seed-selection-container"
               style="
                 display: flex;
                 gap: 10px;
                 overflow-x: auto;
-                padding-bottom: 10px;
+                padding-bottom: 15px;
                 scrollbar-width: none;
               "
-            >
-              <div
-                class="seed-card"
-                style="
-                  min-width: 100px;
-                  border: 2px solid var(--primary-pink);
-                  border-radius: 10px;
-                  padding: 10px;
-                  text-align: center;
-                  background: #fff;
-                  cursor: pointer;
-                "
-              >
-                <div
-                  style="
-                    font-size: 35px;
-                    background: #fce4ec;
-                    border-radius: 8px;
-                    padding: 5px;
-                  "
-                >
-                  🌼
-                </div>
-                <p
-                  style="
-                    font-size: 11px;
-                    font-weight: bold;
-                    margin-top: 5px;
-                    color: #333;
-                  "
-                >
-                  Benih Melati
-                </p>
-                <div style="margin-top: 5px">
-                  <span
-                    style="
-                      font-size: 10px;
-                      background: #ffcdd2;
-                      color: #c62828;
-                      padding: 2px 6px;
-                      border-radius: 4px;
-                      font-weight: bold;
-                    "
-                    >Gratis</span
-                  >
-                </div>
-              </div>
-              <div
-                class="seed-card"
-                style="
-                  min-width: 100px;
-                  border: 2px solid #9fa8da;
-                  border-radius: 10px;
-                  padding: 10px;
-                  text-align: center;
-                  background: #f5f5f5;
-                "
-              >
-                <div
-                  style="
-                    font-size: 35px;
-                    background: #e8eaf6;
-                    border-radius: 8px;
-                    padding: 5px;
-                  "
-                >
-                  🌵
-                </div>
-                <p
-                  style="
-                    font-size: 11px;
-                    font-weight: bold;
-                    margin-top: 5px;
-                    color: #555;
-                  "
-                >
-                  Benih Kaktus
-                </p>
-                <div style="margin-top: 5px">
-                  <span
-                    style="
-                      font-size: 10px;
-                      background: #5c6bc0;
-                      color: #fff;
-                      padding: 2px 6px;
-                      border-radius: 4px;
-                      font-weight: bold;
-                    "
-                    >Adventure</span
-                  >
-                </div>
-              </div>
-            </div>
+            ></div>
           </div>
 
-          <div style="padding: 0 20px; margin-top: 15px">
+          <div style="padding: 0 20px; margin-top: 5px; margin-bottom: 20px">
             <h3
               style="
                 font-size: 15px;
@@ -1073,30 +1042,9 @@
               Koleksi Tanaman:
             </h3>
             <div
+              id="garden-collection-grid"
               style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px"
-            >
-              <div
-                style="
-                  background: var(--bg-color);
-                  border: 1px solid var(--gray-light);
-                  border-radius: 10px;
-                  padding: 10px;
-                  text-align: center;
-                "
-              >
-                <div style="font-size: 35px">🌿</div>
-                <p
-                  style="
-                    font-size: 11px;
-                    font-weight: bold;
-                    color: #43a047;
-                    margin-top: 5px;
-                  "
-                >
-                  Melati Remaja
-                </p>
-              </div>
-            </div>
+            ></div>
           </div>
         </div>
 
@@ -1109,7 +1057,6 @@
             </div>
           </div>
           <div class="page-title">Community Forum</div>
-
           <div style="padding: 20px">
             <div
               style="
@@ -1142,7 +1089,6 @@
                 Post Diskusi
               </button>
             </div>
-
             <h3
               style="
                 color: var(--primary-blue);
@@ -1246,38 +1192,44 @@
           </div>
 
           <div class="lb-menu">
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('books')">
               <span class="title">Books</span>
               <span class="stats"
-                ><span id="lb-books-count">3</span> <span>›</span></span
+                ><span id="lb-books-count">0</span> <span>›</span></span
               >
             </div>
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('diary')">
               <span class="title">Diary</span>
-              <span class="stats">12 <span>›</span></span>
+              <span class="stats"
+                ><span id="lb-diary-count">0</span> <span>›</span></span
+              >
             </div>
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('reviews')">
               <span class="title">Reviews</span>
-              <span class="stats">5 <span>›</span></span>
+              <span class="stats"
+                ><span id="lb-reviews-count">0</span> <span>›</span></span
+              >
             </div>
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('watchlist')">
               <span class="title">Watchlist (TBR)</span>
-              <span class="stats">8 <span>›</span></span>
+              <span class="stats"
+                ><span id="lb-watchlist-count">0</span> <span>›</span></span
+              >
             </div>
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('favorites')">
               <span class="title" style="color: var(--primary-pink)"
                 >Favorites</span
               >
               <span class="stats"
-                ><span id="lb-fav-count">0</span>
-                <span style="color: var(--primary-pink)">›</span></span
+                ><span id="lb-fav-count">0</span
+                ><span style="color: var(--primary-pink)">›</span></span
               >
             </div>
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('following')">
               <span class="title">Following</span>
               <span class="stats">54 <span>›</span></span>
             </div>
-            <div class="lb-row">
+            <div class="lb-row" onclick="openLbDetail('followers')">
               <span class="title">Followers</span>
               <span class="stats">31 <span>›</span></span>
             </div>
@@ -1330,6 +1282,29 @@
               </div>
             </div>
           </div>
+
+          <br />
+        </div>
+
+        <div id="lb-detail-screen" class="screen" style="padding: 20px">
+          <div class="back-btn" onclick="goBackToProfile()">
+            🔙 Back to Profile
+          </div>
+          <h2
+            id="lb-detail-title"
+            style="
+              color: var(--primary-pink);
+              margin-bottom: 15px;
+              border-bottom: 2px solid var(--gray-light);
+              padding-bottom: 10px;
+            "
+          >
+            Title
+          </h2>
+          <div
+            id="lb-detail-content"
+            style="display: flex; flex-direction: column; gap: 10px"
+          ></div>
         </div>
 
         <div
@@ -1394,7 +1369,6 @@
           >
             🔙 Back
           </div>
-
           <div style="padding: 0 20px 20px; text-align: center">
             <h2
               id="read-book-title"
@@ -1423,7 +1397,7 @@
                 onclick="prevPage()"
                 style="
                   position: absolute;
-                  left: -15px;
+                  left: -5px;
                   top: 50%;
                   transform: translateY(-50%);
                   z-index: 10;
@@ -1433,12 +1407,12 @@
                   color: var(--primary-pink);
                   border: 1px solid rgba(216, 27, 96, 0.3);
                   border-radius: 50%;
-                  width: 30px;
-                  height: 30px;
+                  width: 35px;
+                  height: 35px;
                   cursor: pointer;
                   display: none;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                  font-size: 18px;
+                  font-size: 16px;
                 "
               >
                 &#10094;
@@ -1455,7 +1429,7 @@
                 onclick="nextPage()"
                 style="
                   position: absolute;
-                  right: -15px;
+                  right: -5px;
                   top: 50%;
                   transform: translateY(-50%);
                   z-index: 10;
@@ -1465,18 +1439,17 @@
                   color: var(--primary-pink);
                   border: 1px solid rgba(216, 27, 96, 0.3);
                   border-radius: 50%;
-                  width: 30px;
-                  height: 30px;
+                  width: 35px;
+                  height: 35px;
                   cursor: pointer;
                   display: none;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                  font-size: 18px;
+                  font-size: 16px;
                 "
               >
                 &#10095;
               </button>
             </div>
-
             <div class="page-indicator" id="page-indicator-text">
               Halaman 1 dari 1
             </div>
@@ -1510,7 +1483,6 @@
 
     <script>
       let previousScreen = "home";
-
       let isDarkMode = false;
       function toggleDarkMode() {
         isDarkMode = !isDarkMode;
@@ -1529,10 +1501,86 @@
 
       let readingTimer = null;
       let currentReadingSeconds = 0;
-      const targetReadingSeconds = 120; // Ubah ke 10 detik jika untuk demo
+      const targetReadingSeconds = 120; // 2 Menit
 
-      // --- ARRAY BUKU FAVORIT ---
+      // --- ARRAY DATA PROFILE (LETTERBOXD STYLE) ---
+      let readBooksList = [];
       let favoriteBooks = [];
+      let watchlistBooks = [];
+
+      // Diary & Review di-isi dummy awal
+      let diaryList = [
+        { date: "Kemarin", text: "Mendapatkan +10 Points dari membaca buku." },
+        { date: "3 Hari Lalu", text: "Membuat akun BacaRia." },
+      ];
+      let myReviewsList = [
+        {
+          bookTitle: "The Chronicles of Narnia",
+          stars: 5,
+          text: "Buku yang sangat magis dan emosional!",
+          date: "2 Hari Lalu",
+        },
+      ];
+
+      // Generate 54 Dummy Names for Following/Followers
+      const dummyNames = [
+        "Budi",
+        "Siti",
+        "Agus",
+        "Ayu",
+        "Joko",
+        "Rina",
+        "Dodi",
+        "Nina",
+        "Hendra",
+        "Maya",
+        "Tono",
+        "Lina",
+        "Eko",
+        "Sari",
+        "Rudi",
+        "Yanti",
+        "Andi",
+        "Mega",
+        "Iwan",
+        "Desi",
+        "Fajar",
+        "Ika",
+        "Arief",
+        "Nia",
+        "Bambang",
+        "Putri",
+        "Dedi",
+        "Dina",
+        "Heri",
+        "Rini",
+        "Wawan",
+        "Lita",
+        "Anto",
+        "Siska",
+        "Rizal",
+        "Nita",
+        "Doni",
+        "Yuni",
+        "Ari",
+        "Ratih",
+        "Bayu",
+        "Riska",
+        "Eka",
+        "Nurul",
+        "Feri",
+        "Vina",
+        "Guntur",
+        "Ratna",
+        "Hasan",
+        "Mira",
+        "Indra",
+        "Tari",
+        "Kiki",
+        "Lia",
+      ];
+      const followingList = dummyNames.slice(0, 54);
+      const followersList = dummyNames.slice(0, 31).reverse();
 
       const booksData = {
         Fantasy: [
@@ -1566,6 +1614,61 @@
             story:
               "<b>Buku Atomic Habits karya James Clear membedah sains dan praktik tentang bagaimana perubahan kecil yang dilakukan secara konsisten setiap hari dapat menghasilkan dampak yang luar biasa besar dalam jangka panjang melalui efek majemuk.<br><br>Ferick gagasan utama dari buku ini adalah pentingnya berfokus pada sistem pembentukan kebiasaan daripada sekadar menetapkan tujuan akhir karena pencapaian sejati berakar pada perubahan identitas seseorang yang perlahan lahan mengubah cara pandang terhadap diri sendiri.<br><br>Clear memperkenalkan siklus kebiasaan yang terdiri dari empat tahap yakni petunjuk gairah tanggapan dan ganjaran yang kemudian diterjemahkan menjadi empat hukum perubahan perilaku. Hukum pertama mengajarkan kita untuk menjadikannya terlihat dengan mendesain lingkungan sedemikian rupa agar petunjuk kebiasaan baik mudah disadari seperti meletakkan buku di atas bantal jika ingin rajin membaca serta menggunakan teknik menumpuk kebiasaan baru di atas rutinitas lama.<br><br>Hukum kedua menekankan pentingnya menjadikannya menarik melalui penggabungan godaan di mana tindakan yang perlu dilakukan dipasangkan dengan tindakan yang diinginkan serta bergabung dengan komunitas yang menormalisasi perilaku target kita.<br><br>Hukum ketiga menuntut kita untuk menjadikannya mudah dengan mengurangi hambatan di awal proses dengan mempraktikkan aturan dua menit yaitu menyusutkan kebiasaan baru menjadi tindakan berdurasi maksimal dua menit agar tidak terasa membebani pikiran.<br><br>Hukum keempat mengharuskan kita menjadikannya memuaskan dengan memberikan penghargaan langsung setelah kebiasaan selesai dilakukan agar otak mengasosiasikan tindakan tersebut dengan perasaan positif dan menggunakan pelacak kebiasaan visual untuk menjaga motivasi agar rantai rutinitas tidak terputus.<br><br>Sebaliknya untuk menghentikan kebiasaan buruk kita harus membalikkan keempat hukum tersebut menjadi menjadikannya tidak terlihat tidak menarik sulit dan mengecewakan. Buku ini juga membahas strategi tingkat lanjut seperti aturan Goldilocks yang menyatakan bahwa manusia mencapai motivasi puncak saat mengerjakan tugas yang tingkat kesulitannya pas berada di ambang batas kemampuan mereka serta pentingnya melakukan peninjauan dan refleksi berkala agar rutinitas otomatis tidak membuat kita berhenti bertumbuh sehingga perbaikan satu persen setiap hari pada akhirnya membangun fondasi kokoh bagi keberhasilan yang berkelanjutan.",
           },
+          {
+            title: "How to be Happy",
+            author: "Lee Crutchley",
+            img: "images/SI- Happy.png",
+            story:
+              "<b>Perjalanan di dalam lembaran ini dimulai bukan dengan janji manis tentang kebahagiaan melainkan dengan sebuah pengakuan jujur bahwa saat dunia terasa sangat gelap tujuan paling masuk akal bukanlah menjadi bahagia seketika melainkan berusaha menjadi sedikit lebih tidak sedih dari sebelumnya.<br><br>Begitu halamannya terbuka kamu langsung dibawa masuk ke dalam ruang interaktif yang memintamu untuk berhadapan dengan perasaanmu sendiri secara telanjang tanpa teori psikologi yang rumit. Langkah pertama dalam kisah ini mengharuskanmu untuk mengakui seberapa buruk keadaan dan perasaanmu hari ini di mana kamu diberikan ruang aman untuk menuliskan segala hal yang membuatmu merasa hancur tanpa perlu berpura pura tegar.<br><br>Setelah beban pengakuan itu dituangkan narasi berlanjut pada tindakan tindakan pembebasan fisik yang nyata seperti mencoret coret halaman dengan penuh amarah merobek kertas untuk meluapkan frustrasi yang terpendam atau sekadar menggambar pola pola acak demi menghentikan laju pikiran buruk yang terus berputar putar di dalam kepala.<br><br>Ketika badai emosi mulai mereda perlahan lahan kamu dituntun untuk melatih kembali indramu agar peka terhadap kebaikan kecil di sekitarmu dengan cara mencatat hal hal sederhana yang masih bisa memberi rasa nyaman misalnya hangatnya secangkir teh di sore hari atau suara rintik hujan yang menenangkan.<br><br>Lembaran selanjutnya bertindak layaknya teman yang duduk diam di sampingmu saat kamu kehabisan energi mengajakmu untuk memetakan kebiasaan kebiasaan yang memperburuk keadaan seperti kurang tidur atau makan sembarangan lalu perlahan membimbingmu untuk membangun kembali rutinitas dari titik yang paling remeh.<br><br>Cerita ini juga membawamu keluar dari isolasi pikiran melalui instruksi untuk sekadar duduk di luar dan memperhatikan orang orang yang berlalu lalang menyadarkanmu bahwa kehidupan terus bergerak dan kamu tetap menjadi bagian dari semesta ini meski hatimu sedang terasa sangat asing.<br><br>Mendekati akhir perjalanannya kamu diajak untuk menyusun strategi bertahan hidup pribadi berupa daftar tindakan darurat yang harus segera dilakukan ketika ombak kesedihan tiba tiba datang menerjang kembali.<br><br>Seluruh lembaran ini mengalir sebagai sebuah kisah pertahanan diri di mana setiap halaman yang diselesaikan adalah satu langkah kecil menjauh dari keputusasaan hingga akhirnya kamu tiba di titik di mana beban di dada terasa sedikit lebih ringan memampukanmu untuk terus melangkah maju menyongsong hari esok tanpa paksaan untuk memalsukan senyuman.",
+          },
+          {
+            title: "The Psychology of Money",
+            author: "Morgan Housel",
+            img: "images/SI - Moneyuu.png",
+            story:
+              "<b>Cerita dalam buku ini dibuka dengan sebuah perbandingan nyata antara dua nasib manusia yang sangat kontras yaitu seorang petugas kebersihan bernama Ronald Read dan seorang eksekutif sukses lulusan Harvard bernama Richard Fuscone.<br><br>Ronald Read menjalani hidup yang sangat sederhana dan tenang namun setelah ia wafat dunia dikejutkan dengan harta warisannya yang mencapai delapan juta dolar hasil dari konsistensi menabung di saham perusahaan berkualitas selama puluhan tahun.<br><br>Di sisi lain Richard Fuscone yang memiliki segalanya justru bangkrut total karena sifat serakah dan gaya hidup yang sangat boros hingga ia terpaksa menjual rumah mewahnya dengan harga sangat murah. Kejadian ini membuktikan bahwa perilaku terhadap uang jauh lebih menentukan masa depan finansial daripada seberapa tinggi tingkat pendidikan seseorang.<br><br>Narasi kemudian membawa kita pada pemahaman tentang keberuntungan dan risiko di mana keberhasilan seseorang seringkali dipengaruhi oleh kekuatan besar di luar kendali mereka sehingga kita diajak untuk tidak terlalu sombong saat menang atau terlalu menyalahkan diri sendiri saat gagal.<br><br>Kisah berlanjut pada rahasia terbesar kekayaan Warren Buffett yang seringkali disalahpahami orang banyak di mana kunci utamanya bukanlah murni pada kecerdasan investasinya melainkan pada faktor waktu yang sangat lama.<br><br>Sebagian besar kekayaan Buffett baru terbentuk setelah ia melewati usia enam puluh lima tahun karena ia membiarkan bunga majemuk bekerja tanpa gangguan selama lebih dari delapan dekade. Namun narasi ini memberikan peringatan keras melalui kisah tokoh tokoh lain yang sudah memiliki uang jutaan dolar tetapi tetap merasa kurang hingga akhirnya mereka melakukan tindakan ilegal atau terlalu berisiko yang membuat mereka kehilangan nama baik serta kemerdekaan mereka.<br><br>Pelajaran besar yang ditekankan di sini adalah pentingnya memiliki titik cukup agar kita tidak mempertaruhkan hal yang kita butuhkan demi mengejar hal yang sebenarnya tidak penting bagi kita.<br><br>Kebebasan menjadi inti dari narasi berikutnya di mana nilai tertinggi dari uang sebenarnya adalah kemampuan untuk mengendalikan waktu sendiri. Memiliki kemampuan untuk bangun di pagi hari dan berkata bahwa aku bisa melakukan apa saja yang aku mau hari ini adalah dividen tertinggi yang bisa diberikan oleh uang kepada manusia.<br><br>Namun untuk mencapai itu seseorang harus memahami perbedaan antara menjadi kaya yakni memiliki pendapatan besar saat ini dan menjadi makmur yakni memiliki aset yang tidak terlihat yang disimpan untuk masa depan.<br><br>Kekayaan seringkali bersifat pamer sedangkan kemakmuran adalah opsi yang kita miliki untuk tidak membeli sesuatu sekarang agar memiliki kebebasan di kemudian hari. Buku ini juga menceritakan pentingnya ruang untuk kesalahan dalam setiap rencana keuangan karena masa depan selalu penuh dengan kejutan yang tidak terduga.<br><br>Memiliki cadangan kas yang terasa tidak produktif sebenarnya adalah bentuk asuransi agar kita tidak terpaksa menjual aset di saat harga sedang jatuh atau saat terjadi krisis global. Narasi ini ditutup dengan kesadaran bahwa setiap individu sedang memainkan permainan yang berbeda beda di mana strategi yang masuk akal bagi seorang trader harian bisa menjadi bencana bagi seorang investor jangka panjang.<br><br>Oleh karena itu sangat penting untuk tidak terpengaruh oleh kebisingan orang lain dan fokus pada apa yang membuat kita bisa tidur nyenyak di malam hari karena ketenangan pikiran adalah bentuk kesuksesan finansial yang paling hakiki.",
+          },
+        ],
+        "Mental Health": [
+          {
+            title: "Seni Bersikap Bodo Amat",
+            author: "Mark Manson",
+            img: "images/MH - Bomat.jpg",
+            story:
+              "<b>sebuah tamparan realitas tentang sosok Charles Bukowski seorang penulis yang tidak pernah berusaha keras untuk menjadi hebat namun justru meraih kesuksesan karena ia jujur pada kegagalannya.<br><br>Narasi ini membawa kita pada kesadaran bahwa budaya modern saat ini terlalu memaksa manusia untuk selalu positif dan mengejar kesempurnaan yang justru menciptakan siklus kecemasan tanpa akhir. Kita diajak untuk memahami hukum kebalikan di mana semakin kita mati matian mengejar perasaan positif maka kita akan semakin merasa tidak puas sedangkan menerima pengalaman negatif justru merupakan pengalaman positif itu sendiri.<br><br>Mark Manson membawa kita pada sebuah filosofi tentang keterbatasan energi mental di mana kita tidak mungkin peduli pada semua hal yang terjadi di dunia ini. Kunci hidup yang baik bukanlah tentang memedulikan lebih banyak hal melainkan tentang memedulikan hal hal yang benar benar penting dan membuang sisanya yang tidak berarti atau bersikap bodo amat terhadap gangguan gangguan sepele yang menguras emosi.<br><br>Alur pemikiran kemudian bergeser pada sebuah kebenaran pahit bahwa penderitaan adalah bagian yang tidak terpisahkan dari kehidupan manusia dan tidak akan pernah hilang sepenuhnya. Masalah akan selalu ada dan yang bisa kita lakukan hanyalah memilih masalah apa yang ingin kita hadapi atau penderitaan apa yang sanggup kita jalani.<br><br>Kebahagiaan sejati tidak datang dari ketiadaan masalah melainkan dari proses menyelesaikan masalah tersebut secara terus menerus. Narasi ini juga menghancurkan konsep tentang menjadi istimewa yang sering diagung agungkan media karena kenyataannya sebagian besar manusia adalah rata rata dalam banyak hal dan menerima fakta ini justru memberikan kebebasan untuk mulai bertumbuh tanpa beban ekspektasi yang tidak realistis.<br><br>Kita diperkenalkan pada pentingnya memilih standar nilai yang baik yang berada di bawah kendali diri sendiri seperti kejutan kerendahhatian dan kejujuran dibandingkan nilai nilai buruk yang bergantung pada faktor eksternal seperti popularitas atau kekayaan materi semata. Lebih dalam lagi cerita ini mengajarkan tentang tanggung jawab penuh atas segala sesuatu yang terjadi dalam hidup kita meski itu bukan kesalahan kita.<br><br>Kita mungkin tidak bersalah atas kejadian buruk yang menimpa namun kita selalu bertanggung jawab atas bagaimana kita memberikan respon terhadap kejadian tersebut. Narasi kemudian menantang kita untuk meragukan segala keyakinan yang kita miliki tentang diri sendiri karena merasa paling benar adalah musuh utama dari pertumbuhan.<br><br>Kegagalan diposisikan sebagai guru terbaik dan satu satunya cara untuk menjadi mahir dalam sesuatu adalah dengan bersedia melakukan kesalahan berkali kali. Bagian akhir dari perjalanan ini membawa kita pada kesadaran tentang kematian yang tak terelakkan di mana mengingat bahwa kita semua akan mati justru menjadi kompas paling jernih untuk menentukan apa yang benar benar berharga dalam hidup.<br><br>Dengan menyadari bahwa waktu kita terbatas kita akan berhenti memedulikan hal hal yang dangkal dan mulai fokus membangun warisan yang bermakna serta menjalin hubungan yang tulus dengan orang orang di sekitar kita.",
+          },
+          {
+            title: "I Have Anxiety",
+            author: "Isna Nurjanah",
+            img: "images/MH - Anxiety.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Psychology of Emotions",
+            author: "David J. Lieberman",
+            img: "images/MH - Emotions.jpg",
+            story: "Teks cerita...",
+          },
+        ],
+        Comedy: [
+          {
+            title: "Ubur-Ubur Lembur",
+            author: "Raditya Dika",
+            img: "images/comedy - ubur2.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Marmut Merah Jambu",
+            author: "Raditya Dika",
+            img: "images/comedy - marmut.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Ngenest",
+            author: "Ernest Prakasa",
+            img: "images/comedy - ernest.jpg",
+            story: "Teks cerita...",
+          },
         ],
         Romance: [
           {
@@ -1575,8 +1678,226 @@
             story:
               "<b>Bab 1: Milea</b><br><br>Namaku Milea. Saat itu tahun 1990, aku baru saja pindah ke Bandung dari Jakarta.<br><br>Di hari pertama sekolah, ada suara motor menderu di sebelahku. Di sanalah aku pertama kali bertegur sapa dengan Dilan, cowok dengan gaya pendekatan paling unik yang pernah aku kenal.",
           },
+          {
+            title: "It Starts With Us",
+            author: "Colleen Hoover",
+            img: "images/romance - start with us.png",
+            story: "Teks cerita...",
+          },
+          {
+            title: "It Ends With Us",
+            author: "Colleen Hoover",
+            img: "images/romance - ends with us.png",
+            story: "Teks cerita...",
+          },
+        ],
+        "Slice of Life": [
+          {
+            title: "Sweet Bean Paste",
+            author: "Durian Sukegawa",
+            img: "images/SOL - SBP.png",
+            story: "Teks cerita...",
+          },
+          {
+            title: "What You Are Looking For",
+            author: "Michiko Aoyama",
+            img: "images/SOL - cat.png",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Convenience Store Woman",
+            author: "Sayaka Murata",
+            img: "images/SOL - convenience.png",
+            story: "Teks cerita...",
+          },
+        ],
+        Adventure: [
+          {
+            title: "Around the World in 80 Days",
+            author: "Jules Verne",
+            img: "images/adventure - around world.png",
+            story: "Teks cerita...",
+          },
+          {
+            title: "The Call of the Wild",
+            author: "Jack London",
+            img: "images/adventure wild.png",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Treasure Island",
+            author: "Robert Louis Stevenson",
+            img: "images/adventure - treasure.png",
+            story: "Teks cerita...",
+          },
+        ],
+        Technology: [
+          {
+            title: "Information Technology",
+            author: "Álvaro Rocha",
+            img: "images/Tech - ITS.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "The Nature of Technology",
+            author: "W. Brian Arthur",
+            img: "images/Tech - nature.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "The Science Book",
+            author: "National Geographic",
+            img: "images/Tech - science book.jpg",
+            story: "Teks cerita...",
+          },
+        ],
+        Education: [
+          {
+            title: "English Literature",
+            author: "Henry S. Pancoast",
+            img: "images/education - english.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Digital Technology",
+            author: "Michelle F. Wright",
+            img: "images/education - digital tech.jpg",
+            story: "Teks cerita...",
+          },
+          {
+            title: "Living Economics",
+            author: "Peter J. Boettke",
+            img: "images/education - living eco.jpg",
+            story: "Teks cerita...",
+          },
         ],
       };
+
+      // --- GARDEN DATA ---
+      const plantTypes = [
+        {
+          id: "blushbloom",
+          name: "Blushbloom",
+          genre: "Romance",
+          icon: "🌸",
+          badgeColor: "#f8bbd0",
+          textColor: "#c2185b",
+          gradient: "linear-gradient(135deg, #fce4ec, #f8bbd0)",
+        },
+        {
+          id: "spikester",
+          name: "Spikester",
+          genre: "Adventure",
+          icon: "🌵",
+          badgeColor: "#c8e6c9",
+          textColor: "#2e7d32",
+          gradient: "linear-gradient(135deg, #e8f5e9, #c8e6c9)",
+        },
+        {
+          id: "brainroot",
+          name: "Brainroot",
+          genre: "Education",
+          icon: "🌿",
+          badgeColor: "#d7ccc8",
+          textColor: "#5d4037",
+          gradient: "linear-gradient(135deg, #efebe9, #d7ccc8)",
+        },
+        {
+          id: "mysticore",
+          name: "Mysticore",
+          genre: "Fantasy",
+          icon: "🔮",
+          badgeColor: "#e1bee7",
+          textColor: "#6a1b9a",
+          gradient: "linear-gradient(135deg, #f3e5f5, #e1bee7)",
+        },
+        {
+          id: "sunbud",
+          name: "Sunbud",
+          genre: "Slice of Life",
+          icon: "🌻",
+          badgeColor: "#ffecb3",
+          textColor: "#f57f17",
+          gradient: "linear-gradient(135deg, #fff8e1, #ffecb3)",
+        },
+        {
+          id: "noctara",
+          name: "Noctara",
+          genre: "Thriller",
+          icon: "🦇",
+          badgeColor: "#d1c4e9",
+          textColor: "#4a148c",
+          gradient: "linear-gradient(135deg, #ede7f6, #d1c4e9)",
+        },
+      ];
+      let activePlantId = "blushbloom";
+
+      function renderGardenUI() {
+        const seedContainer = document.getElementById(
+          "seed-selection-container",
+        );
+        if (seedContainer) {
+          let seedHTML = "";
+          plantTypes.forEach((plant) => {
+            const isActive = plant.id === activePlantId;
+            seedHTML += `
+              <div class="garden-seed-card ${isActive ? "active" : ""}" onclick="selectPlant('${plant.id}')" style="background: ${plant.gradient};">
+                <div class="garden-seed-icon">${plant.icon}</div>
+                <div class="garden-seed-title" style="color: ${plant.textColor};">${plant.name}</div>
+                <div class="garden-seed-genre" style="color: ${plant.textColor};">${plant.genre}</div>
+              </div>
+            `;
+          });
+          seedContainer.innerHTML = seedHTML;
+        }
+
+        const mainPot = document.getElementById("main-pot");
+        const activePlant = plantTypes.find((p) => p.id === activePlantId);
+
+        if (mainPot && activePlant) {
+          const targetNutrisi = 350;
+          const currentNutrisi = globalPoints * 10;
+          let progress = (currentNutrisi / targetNutrisi) * 100;
+          if (progress > 100) progress = 100;
+          let remaining = targetNutrisi - currentNutrisi;
+          if (remaining < 0) remaining = 0;
+
+          let plantIcon =
+            currentNutrisi >= targetNutrisi ? activePlant.icon : "🌱";
+          mainPot.style.background = activePlant.gradient;
+          mainPot.style.borderColor = activePlant.textColor;
+
+          mainPot.innerHTML = `
+            <div class="pot-character" style="text-shadow: 0 10px 20px ${activePlant.textColor}55;">${plantIcon}</div>
+            <h3 style="color: ${activePlant.textColor}; margin-bottom: 10px; font-weight: 900;">${activePlant.name}</h3>
+            <div class="progress-bar" style="background: rgba(255,255,255,0.5); border-color: ${activePlant.textColor}; height: 15px;">
+               <div class="progress-fill" style="background: ${activePlant.textColor}; width: ${progress}%;"></div>
+            </div>
+            <p style="font-size: 11px; margin-top: 8px; font-weight: bold; color: ${activePlant.textColor};">${remaining} ml lagi untuk berevolusi</p>
+          `;
+
+          const collectionGrid = document.getElementById(
+            "garden-collection-grid",
+          );
+          if (collectionGrid) {
+            if (currentNutrisi >= targetNutrisi) {
+              collectionGrid.innerHTML = `
+                  <div style="background: ${activePlant.gradient}; border: 1px solid ${activePlant.textColor}; border-radius: 10px; padding: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <div style="font-size: 40px; animation: float 3s infinite ease-in-out;">${activePlant.icon}</div>
+                    <p style="font-size: 11px; font-weight: bold; color: ${activePlant.textColor}; margin-top: 5px;">${activePlant.name} Dewasa</p>
+                  </div>
+                `;
+            } else {
+              collectionGrid.innerHTML = `<p style="grid-column: span 2; font-size: 12px; color: gray; font-style: italic; text-align:center;">Belum ada tanaman yang berevolusi penuh.</p>`;
+            }
+          }
+        }
+      }
+
+      function selectPlant(id) {
+        activePlantId = id;
+        renderGardenUI();
+      }
 
       function updateGlobalDataUI() {
         document.querySelectorAll(".global-pts-text").forEach((el) => {
@@ -1612,30 +1933,29 @@
             ratingPctFormatted + "%";
         }
 
-        const targetNutrisi = 350;
-        const currentNutrisi = globalPoints * 10;
         const totalNutrisiEl = document.getElementById("total-nutrisi");
         if (totalNutrisiEl) {
-          totalNutrisiEl.innerText = currentNutrisi.toLocaleString();
-          let gardenProgress = (currentNutrisi / targetNutrisi) * 100;
-          if (gardenProgress > 100) gardenProgress = 100;
-          document.getElementById("evolution-fill").style.width =
-            gardenProgress + "%";
-          let remaining = targetNutrisi - currentNutrisi;
-          if (remaining < 0) remaining = 0;
-          document.getElementById("nutrisi-needed").innerText =
-            remaining.toLocaleString();
-
-          if (currentNutrisi >= targetNutrisi) {
-            document.getElementById("garden-char").innerText = "🪴";
-          } else {
-            document.getElementById("garden-char").innerText = "🌱";
-          }
+          totalNutrisiEl.innerText = (globalPoints * 10).toLocaleString();
         }
 
-        // Update Angka Favorit di Menu Letterboxd
-        document.getElementById("lb-fav-count").innerText =
-          favoriteBooks.length;
+        // Update Profile Letterboxd Counts
+        if (document.getElementById("lb-books-count"))
+          document.getElementById("lb-books-count").innerText =
+            readBooksList.length;
+        if (document.getElementById("lb-diary-count"))
+          document.getElementById("lb-diary-count").innerText =
+            diaryList.length;
+        if (document.getElementById("lb-reviews-count"))
+          document.getElementById("lb-reviews-count").innerText =
+            myReviewsList.length;
+        if (document.getElementById("lb-watchlist-count"))
+          document.getElementById("lb-watchlist-count").innerText =
+            watchlistBooks.length;
+        if (document.getElementById("lb-fav-count"))
+          document.getElementById("lb-fav-count").innerText =
+            favoriteBooks.length;
+
+        renderGardenUI();
       }
 
       window.onload = function () {
@@ -1653,11 +1973,6 @@
         const errorMsg = document.getElementById("login-error");
         if (email.trim() === "" || pass.trim() === "") {
           errorMsg.innerText = "Email and Password cannot be empty!";
-          errorMsg.style.color = "red";
-          errorMsg.style.display = "block";
-        } else if (!email.endsWith("@gmail.com")) {
-          errorMsg.innerText = "Please use a valid @gmail.com address!";
-          errorMsg.style.color = "red";
           errorMsg.style.display = "block";
         } else {
           localStorage.setItem("regEmail", email);
@@ -1672,35 +1987,24 @@
         const email = document.getElementById("login-email").value;
         const pass = document.getElementById("login-password").value;
         const errorMsg = document.getElementById("login-error");
-        const savedEmail = localStorage.getItem("regEmail");
-        const savedPass = localStorage.getItem("regPass");
         const defaultEmail = "aurel@gmail.com";
         const defaultPass = "buku123";
 
-        if (email.trim() === "" || pass.trim() === "") {
-          errorMsg.innerText = "Email and Password cannot be empty!";
-          errorMsg.style.color = "red";
-          errorMsg.style.display = "block";
-        } else if (!email.endsWith("@gmail.com")) {
-          errorMsg.innerText = "Please use a valid @gmail.com address!";
-          errorMsg.style.color = "red";
-          errorMsg.style.display = "block";
+        if (
+          (email === localStorage.getItem("regEmail") &&
+            pass === localStorage.getItem("regPass")) ||
+          (email === defaultEmail && pass === defaultPass)
+        ) {
+          errorMsg.style.display = "none";
+          localStorage.setItem("isLoggedIn", "true");
+          document.getElementById("login-screen").classList.remove("active");
+          document.getElementById("main-app").style.display = "flex";
+          document.getElementById("home").classList.add("active");
+          updateGlobalDataUI();
         } else {
-          if (
-            (email === savedEmail && pass === savedPass) ||
-            (email === defaultEmail && pass === defaultPass)
-          ) {
-            errorMsg.style.display = "none";
-            localStorage.setItem("isLoggedIn", "true");
-            document.getElementById("login-screen").classList.remove("active");
-            document.getElementById("main-app").style.display = "flex";
-            document.getElementById("home").classList.add("active");
-            updateGlobalDataUI();
-          } else {
-            errorMsg.style.color = "red";
-            errorMsg.innerText = "Incorrect Email or Password!";
-            errorMsg.style.display = "block";
-          }
+          errorMsg.style.color = "red";
+          errorMsg.innerText = "Incorrect Email or Password!";
+          errorMsg.style.display = "block";
         }
       }
 
@@ -1716,7 +2020,8 @@
         if (
           screenId !== "category-detail" &&
           screenId !== "read-book" &&
-          screenId !== "garden"
+          screenId !== "garden" &&
+          screenId !== "lb-detail-screen"
         )
           previousScreen = screenId;
       }
@@ -1736,6 +2041,8 @@
           let bookId = categoryName + "-" + index;
           let isFav = favoriteBooks.some((b) => b.id === bookId);
           let heartIcon = isFav ? "❤️" : "🤍";
+          let isTbr = watchlistBooks.some((b) => b.id === bookId);
+          let tbrIcon = isTbr ? "🔖" : "🏷️";
 
           listHTML += `
           <div class="book-item-row" onclick="readBook('${categoryName}', ${index})" style="cursor: pointer;">
@@ -1745,8 +2052,9 @@
               <p style="font-size:12px; color:gray;">${book.author}</p>
               <span style="color:#FFB300; font-size:12px;">★★★★★</span>
             </div>
-            <div onclick="toggleFavorite(event, '${categoryName}', ${index})" style="font-size: 22px; padding: 5px; z-index: 10;">
-              ${heartIcon}
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+               <div onclick="toggleFavorite(event, '${categoryName}', ${index})" style="font-size: 20px; z-index: 10;" title="Favorite">${heartIcon}</div>
+               <div onclick="toggleWatchlist(event, '${categoryName}', ${index})" style="font-size: 20px; z-index: 10;" title="Watchlist/TBR">${tbrIcon}</div>
             </div>
           </div>
         `;
@@ -1754,32 +2062,42 @@
         document.getElementById("cat-book-list").innerHTML = listHTML;
       }
 
-      // FUNGSI TOGGLE FAVORIT (NEW)
       function toggleFavorite(event, categoryName, bookIndex) {
-        event.stopPropagation(); // Mencegah buku terbuka saat klik hati
+        event.stopPropagation();
         const book = booksData[categoryName][bookIndex];
         const bookId = categoryName + "-" + bookIndex;
-
         const existingIndex = favoriteBooks.findIndex((b) => b.id === bookId);
         if (existingIndex > -1) {
           favoriteBooks.splice(existingIndex, 1);
         } else {
           favoriteBooks.push({ ...book, id: bookId });
         }
-
-        // Refresh UI
         openCategory(categoryName);
         updateFavoritesUI();
         updateGlobalDataUI();
       }
 
+      function toggleWatchlist(event, categoryName, bookIndex) {
+        event.stopPropagation();
+        const book = booksData[categoryName][bookIndex];
+        const bookId = categoryName + "-" + bookIndex;
+        const existingIndex = watchlistBooks.findIndex((b) => b.id === bookId);
+        if (existingIndex > -1) {
+          watchlistBooks.splice(existingIndex, 1);
+        } else {
+          watchlistBooks.push({ ...book, id: bookId });
+        }
+        openCategory(categoryName);
+        updateGlobalDataUI();
+      }
+
       function updateFavoritesUI() {
         const list = document.getElementById("favorite-books-list");
+        if (!list) return;
         if (favoriteBooks.length === 0) {
           list.innerHTML = `<p style="font-size: 12px; color: gray; font-style: italic;">Belum ada buku favorit. Beri hati ❤️ pada buku untuk menambahkannya ke sini.</p>`;
           return;
         }
-
         let html = "";
         favoriteBooks.forEach((book) => {
           html += `
@@ -1789,6 +2107,99 @@
               </div>`;
         });
         list.innerHTML = html;
+      }
+
+      // --- LETTERBOXD PROFILE MENUS LOGIC ---
+      function goBackToProfile() {
+        document.getElementById("lb-detail-screen").classList.remove("active");
+        document.getElementById("profile").classList.add("active");
+      }
+
+      function openLbDetail(type) {
+        document
+          .querySelectorAll("#main-app .screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("lb-detail-screen").classList.add("active");
+
+        const titleEl = document.getElementById("lb-detail-title");
+        const contentEl = document.getElementById("lb-detail-content");
+        let html = "";
+
+        if (type === "books") {
+          titleEl.innerText = "Books I've Read";
+          if (readBooksList.length === 0)
+            html =
+              "<p style='font-size:12px; color:gray;'>Belum ada buku yang dibaca.</p>";
+          readBooksList.forEach((book) => {
+            html += `
+               <div class="list-item-row">
+                 <img src="${book.img}" style="width: 45px; height: 65px; border-radius: 4px; object-fit: cover;">
+                 <div><b style="color:var(--primary-blue); font-size:14px;">${book.title}</b><br><span style="font-size:12px; color:gray;">${book.author}</span></div>
+               </div>`;
+          });
+        } else if (type === "diary") {
+          titleEl.innerText = "My Reading Diary";
+          if (diaryList.length === 0)
+            html =
+              "<p style='font-size:12px; color:gray;'>Belum ada aktivitas.</p>";
+          diaryList.forEach((entry) => {
+            html += `
+               <div style="border-left: 3px solid var(--primary-pink); padding-left: 10px; margin-bottom: 10px;">
+                 <span style="font-size:10px; color:gray; font-weight:bold;">${entry.date}</span>
+                 <p style="font-size:13px; color:var(--text-dark); margin-top:3px;">${entry.text}</p>
+               </div>`;
+          });
+        } else if (type === "reviews") {
+          titleEl.innerText = "My Reviews";
+          if (myReviewsList.length === 0)
+            html =
+              "<p style='font-size:12px; color:gray;'>Belum ada review.</p>";
+          myReviewsList.forEach((rev) => {
+            let stars = `<span style="color:#ffb300;">${"★".repeat(rev.stars)}${"☆".repeat(5 - rev.stars)}</span>`;
+            html += `
+               <div style="background: var(--bg-color); border: 1px solid var(--gray-light); border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                 <b style="font-size:14px; color:var(--primary-blue);">${rev.bookTitle}</b> ${stars}<br>
+                 <span style="font-size:10px; color:gray;">${rev.date}</span>
+                 <p style="font-size:13px; margin-top:8px;">"${rev.text}"</p>
+               </div>`;
+          });
+        } else if (type === "watchlist") {
+          titleEl.innerText = "Watchlist (TBR)";
+          if (watchlistBooks.length === 0)
+            html =
+              "<p style='font-size:12px; color:gray;'>Belum ada buku di Watchlist. Tambahkan pakai icon 🔖.</p>";
+          watchlistBooks.forEach((book) => {
+            html += `
+               <div class="list-item-row">
+                 <img src="${book.img}" style="width: 45px; height: 65px; border-radius: 4px; object-fit: cover;">
+                 <div><b style="color:var(--primary-blue); font-size:14px;">${book.title}</b><br><span style="font-size:12px; color:gray;">${book.author}</span></div>
+               </div>`;
+          });
+        } else if (type === "favorites") {
+          titleEl.innerText = "Favorite Books ❤️";
+          if (favoriteBooks.length === 0)
+            html =
+              "<p style='font-size:12px; color:gray;'>Belum ada buku favorit.</p>";
+          favoriteBooks.forEach((book) => {
+            html += `
+               <div class="list-item-row">
+                 <img src="${book.img}" style="width: 45px; height: 65px; border-radius: 4px; object-fit: cover;">
+                 <div><b style="color:var(--primary-pink); font-size:14px;">${book.title}</b><br><span style="font-size:12px; color:gray;">${book.author}</span></div>
+               </div>`;
+          });
+        } else if (type === "following") {
+          titleEl.innerText = "Following";
+          followingList.forEach((name) => {
+            html += `<div class="user-row"><div class="user-avatar">👤</div><b style="font-size:14px;">${name}</b></div>`;
+          });
+        } else if (type === "followers") {
+          titleEl.innerText = "Followers";
+          followersList.forEach((name) => {
+            html += `<div class="user-row"><div class="user-avatar">👤</div><b style="font-size:14px;">${name}</b></div>`;
+          });
+        }
+
+        contentEl.innerHTML = html;
       }
 
       function openGarden() {
@@ -1804,7 +2215,6 @@
         document.getElementById("reward").classList.add("active");
       }
 
-      // FUNGSI FORUM (NEW)
       function addForumPost() {
         const inputField = document.getElementById("forum-input");
         const text = inputField.value;
@@ -1845,17 +2255,28 @@
         const reviewInput = document.getElementById("review-text");
         const text = reviewInput.value;
         if (currentRating === 0 && text.trim() === "") {
-          alert(
-            "Silakan berikan rating bintang atau tulis ulasan terlebih dahulu!",
-          );
+          alert("Silakan berikan rating bintang atau ulasan!");
           return;
         }
 
-        let starsHtml = "";
-        if (currentRating > 0) {
-          starsHtml = `<div style="color: #ffb300; margin-bottom: 5px; font-size:16px;">${"★".repeat(currentRating)}${"☆".repeat(5 - currentRating)}</div>`;
-        }
+        // Tambah ke myReviewsList
+        myReviewsList.unshift({
+          bookTitle: "The Chronicles of Narnia",
+          stars: currentRating,
+          text: text,
+          date: "Baru saja",
+        });
 
+        // Catat di Diary
+        diaryList.unshift({
+          date: "Hari ini",
+          text: `Memberikan review ${currentRating} Bintang untuk The Chronicles of Narnia.`,
+        });
+
+        let starsHtml =
+          currentRating > 0
+            ? `<div style="color: #ffb300; margin-bottom: 5px; font-size:16px;">${"★".repeat(currentRating)}${"☆".repeat(5 - currentRating)}</div>`
+            : "";
         const container = document.getElementById("review-container");
         container.innerHTML =
           `<div class="review-item">${starsHtml}<strong>Aurel (You):</strong> ${text}</div>` +
@@ -1865,19 +2286,18 @@
         if (currentRating > 0) {
           if (booksRatedCount < maxRatingBooks) {
             booksRatedCount++;
-            alert(
-              "Berhasil memberi rating! Progres misi 'Rate 5 Books' bertambah.",
-            );
-            updateGlobalDataUI();
           }
+          alert(
+            "Berhasil memberi rating! Progres misi 'Rate 5 Books' bertambah.",
+          );
           currentRating = 0;
           for (let i = 1; i <= 5; i++) {
             document.getElementById("star-" + i).classList.remove("selected");
           }
+          updateGlobalDataUI();
         }
       }
 
-      // --- LOGIKA MEMBACA BUKU (SWIPE, PANAH & IDLE) ---
       let screenBeforeRead = "category-detail";
       let currentPageIndex = 0;
       let totalPages = 0;
@@ -1887,6 +2307,7 @@
       function readBook(categoryName, bookIndex) {
         const books = booksData[categoryName] || booksData["Fantasy"];
         const book = books[bookIndex];
+        const bookId = categoryName + "-" + bookIndex;
         const activeScreen = document.querySelector(".screen.active");
         if (activeScreen) {
           screenBeforeRead = activeScreen.id;
@@ -1896,10 +2317,18 @@
           .querySelectorAll("#main-app .screen")
           .forEach((s) => s.classList.remove("active"));
         document.getElementById("read-book").classList.add("active");
-
         document.getElementById("read-book-title").innerText = book.title;
 
-        // Memecah cerita menjadi halaman-halaman
+        // Tambahkan ke Read Books List jika belum ada
+        if (!readBooksList.some((b) => b.id === bookId)) {
+          readBooksList.push({ ...book, id: bookId });
+          diaryList.unshift({
+            date: "Hari ini",
+            text: `Mulai membaca buku: ${book.title}`,
+          });
+          updateGlobalDataUI();
+        }
+
         let paragraphs = book.story.split("<br><br>");
         totalPages = paragraphs.length;
         let pagesHtml = "";
@@ -1922,13 +2351,11 @@
       function updatePageButtons() {
         const prevBtn = document.getElementById("prev-page-btn");
         const nextBtn = document.getElementById("next-page-btn");
-
         if (totalPages <= 1) {
           prevBtn.style.display = "none";
           nextBtn.style.display = "none";
           return;
         }
-
         prevBtn.style.display = currentPageIndex > 0 ? "block" : "none";
         nextBtn.style.display =
           currentPageIndex < totalPages - 1 ? "block" : "none";
@@ -1963,9 +2390,7 @@
           let audio = document.getElementById("page-flip-audio");
           if (audio) {
             audio.currentTime = 0;
-            audio.play().catch((e) => {
-              /* Abaikan error pada browser strict autoplay */
-            });
+            audio.play().catch((e) => {});
           }
         }
       }
@@ -1988,7 +2413,6 @@
         document.getElementById("reading-timer-container").style.display =
           "block";
         updateTimerUI();
-
         resetIdleTimer();
 
         clearInterval(readingTimer);
@@ -1996,7 +2420,6 @@
           if (!isIdle) {
             currentReadingSeconds++;
             updateTimerUI();
-
             if (currentReadingSeconds >= targetReadingSeconds) {
               completeReadingSession();
             }
@@ -2017,7 +2440,6 @@
           (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
         document.getElementById("reading-time-text").innerText =
           timeString + " / 02:00";
-
         let pct = (currentReadingSeconds / targetReadingSeconds) * 100;
         document.getElementById("reading-progress-fill").style.width =
           pct + "%";
@@ -2030,6 +2452,10 @@
         if (booksReadCount < maxMissionBooks) {
           booksReadCount++;
         }
+        diaryList.unshift({
+          date: "Hari ini",
+          text: "Menyelesaikan misi harian: Daily Read (+10 Points).",
+        });
         alert(
           "🎉 Selamat! Anda telah membaca buku selama 2 menit.\nAnda mendapatkan +10 Points! Nutrisi Garden Anda juga bertambah.",
         );
@@ -2039,10 +2465,8 @@
       function resetIdleTimer() {
         if (!document.getElementById("read-book").classList.contains("active"))
           return;
-
         isIdle = false;
         clearTimeout(idleTimeout);
-
         idleTimeout = setTimeout(() => {
           isIdle = true;
           alert(
